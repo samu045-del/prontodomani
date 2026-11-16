@@ -47,4 +47,12 @@ export const demo: Demo[] = [
     altezze: [2080, 2105, 2088],
     inviata: '',
   },
+  {
+    slug: 'asd-lenno',
+    club: 'A.S.D. Lenno',
+    immagini: ['parte-1.webp', 'parte-2.webp', 'parte-3.webp'],
+    larghezza: 1636,
+    altezze: [2668, 2668, 2669],
+    inviata: '',
+  },
 ];
