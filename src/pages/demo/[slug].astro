@@ -1,0 +1,75 @@
+---
+import '@fontsource-variable/inter';
+import '@fontsource-variable/manrope';
+import '../../styles/global.css';
+import Logo from '../../components/Logo.astro';
+import { demo, type Demo } from '../../data/demo';
+
+export function getStaticPaths() {
+  return demo.map((d) => ({ params: { slug: d.slug }, props: { d } }));
+}
+
+const { d } = Astro.props as { d: Demo };
+const oggetto = encodeURIComponent(`Bozza sito ${d.club}`);
+---
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{`Bozza riservata · ${d.club} · ProntoDomani`}</title>
+  <meta name="robots" content="noindex, nofollow, noimageindex" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+  <header class="barra">
+    <div class="barra__riga">
+      <a href="/" aria-label="ProntoDomani"><Logo size={28} /></a>
+      <p class="barra__testo">Bozza riservata per <strong>{d.club}</strong>, preparata da ProntoDomani. Non è il sito ufficiale della società.</p>
+      <a class="btn btn--primario btn--piccolo" href={`mailto:samuele@prontodomani.it?subject=${oggetto}`}>Mi interessa</a>
+    </div>
+  </header>
+
+  <main class="tela">
+    <p class="sr-only">Anteprima grafica della homepage proposta per {d.club}.</p>
+    {d.immagini.map((img, i) => (
+      <img
+        src={`/demo/${d.slug}/${img}`}
+        width={d.larghezza}
+        height={d.altezze[i]}
+        alt={i === 0 ? `Anteprima della homepage proposta per ${d.club}` : ''}
+        loading={i === 0 ? 'eager' : 'lazy'}
+        decoding="async"
+      />
+    ))}
+  </main>
+
+  <footer class="chiusura">
+    <p>Ti piace la direzione? Rispondi alla mail che hai ricevuto o scrivici: la prima versione navigabile arriva entro 24 ore dal materiale completo.</p>
+    <p class="chiusura__azioni">
+      <a class="btn btn--lime" href={`mailto:samuele@prontodomani.it?subject=${oggetto}`}>Scrivi a Samuele</a>
+      <a class="btn btn--secondario chiusura__secondario" href="/">Scopri ProntoDomani</a>
+    </p>
+  </footer>
+</body>
+</html>
+
+<style>
+  body { background: #E9ECE5; }
+  .barra { position: sticky; top: 0; z-index: 5; background: rgba(247, 245, 239, 0.96); border-bottom: 1px solid var(--bordo); }
+  .barra__riga { max-width: 1240px; margin: 0 auto; padding: 10px 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px; justify-content: space-between; }
+  .barra a:first-child { text-decoration: none; }
+  .barra__testo { font-size: 14px; flex: 1 1 320px; }
+  .tela { max-width: 1240px; margin: 24px auto; box-shadow: 0 30px 60px -30px rgba(15, 58, 52, 0.4); }
+  .tela img { display: block; width: 100%; height: auto; }
+  .chiusura { background: var(--petrolio); color: #E3EEEA; padding: 48px 20px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+  .chiusura p { max-width: 640px; font-size: 18px; }
+  .chiusura__azioni { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+  .chiusura__secondario { border-color: #E3EEEA; color: #E3EEEA; }
+  .chiusura__secondario:hover { background: rgba(255,255,255,0.1); color: #fff; }
+  @media (max-width: 720px) {
+    .tela { margin: 0; }
+    .barra { position: static; }
+    .barra__testo { font-size: 13px; }
+  }
+</style>
