@@ -1,0 +1,28 @@
+---
+import Legale from '../components/Legale.astro';
+import { azienda } from '../data/site';
+---
+<Legale title="Informativa privacy" description="Come ProntoDomani tratta i dati inviati tramite il modulo di richiesta.">
+  <h2>Titolare del trattamento</h2>
+  <p>{azienda.titolare}, P.IVA {azienda.piva}, {azienda.indirizzo}. Contatto: <a href={`mailto:${azienda.email}`}>{azienda.email}</a>.</p>
+
+  <h2>Quali dati raccogliamo</h2>
+  <p>Tramite il modulo di richiesta: nome e cognome, nome dello studio o dell'azienda, email, telefono (facoltativo), settore, sito attuale (facoltativo), tempistiche e il testo del messaggio. Ti chiediamo di non inserire dati sanitari o altre informazioni sensibili.</p>
+
+  <h2>Perché li usiamo e su quale base</h2>
+  <p>Per rispondere alla tua richiesta e inviarti una proposta: misure precontrattuali richieste da te (art. 6, par. 1, lett. b del GDPR). Non usiamo questi dati per newsletter o marketing senza un tuo consenso separato.</p>
+
+  <h2>Per quanto tempo</h2>
+  <p>[DA DEFINIRE: es. 12 mesi dall'ultimo contatto se non diventi cliente; in caso di contratto, per la durata prevista dagli obblighi di legge.]</p>
+
+  <h2>Chi tratta i dati per nostro conto</h2>
+  <ul>
+    <li>Cloudflare, Inc.: hosting del sito, invio del modulo e protezione antispam (Turnstile).</li>
+    <li>[SERVIZIO DI INVIO EMAIL, es. Resend]: inoltro della richiesta alla nostra casella.</li>
+    <li>Aruba S.p.A.: casella di posta elettronica.</li>
+  </ul>
+  <p>[DA VERIFICARE: eventuali trasferimenti extra UE e relative garanzie.]</p>
+
+  <h2>I tuoi diritti</h2>
+  <p>Puoi chiedere accesso, rettifica, cancellazione, limitazione, portabilità od opporti al trattamento scrivendo a <a href={`mailto:${azienda.email}`}>{azienda.email}</a>. Puoi anche presentare reclamo al Garante per la protezione dei dati personali.</p>
+</Legale>

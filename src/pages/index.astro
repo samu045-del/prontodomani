@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Sezioni from '../components/Sezioni.astro';
+import Richiesta from '../components/Richiesta.astro';
+import { prezzi } from '../data/site';
+---
+<Base
+  title="ProntoDomani · Siti web professionali, prima demo in 24 ore"
+  description={`Siti vetrina per studi, professionisti e società sportive. Prima demo entro 24 ore dal brief completo, online solo dopo il tuo ok. ${prezzi.sito} € con dominio e hosting del primo anno.`}
+>
+  <Hero />
+  <Sezioni />
+  <Richiesta />
+</Base>

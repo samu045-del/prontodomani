@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+interface Props { title: string; description: string }
+const { title, description } = Astro.props;
+---
+<Base title={`${title} · ProntoDomani`} description={description}>
+  <article class="contenitore sezione sezione--stretta legale">
+    <p class="bozza">Bozza da verificare con un consulente prima della pubblicazione definitiva.</p>
+    <h1 class="titolo-sezione">{title}</h1>
+    <slot />
+  </article>
+</Base>
+
+<style>
+  .legale { display: flex; flex-direction: column; gap: 16px; }
+  .legale :global(h2) { font-size: 22px; margin-top: 16px; }
+  .legale :global(ul) { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 6px; }
+  .bozza { background: #FFF1CC; color: #5C3F00; border-radius: 10px; padding: 10px 14px; font-size: 14px; font-weight: 600; }
+</style>

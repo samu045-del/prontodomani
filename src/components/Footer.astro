@@ -1,0 +1,35 @@
+---
+import Logo from './Logo.astro';
+import { azienda } from '../data/site';
+const anno = new Date().getFullYear();
+---
+<footer class="footer">
+  <div class="contenitore footer__riga">
+    <div class="footer__dati">
+      <Logo size={28} />
+      <p>{azienda.titolare} · P.IVA {azienda.piva}</p>
+      <p>{azienda.indirizzo}</p>
+      <p>
+        <a href={`mailto:${azienda.email}`}>{azienda.email}</a>
+        {azienda.telefono && <> · <a href={`tel:${azienda.telefono.replace(/\s/g, '')}`}>{azienda.telefono}</a></>}
+      </p>
+      <p class="piccolo">© {anno} {azienda.nome}</p>
+    </div>
+    <nav aria-label="Informazioni legali">
+      <ul class="footer__link">
+        <li><a href="/privacy">Privacy</a></li>
+        <li><a href="/cookie">Cookie</a></li>
+        <li><a href="/condizioni">Condizioni del servizio</a></li>
+        <li><a href="/condizioni#dominio">Dominio e rinnovi</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .footer { border-top: 1px solid var(--bordo); font-size: 14px; }
+  .footer__riga { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px; padding-block: 48px; }
+  .footer__dati { display: flex; flex-direction: column; gap: 6px; }
+  .footer__link { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 22px; }
+  .footer__link a { display: inline-block; padding: 8px 0; }
+</style>

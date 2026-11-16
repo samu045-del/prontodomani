@@ -1,0 +1,15 @@
+---
+interface Props { tipo?: 'si' | 'no' }
+const { tipo = 'si' } = Astro.props;
+---
+{tipo === 'si' ? (
+  <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+    <circle cx="12" cy="12" r="11" fill="#E8F2EE"></circle>
+    <path d="M7 12.5l3.2 3L17 8.5" fill="none" stroke="#2E7D6B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+  </svg>
+) : (
+  <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+    <circle cx="12" cy="12" r="11" fill="#F1EFE8"></circle>
+    <path d="M8 12h8" stroke="#55646B" stroke-width="2.4" stroke-linecap="round"></path>
+  </svg>
+)}

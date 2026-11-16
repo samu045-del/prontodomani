@@ -1,0 +1,57 @@
+---
+import { posti } from '../data/site';
+
+const totale = posti.totale;
+const occupati = Math.min(Math.max(posti.occupati, 0), totale);
+const liberi = totale - occupati;
+const esauriti = liberi === 0;
+const mostraNumeri = occupati >= posti.mostraDaOccupati;
+const percentuale = Math.round((occupati / totale) * 100);
+---
+<div class="contatore">
+  {esauriti ? (
+    <>
+      <p class="contatore__etichetta">Posti di {posti.mese}</p>
+      <p class="contatore__grande">Esauriti</p>
+      <p class="contatore__nota">Scrivici lo stesso: ti mettiamo in lista per il mese successivo.</p>
+    </>
+  ) : mostraNumeri ? (
+    <>
+      <p class="contatore__etichetta">
+        <span>Posti di {posti.mese}</span>
+        <span class="contatore__stato"><span class="pallino" aria-hidden="true"></span>Aperti</span>
+      </p>
+      <p class="contatore__numeri"><span class="contatore__grande">{liberi}</span> liberi su {totale}</p>
+      <div class="contatore__barra" role="progressbar" aria-label={`Posti occupati a ${posti.mese}`} aria-valuemin="0" aria-valuemax={totale} aria-valuenow={occupati}>
+        <div style={`width: ${percentuale}%`}></div>
+      </div>
+      <p class="contatore__nota">Lavoriamo su {totale} siti al mese per mantenere la promessa delle 24 ore.</p>
+    </>
+  ) : (
+    <>
+      <p class="contatore__etichetta">
+        <span>Prossima demo</span>
+        <span class="contatore__stato"><span class="pallino" aria-hidden="true"></span>Disponibile</span>
+      </p>
+      <p class="contatore__grande contatore__grande--testo">Entro 24 ore</p>
+      <p class="contatore__nota">dal brief completo. Accettiamo al massimo {totale} siti al mese.</p>
+    </>
+  )}
+</div>
+
+<style>
+  .contatore {
+    background: var(--petrolio); color: var(--bianco); border-radius: 18px; padding: 18px 20px;
+    box-shadow: 0 20px 40px -18px rgba(15, 58, 52, 0.6);
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .contatore__etichetta { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+  .contatore__stato { display: inline-flex; align-items: center; gap: 6px; color: var(--lime); }
+  .pallino { width: 8px; height: 8px; border-radius: 50%; background: var(--lime); }
+  .contatore__numeri { display: flex; align-items: baseline; gap: 8px; font-size: 15px; color: #D7E6E1; }
+  .contatore__grande { font-family: var(--font-titoli); font-weight: 800; font-size: 44px; line-height: 1; color: var(--bianco); }
+  .contatore__grande--testo { font-size: 32px; }
+  .contatore__barra { height: 8px; border-radius: 999px; background: rgba(255, 255, 255, 0.18); overflow: hidden; }
+  .contatore__barra div { height: 100%; background: var(--lime); border-radius: 999px; }
+  .contatore__nota { font-size: 13px; color: #D7E6E1; }
+</style>

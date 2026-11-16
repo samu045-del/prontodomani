@@ -1,0 +1,111 @@
+/* ===== Token ===== */
+:root {
+  --petrolio: #0F3A34;
+  --verde: #2E7D6B;
+  --menta: #E8F2EE;
+  --avorio: #F7F5EF;
+  --ardesia: #37474F;
+  --lime: #C6F36B;
+  --grigio-testo: #55646B;
+  --bordo: #E2E0D8;
+  --bianco: #FFFFFF;
+
+  --font-titoli: 'Manrope Variable', system-ui, sans-serif;
+  --font-testo: 'Inter Variable', system-ui, sans-serif;
+
+  --raggio: 20px;
+  --contenitore: 1200px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-testo);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ardesia);
+  background: var(--avorio);
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+a { color: var(--petrolio); text-underline-offset: 3px; }
+a:hover { color: var(--verde); }
+
+:focus-visible { outline: 3px solid var(--verde); outline-offset: 3px; border-radius: 4px; }
+
+h1, h2, h3 { font-family: var(--font-titoli); color: var(--petrolio); margin: 0; }
+p { margin: 0; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.salta {
+  position: absolute; left: 16px; top: -60px; z-index: 100;
+  background: var(--petrolio); color: var(--bianco); padding: 10px 16px; border-radius: 8px;
+}
+.salta:focus { top: 12px; color: var(--bianco); }
+
+/* ===== Layout ===== */
+.contenitore { max-width: var(--contenitore); margin: 0 auto; padding-inline: 24px; }
+.sezione { padding-block: 96px; }
+.sezione--stretta { max-width: 880px; }
+.intestazione { display: flex; flex-direction: column; gap: 12px; max-width: 720px; margin-bottom: 40px; }
+.occhiello { font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--verde); }
+.titolo-sezione { font-weight: 800; font-size: clamp(32px, 4vw, 46px); line-height: 1.08; letter-spacing: -0.03em; }
+.griglia { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--min, 300px)), 1fr)); }
+.nota { font-size: 15px; max-width: 820px; }
+.piccolo { font-size: 14px; color: var(--grigio-testo); }
+
+/* ===== Pulsanti ===== */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 52px; padding: 0 26px; border-radius: 999px;
+  font-weight: 600; text-decoration: none; border: 1.5px solid transparent;
+  font: inherit; font-weight: 600; cursor: pointer;
+  transition: background-color .15s ease, color .15s ease;
+}
+.btn--primario { background: var(--petrolio); color: var(--bianco); }
+.btn--primario:hover { background: #164d45; color: var(--bianco); }
+.btn--secondario { border-color: var(--petrolio); color: var(--petrolio); background: transparent; }
+.btn--secondario:hover { background: var(--menta); color: var(--petrolio); }
+.btn--lime { background: var(--lime); color: var(--petrolio); font-weight: 700; }
+.btn--lime:hover { background: #b6e85a; color: var(--petrolio); }
+.btn--piccolo { min-height: 44px; padding: 0 20px; font-size: 15px; }
+
+/* ===== Card ===== */
+.card {
+  background: var(--bianco); border: 1px solid var(--bordo); border-radius: var(--raggio);
+  padding: 28px; display: flex; flex-direction: column; gap: 14px;
+}
+.card h3 { font-size: 22px; }
+.badge {
+  align-self: flex-start; font-size: 12px; font-weight: 600; color: var(--petrolio);
+  background: var(--menta); padding: 4px 10px; border-radius: 999px;
+}
+
+/* ===== Liste con spunta ===== */
+.lista-spunte { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.lista-spunte li { display: flex; gap: 12px; align-items: flex-start; }
+.lista-spunte svg { flex: none; margin-top: 3px; }
+
+/* ===== Moduli ===== */
+.campo { display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: var(--petrolio); }
+.campo input, .campo select, .campo textarea {
+  min-height: 46px; border: 1px solid #A9A69B; border-radius: 10px; padding: 0 12px;
+  font: inherit; font-size: 16px; font-weight: 400; color: var(--ardesia); background: var(--bianco);
+}
+.campo textarea { padding: 10px 12px; resize: vertical; min-height: 110px; }
+.campo--intero { grid-column: 1 / -1; }
+.aiuto { font-weight: 400; font-size: 13px; color: var(--grigio-testo); }
+.trappola { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }

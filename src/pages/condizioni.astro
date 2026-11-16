@@ -1,0 +1,30 @@
+---
+import Legale from '../components/Legale.astro';
+import { prezzi } from '../data/site';
+---
+<Legale title="Condizioni del servizio" description="Sintesi delle condizioni del servizio ProntoDomani.">
+  <p>Questa pagina riassume l'offerta. Le condizioni che valgono sono quelle del contratto firmato.</p>
+
+  <h2>Il pacchetto da {prezzi.sito} €</h2>
+  <ul>
+    <li>Sito vetrina fino a 4 pagine, ottimizzato per smartphone, tablet e computer.</li>
+    <li>Dominio .it, hosting e certificato SSL per i primi 12 mesi.</li>
+    <li>Due giri di revisione concordati.</li>
+  </ul>
+
+  <h2>La promessa delle 24 ore</h2>
+  <p>La prima demo navigabile viene consegnata entro 24 ore dalla ricezione di brief completo, testi, logo e immagini (o indicazioni approvate per reperirle). Ritardi nel materiale, richieste fuori pacchetto o revisioni aggiuntive possono modificare i tempi. Il sito viene pubblicato solo dopo l'approvazione del cliente.</p>
+
+  <h2 id="dominio">Dominio e rinnovi</h2>
+  <ul>
+    <li>Il dominio è intestato al cliente fin dalla registrazione.</li>
+    <li>Dal secondo anno la manutenzione costa {prezzi.manutenzione} €/anno: hosting, SSL, {prezzi.rinnovoDominioIncluso ? 'rinnovo del dominio, ' : ''}backup, monitoraggio, aggiornamenti tecnici, assistenza e 30 minuti di piccole modifiche a trimestre.</li>
+    <li>Se il cliente non rinnova, il sito resta online fino alla scadenza; poi consegniamo i file e assistiamo il trasferimento del dominio.</li>
+    <li>[DA DEFINIRE: durata minima, preavviso di disdetta, proprietà e licenze di codice, testi e immagini.]</li>
+  </ul>
+
+  <h2>Cosa non è incluso</h2>
+  <p>Nuove pagine, restyling, SEO continuativa, campagne pubblicitarie, gestione social, scrittura dei testi, fotografie, funzionalità su misura e modifiche illimitate. Non promettiamo risultati di posizionamento su Google né un aumento dei contatti.</p>
+
+  <p>{prezzi.notaIva}</p>
+</Legale>

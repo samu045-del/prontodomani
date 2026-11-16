@@ -1,0 +1,43 @@
+---
+import Logo from './Logo.astro';
+import { progetti } from '../data/site';
+
+const haEsempi = progetti.some((p) => p.consenso);
+const voci = [
+  { href: '/#come-funziona', label: 'Come funziona' },
+  { href: '/#settori', label: 'Settori' },
+  ...(haEsempi ? [{ href: '/#esempi', label: 'Esempi' }] : []),
+  { href: '/#prezzi', label: 'Prezzi' },
+  { href: '/#faq', label: 'FAQ' },
+];
+---
+<header class="header">
+  <div class="contenitore header__riga">
+    <a href="/" class="header__logo" aria-label="ProntoDomani, torna alla home"><Logo /></a>
+    <nav aria-label="Principale">
+      <ul class="header__nav">
+        {voci.map((v) => <li><a href={v.href}>{v.label}</a></li>)}
+      </ul>
+    </nav>
+    <a href="/#richiesta" class="btn btn--primario btn--piccolo">Richiedi una proposta</a>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(247, 245, 239, 0.95);
+    border-bottom: 1px solid var(--bordo);
+    backdrop-filter: blur(6px);
+  }
+  .header__riga { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; padding-block: 12px; }
+  .header__logo { text-decoration: none; }
+  .header__nav { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0 24px; font-size: 15px; font-weight: 500; }
+  .header__nav a { display: inline-block; padding: 10px 0; text-decoration: none; }
+  .header__nav a:hover { text-decoration: underline; }
+  @media (max-width: 720px) {
+    .header { position: static; }
+    .header__riga { justify-content: center; }
+    .header__nav { justify-content: center; gap: 0 18px; }
+  }
+</style>
