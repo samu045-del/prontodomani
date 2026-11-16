@@ -1,20 +1,19 @@
-// Cloudflare Pages Function: riceve il modulo di richiesta, verifica
-// l'antispam (Turnstile) e inoltra la richiesta via email (Resend).
+// Gestione del modulo di richiesta: verifica l'antispam (Turnstile)
+// e inoltra la richiesta via email (Resend).
 //
-// Variabili d'ambiente da impostare su Cloudflare (Settings > Variables):
-//   TURNSTILE_SECRET_KEY  chiave segreta di Turnstile            (segreta)
-//   RESEND_API_KEY        chiave API di Resend                     (segreta)
-//   MAIL_TO               dove arrivano le richieste, es. samuele@prontodomani.it
-//   MAIL_FROM             mittente verificato su Resend, es. "ProntoDomani <modulo@send.prontodomani.it>"
+// Segreti da impostare su Cloudflare (Worker > Settings > Variables and Secrets):
+//   TURNSTILE_SECRET_KEY  chiave segreta di Turnstile
+//   RESEND_API_KEY        chiave API di Resend
+// MAIL_TO e MAIL_FROM sono in wrangler.jsonc (non sono segreti).
 
-interface Env {
+export interface Env {
+  ASSETS: { fetch: (request: Request) => Promise<Response> };
   TURNSTILE_SECRET_KEY: string;
   RESEND_API_KEY: string;
   MAIL_TO: string;
   MAIL_FROM: string;
 }
 
-type Ctx = { request: Request; env: Env };
 
 const LIMITI: Record<string, number> = {
   nome: 120, azienda: 160, email: 200, telefono: 40, settore: 60,
@@ -35,7 +34,7 @@ function escape(testo: string): string {
   return testo.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!));
 }
 
-export async function onRequestPost({ request, env }: Ctx): Promise<Response> {
+export async function gestisciRichiesta(request: Request, env: Env): Promise<Response> {
   let form: FormData;
   try {
     form = await request.formData();
@@ -45,7 +44,7 @@ export async function onRequestPost({ request, env }: Ctx): Promise<Response> {
 
   // Trappola per bot: un umano non vede né compila questo campo.
   if (String(form.get('sito_web_2') ?? '').trim() !== '') {
-    return vaiA(request, '/grazie');
+    return vaiA(request, '/grazie/');
   }
 
   const dati: Record<string, string> = {};
@@ -108,9 +107,5 @@ export async function onRequestPost({ request, env }: Ctx): Promise<Response> {
   if (!invio.ok) {
     return errore(request, `invio email fallito: ${invio.status} ${await invio.text()}`);
   }
-  return vaiA(request, '/grazie');
-}
-
-export async function onRequest({ request }: Ctx): Promise<Response> {
-  return vaiA(request, '/#richiesta');
+  return vaiA(request, '/grazie/');
 }

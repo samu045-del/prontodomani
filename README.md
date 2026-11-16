@@ -1,6 +1,6 @@
 # prontodomani.it
 
-Sito vetrina di ProntoDomani. Astro (sito statico) + una Cloudflare Pages Function per il modulo.
+Sito vetrina di ProntoDomani. Astro (sito statico) servito da un Cloudflare Worker, che gestisce anche il modulo (`/api/richiesta`).
 
 ## Cosa modificare e dove
 
@@ -11,7 +11,8 @@ Sito vetrina di ProntoDomani. Astro (sito statico) + una Cloudflare Pages Functi
 | Colori e stili comuni | `src/styles/global.css` |
 | Sezioni della home | `src/components/` |
 | Privacy, cookie, condizioni (bozze) | `src/pages/privacy.astro`, `cookie.astro`, `condizioni.astro` |
-| Invio del modulo | `functions/api/richiesta.ts` |
+| Invio del modulo | `worker/richiesta.ts` (instradamento in `worker/index.ts`) |
+| Destinatario e mittente delle email del modulo | `vars` in `wrangler.jsonc` |
 
 Ogni modifica salvata su GitHub (ramo `main`) viene pubblicata da Cloudflare in automatico in 1-2 minuti.
 
@@ -23,18 +24,15 @@ npm run dev      # http://localhost:4321
 npm run build    # genera dist/
 ```
 
-In locale il modulo non invia email: la funzione gira solo su Cloudflare.
+Per provare anche il Worker in locale: `npm run build && npx wrangler dev`.
 
-## Impostazioni Cloudflare Pages
+## Impostazioni Cloudflare (Workers Builds)
 
-- Framework preset: Astro
 - Build command: `npm run build`
-- Output directory: `dist`
-- Variabili d'ambiente (Production):
-  - `TURNSTILE_SECRET_KEY` (segreta)
-  - `RESEND_API_KEY` (segreta)
-  - `MAIL_TO` es. `samuele@prontodomani.it`
-  - `MAIL_FROM` es. `ProntoDomani <modulo@send.prontodomani.it>`
+- Deploy command: `npx wrangler deploy`
+- Segreti (Worker > Settings > Variables and Secrets, tipo "Secret"):
+  - `TURNSTILE_SECRET_KEY`
+  - `RESEND_API_KEY`
 
 La chiave pubblica di Turnstile va in `turnstileSiteKey` dentro `src/data/site.ts`.
 
