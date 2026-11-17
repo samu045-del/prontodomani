@@ -55,4 +55,12 @@ export const demo: Demo[] = [
     altezze: [2668, 2668, 2669],
     inviata: '',
   },
+  {
+    slug: 'valeria-lazzarini',
+    club: 'Valeria Lazzarini',
+    immagini: ['parte-1.webp', 'parte-2.webp', 'parte-3.webp'],
+    larghezza: 1800,
+    altezze: [2886, 2886, 2886],
+    inviata: '',
+  },
 ];
