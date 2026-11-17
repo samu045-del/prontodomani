@@ -1,0 +1,98 @@
+---
+// Anteprima grafica (non un sito reale) di come può apparire un sito per ciascun settore.
+interface Props {
+  tipo: 'psicologi' | 'dentisti' | 'societa-sportive';
+  formato?: 'desktop' | 'telefono';
+}
+const { tipo, formato = 'desktop' } = Astro.props;
+---
+<div class={`mini mini--${tipo} mini--${formato}`} aria-hidden="true">
+  <div class="mini__barra"><span></span><span></span><span></span></div>
+
+  {tipo === 'psicologi' && (
+    <div class="mini__pagina psi">
+      <div class="psi__nav"><span class="psi__nome">Studio di Psicologia</span><span class="psi__menu">Chi sono · Approccio · Contatti</span></div>
+      <div class="psi__hero">
+        <div>
+          <p class="psi__occhiello">Psicologa · Psicoterapeuta</p>
+          <p class="psi__titolo">Uno spazio di ascolto, con calma.</p>
+          <span class="psi__btn">Prendi contatto</span>
+        </div>
+        <div class="psi__foto"></div>
+      </div>
+      <div class="psi__aree"><span>Ansia e stress</span><span>Relazioni</span><span>Percorsi individuali</span></div>
+    </div>
+  )}
+
+  {tipo === 'dentisti' && (
+    <div class="mini__pagina den">
+      <div class="den__nav"><span class="den__nome">Studio Dentistico</span><span class="den__tel">Chiama ora</span></div>
+      <div class="den__hero">
+        <p class="den__titolo">Cure per tutta la famiglia, in uno studio moderno.</p>
+        <div class="den__orari"><strong>Oggi</strong> 9:00 – 19:00</div>
+      </div>
+      <div class="den__griglia"><span>Igiene</span><span>Conservativa</span><span>Ortodonzia</span><span>Implantologia</span></div>
+    </div>
+  )}
+
+  {tipo === 'societa-sportive' && (
+    <div class="mini__pagina spo">
+      <div class="spo__nav"><span class="spo__stemma"></span><span class="spo__nome">ASD Polisportiva</span></div>
+      <div class="spo__hero">
+        <p class="spo__titolo">Si cresce<br />in campo.</p>
+        <span class="spo__btn">Iscriviti</span>
+      </div>
+      <div class="spo__striscia"><span>Prima squadra</span><span>U14</span><span>Femminile</span></div>
+      <div class="spo__sponsor"><span></span><span></span><span></span><span></span></div>
+    </div>
+  )}
+</div>
+
+<style>
+  .mini { background: #fff; border-radius: 16px; overflow: hidden; border: 1px solid rgba(15,58,52,.12); box-shadow: 0 30px 60px -32px rgba(15, 58, 52, 0.45); font-family: var(--font-testo); }
+  .mini__barra { display: flex; gap: 5px; padding: 9px 12px; background: #F1EFE8; border-bottom: 1px solid #E5E2D8; }
+  .mini__barra span { width: 8px; height: 8px; border-radius: 50%; background: #D3D0C6; }
+  .mini--telefono { border-radius: 26px; border: 7px solid #0F3A34; }
+  .mini--telefono .mini__barra { display: none; }
+  .mini__pagina { padding: 16px; display: flex; flex-direction: column; gap: 12px; font-size: 10px; line-height: 1.35; }
+
+  /* Psicologi: calmo, carta, serif */
+  .psi { background: #F5F2EA; color: #2F3B33; }
+  .psi__nav { display: flex; justify-content: space-between; gap: 8px; align-items: center; }
+  .psi__nome { font-family: Georgia, 'Iowan Old Style', serif; font-size: 12px; font-style: italic; }
+  .psi__menu { font-size: 8.5px; opacity: .75; }
+  .psi__hero { display: grid; grid-template-columns: 1.3fr 1fr; gap: 12px; align-items: center; }
+  .psi__hero > div:first-child { display: flex; flex-direction: column; gap: 8px; }
+  .psi__occhiello { font-size: 8px; letter-spacing: .12em; text-transform: uppercase; color: #56695A; }
+  .psi__titolo { font-family: Georgia, 'Iowan Old Style', serif; font-size: 18px; line-height: 1.15; }
+  .psi__btn { align-self: flex-start; background: #56695A; color: #fff; border-radius: 999px; padding: 5px 10px; font-size: 9px; }
+  .psi__foto { aspect-ratio: 4/5; border-radius: 80px 80px 12px 12px; background: linear-gradient(160deg, #D9D2C1, #B9BFA8); }
+  .psi__aree { display: flex; flex-wrap: wrap; gap: 6px; }
+  .psi__aree span { border: 1px solid #C9C3B3; border-radius: 999px; padding: 3px 8px; font-size: 8.5px; }
+
+  /* Dentisti: pulito, blu, griglia */
+  .den { background: #fff; color: #14324A; }
+  .den__nav { display: flex; justify-content: space-between; align-items: center; }
+  .den__nome { font-family: var(--font-titoli); font-weight: 800; font-size: 12px; color: #1F5F86; }
+  .den__tel { background: #1F5F86; color: #fff; border-radius: 8px; padding: 4px 9px; font-size: 9px; font-weight: 600; }
+  .den__hero { background: linear-gradient(135deg, #EAF2F7, #D6E6F0); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px; }
+  .den__titolo { font-family: var(--font-titoli); font-weight: 800; font-size: 16px; line-height: 1.15; max-width: 85%; }
+  .den__orari { align-self: flex-start; background: #fff; border-radius: 8px; padding: 4px 8px; font-size: 9px; }
+  .den__griglia { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
+  .den__griglia span { border: 1px solid #DCE6ED; border-radius: 8px; padding: 7px 8px; font-weight: 600; font-size: 9px; }
+
+  /* Società sportive: energico, verde scuro, maiuscolo */
+  .spo { background: #F2F5F0; color: #103A20; padding: 0; gap: 0; }
+  .spo__nav { display: flex; gap: 8px; align-items: center; padding: 10px 14px; background: #0F3D22; color: #fff; }
+  .spo__stemma { width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: inset 0 0 0 3px #2FA052; }
+  .spo__nome { font-family: var(--font-titoli); font-weight: 800; font-size: 11px; letter-spacing: .02em; text-transform: uppercase; }
+  .spo__hero { background: #0F3D22; padding: 8px 14px 18px; display: flex; flex-direction: column; gap: 10px; }
+  .spo__titolo { font-family: var(--font-titoli); font-weight: 800; font-style: italic; text-transform: uppercase; font-size: 24px; line-height: .95; color: #fff; letter-spacing: -.02em; }
+  .spo__btn { align-self: flex-start; background: #C6F36B; color: #0F3D22; border-radius: 999px; padding: 5px 10px; font-size: 9px; font-weight: 700; }
+  .spo__striscia { display: flex; flex-wrap: wrap; gap: 4px 12px; padding: 7px 14px; background: #2FA052; color: #fff; font-weight: 800; font-size: 8.5px; text-transform: uppercase; letter-spacing: .04em; }
+  .spo__sponsor { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 12px 14px 14px; }
+  .spo__sponsor span { height: 22px; border: 1px dashed #9DB8A5; border-radius: 6px; }
+
+  .mini--telefono .psi__hero { grid-template-columns: 1fr; }
+  .mini--telefono .psi__foto { display: none; }
+</style>

@@ -1,100 +1,96 @@
 ---
-import { opzioniSettore, turnstileSiteKey, posti } from '../data/site';
-const liberi = Math.max(posti.totale - posti.occupati, 0);
-const mostraNumeri = posti.occupati >= posti.mostraDaOccupati;
+// Modulo di richiesta. Invia a /api/richiesta (Cloudflare Worker).
+import { opzioniSettore, turnstileSiteKey, azienda, pacchetti, promo, euro, prezzoMostrato } from '../data/site';
+const mappaSettori: Record<string, string> = {
+  psicologi: opzioniSettore[0],
+  dentisti: opzioniSettore[1],
+  'societa-sportive': opzioniSettore[2],
+};
 ---
-<section id="richiesta" class="richiesta" aria-labelledby="richiesta-titolo">
-  <div class="contenitore sezione richiesta__griglia">
-    <div class="richiesta__testo">
-      <h2 id="richiesta-titolo">La tua attività merita un sito <span>all'altezza</span>.</h2>
-      <p class="richiesta__sotto">Raccontaci cosa fai. Ti rispondiamo entro un giorno lavorativo con una proposta e la lista del materiale che ci serve.</p>
-      {mostraNumeri && (
-        <p class="richiesta__posti">Posti liberi a {posti.mese}: <strong>{liberi} su {posti.totale}</strong></p>
-      )}
-    </div>
+<form id="modulo" class="modulo" method="post" action="/api/richiesta" data-settori={JSON.stringify(mappaSettori)}>
+  <p id="esito-errore" class="modulo__errore" role="alert" hidden>
+    Non siamo riusciti a inviare la richiesta. Riprova tra qualche minuto o scrivici a <a href={`mailto:${azienda.email}`}>{azienda.email}</a>.
+  </p>
 
-    <form class="modulo" method="post" action="/api/richiesta">
-      <p id="esito-errore" class="modulo__errore" role="alert" hidden>
-        Non siamo riusciti a inviare la richiesta. Riprova tra qualche minuto o scrivici a <a href="mailto:info@prontodomani.it">info@prontodomani.it</a>.
-      </p>
+  <label class="campo">Nome e cognome
+    <input type="text" name="nome" autocomplete="name" required maxlength="120" />
+  </label>
+  <label class="campo">Studio, attività o società
+    <input type="text" name="azienda" autocomplete="organization" required maxlength="160" />
+  </label>
+  <label class="campo">Email
+    <input type="email" name="email" autocomplete="email" required maxlength="200" />
+  </label>
+  <label class="campo"><span>Telefono <span class="aiuto">(facoltativo)</span></span>
+    <input type="tel" name="telefono" autocomplete="tel" maxlength="40" />
+  </label>
+  <label class="campo">Settore
+    <select name="settore" required>
+      <option value="" selected disabled>Scegli…</option>
+      {opzioniSettore.map((o) => <option>{o}</option>)}
+    </select>
+  </label>
+  <label class="campo">Pacchetto
+    <select name="pacchetto">
+      <option value="Non so ancora" selected>Non so ancora</option>
+      {pacchetti.map((p) => (
+        <option value={p.nome}>{p.nome} · {euro(prezzoMostrato(p))}{promo.attiva && p.id === promo.pacchetto ? ' (promozione di lancio)' : ''}</option>
+      ))}
+    </select>
+  </label>
+  <label class="campo"><span>Sito attuale <span class="aiuto">(facoltativo)</span></span>
+    <input type="text" name="sito" inputmode="url" placeholder="www.esempio.it" maxlength="200" />
+  </label>
+  <label class="campo">Quando vorresti essere online?
+    <select name="tempistiche" required>
+      <option value="" selected disabled>Scegli…</option>
+      <option>Il prima possibile</option>
+      <option>Entro un mese</option>
+      <option>Entro tre mesi</option>
+      <option>Sto solo valutando</option>
+    </select>
+  </label>
+  <label class="campo campo--intero">Raccontaci la tua attività
+    <textarea name="messaggio" rows="4" required maxlength="2000"></textarea>
+    <span class="aiuto">Bastano poche righe. Non inserire dati sanitari o informazioni personali sensibili.</span>
+  </label>
 
-      <label class="campo">Nome e cognome
-        <input type="text" name="nome" autocomplete="name" required maxlength="120" />
-      </label>
-      <label class="campo">Studio, azienda o società
-        <input type="text" name="azienda" autocomplete="organization" required maxlength="160" />
-      </label>
-      <label class="campo">Email
-        <input type="email" name="email" autocomplete="email" required maxlength="200" />
-      </label>
-      <label class="campo"><span>Telefono <span class="aiuto">(facoltativo)</span></span>
-        <input type="tel" name="telefono" autocomplete="tel" maxlength="40" />
-      </label>
-      <label class="campo">Settore
-        <select name="settore" required>
-          <option value="" selected disabled>Scegli…</option>
-          {opzioniSettore.map((o) => <option>{o}</option>)}
-        </select>
-      </label>
-      <label class="campo"><span>Sito attuale <span class="aiuto">(facoltativo)</span></span>
-        <input type="text" name="sito" inputmode="url" placeholder="www.esempio.it" maxlength="200" />
-      </label>
-      <label class="campo campo--intero">Di cosa hai bisogno?
-        <textarea name="messaggio" rows="4" required maxlength="2000"></textarea>
-        <span class="aiuto">Non inserire dati sanitari o informazioni personali sensibili.</span>
-      </label>
-      <label class="campo campo--intero">Quando vorresti essere online?
-        <select name="tempistiche" required>
-          <option value="" selected disabled>Scegli…</option>
-          <option>Il prima possibile</option>
-          <option>Entro un mese</option>
-          <option>Entro tre mesi</option>
-          <option>Sto solo valutando</option>
-        </select>
-      </label>
-
-      <div class="trappola" aria-hidden="true">
-        <label>Non compilare questo campo <input type="text" name="sito_web_2" tabindex="-1" autocomplete="off" /></label>
-      </div>
-
-      <label class="consenso campo--intero">
-        <input type="checkbox" name="privacy" value="si" required />
-        <span>Ho letto l'<a href="/privacy" target="_blank" rel="noopener">informativa privacy</a> e acconsento a essere ricontattato per questa richiesta.</span>
-      </label>
-
-      <div class="campo--intero">
-        <div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-language="it" data-theme="light"></div>
-        <noscript><p class="aiuto">Per inviare il modulo serve JavaScript attivo (protezione antispam). In alternativa scrivici a info@prontodomani.it.</p></noscript>
-      </div>
-
-      <button type="submit" class="btn btn--primario campo--intero">Richiedi una proposta</button>
-    </form>
+  <div class="trappola" aria-hidden="true">
+    <label>Non compilare questo campo <input type="text" name="sito_web_2" tabindex="-1" autocomplete="off" /></label>
   </div>
-</section>
+
+  <label class="consenso campo--intero">
+    <input type="checkbox" name="privacy" value="si" required />
+    <span>Ho letto l’<a href="/privacy/" target="_blank" rel="noopener">informativa privacy</a> e acconsento a essere ricontattato per questa richiesta.</span>
+  </label>
+
+  <div class="campo--intero">
+    <div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-language="it" data-theme="light"></div>
+    <noscript><p class="aiuto">Per inviare il modulo serve JavaScript attivo (protezione antispam). In alternativa scrivici a {azienda.email}.</p></noscript>
+  </div>
+
+  <button type="submit" class="btn btn--primario campo--intero">Invia la richiesta</button>
+</form>
 
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer is:inline></script>
 <script>
-  const params = new URLSearchParams(window.location.search);
-  if (params.get('esito') === 'errore') {
-    const box = document.getElementById('esito-errore');
-    if (box) box.hidden = false;
+  const modulo = document.getElementById('modulo') as HTMLFormElement | null;
+  const parametri = new URLSearchParams(window.location.search);
+  if (parametri.get('esito') === 'errore') document.getElementById('esito-errore')?.removeAttribute('hidden');
+  if (modulo) {
+    const mappa = JSON.parse(modulo.dataset.settori || '{}') as Record<string, string>;
+    const settore = parametri.get('settore');
+    const pacchetto = parametri.get('pacchetto');
+    if (settore && mappa[settore]) (modulo.elements.namedItem('settore') as HTMLSelectElement).value = mappa[settore];
+    if (pacchetto) (modulo.elements.namedItem('pacchetto') as HTMLSelectElement).value = pacchetto.toUpperCase();
   }
 </script>
 
 <style>
-  .richiesta { background: var(--petrolio); color: #E3EEEA; }
-  .richiesta__griglia { display: grid; gap: 56px; align-items: start; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); }
-  .richiesta__testo { display: flex; flex-direction: column; gap: 18px; }
-  .richiesta h2 { color: var(--bianco); font-weight: 800; font-size: clamp(34px, 4.4vw, 52px); line-height: 1.05; letter-spacing: -0.03em; }
-  .richiesta h2 span { color: var(--lime); }
-  .richiesta__sotto { font-size: 18px; }
-  .richiesta__posti { font-size: 15px; color: #C9DCD5; }
-  .richiesta__posti strong { color: var(--lime); }
-
   .modulo {
-    background: var(--bianco); color: var(--ardesia); border-radius: 24px; padding: 32px;
-    display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
-    position: relative;
+    background: var(--bianco); color: var(--ardesia); border-radius: var(--raggio-grande); padding: clamp(24px, 4vw, 40px);
+    display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+    border: 1px solid var(--bordo); box-shadow: 0 30px 60px -40px rgba(15, 58, 52, .4);
   }
   .modulo .btn { width: 100%; }
   .modulo__errore { grid-column: 1 / -1; background: #FDECEA; color: #8A1C12; border-radius: 10px; padding: 12px 14px; font-size: 15px; }

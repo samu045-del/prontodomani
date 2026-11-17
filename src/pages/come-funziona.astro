@@ -1,0 +1,64 @@
+---
+import Base from '../layouts/Base.astro';
+import Processo from '../components/Processo.astro';
+import Spunta from '../components/Spunta.astro';
+import Faq from '../components/Faq.astro';
+import CtaFinale from '../components/CtaFinale.astro';
+
+const materiale = [
+  'Il nome dell’attività e cosa fai, in poche righe',
+  'Logo, se ce l’hai (altrimenti partiamo dal nome)',
+  'Fotografie: tue, dello studio, della squadra o del campo',
+  'Contatti, indirizzo e orari',
+  'Eventuali testi che hai già, anche da un vecchio sito o dai social',
+  'Il dominio, se ne hai già uno',
+];
+
+const faq = [
+  { d: 'Da quando partono le 24 ore?', r: 'Da quando abbiamo tutto il materiale dell’elenco qui sopra. Se manca qualcosa ti scriviamo subito, e il conteggio parte quando arriva.' },
+  { d: 'La demo è già il sito definitivo?', r: 'È una prima versione navigabile, su un indirizzo di prova. La sistemiamo con le tue revisioni e la pubblichiamo solo dopo la tua approvazione.' },
+  { d: 'Cosa conta come ciclo di revisione?', r: 'Un elenco unico di correzioni che ci mandi su testi, immagini e dettagli. Ne sono inclusi due. Nuove pagine o cambi di struttura si preventivano a parte.' },
+  { d: 'Devo saper usare strumenti tecnici?', r: 'No. Pensiamo noi a hosting, dominio, sicurezza e pubblicazione. A te chiediamo solo informazioni sulla tua attività.' },
+  { d: 'Scrivete voi i testi?', r: 'Organizziamo e adattiamo per il web le informazioni che ci dai. La scrittura completa dei contenuti non è inclusa nei pacchetti.' },
+];
+---
+<Base title="Come funziona · ProntoDomani" description="Come realizziamo il tuo sito: una chiamata, la prima demo in 24 ore dal materiale completo, due cicli di revisione e la pubblicazione con il tuo ok.">
+  <section class="contenitore sezione cf-intro" aria-labelledby="cf-titolo">
+    <p class="occhiello">Come funziona</p>
+    <h1 id="cf-titolo" class="titolo-sezione">Dalla prima chiamata al sito online, senza complicazioni.</h1>
+    <p class="lead">Ti chiediamo poche cose, ti mostriamo presto un risultato concreto e pubblichiamo solo quando ti convince. Tutto il lato tecnico è affare nostro.</p>
+  </section>
+
+  <section class="contenitore" aria-label="I passaggi">
+    <Processo dettagliato />
+  </section>
+
+  <section class="contenitore sezione cf-due" aria-labelledby="cf-materiale">
+    <div class="cf-box">
+      <p class="occhiello">Cosa ci serve da te</p>
+      <h2 id="cf-materiale" class="titolo-medio">Il materiale per partire.</h2>
+      <ul class="lista-spunte">{materiale.map((m) => <li><Spunta />{m}</li>)}</ul>
+      <p class="piccolo">Non hai tutto? Nessun problema: ti diciamo cosa è indispensabile e cosa può arrivare dopo.</p>
+    </div>
+    <div class="cf-box cf-box--scura">
+      <p class="occhiello">La promessa delle 24 ore</p>
+      <h2 class="titolo-medio">Cosa promettiamo, esattamente.</h2>
+      <p>Entro 24 ore dal materiale completo ricevi la <strong>prima versione navigabile</strong> del sito, su un indirizzo di prova.</p>
+      <p>Non è la pubblicazione automatica di un sito non ancora approvato: quella avviene dopo le revisioni e il tuo ok.</p>
+      <p>Ritardi nel materiale, richieste fuori pacchetto o revisioni aggiuntive possono spostare i tempi. Te lo diciamo sempre prima.</p>
+    </div>
+  </section>
+
+  <Faq voci={faq} titolo="Domande sul processo" />
+  <CtaFinale />
+</Base>
+
+<style>
+  .cf-intro { display: flex; flex-direction: column; gap: 18px; padding-bottom: 48px; max-width: 900px; margin-left: max(0px, calc((100% - var(--contenitore)) / 2)); }
+  .cf-due { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); }
+  .cf-box { background: var(--bianco); border: 1px solid var(--bordo); border-radius: var(--raggio-grande); padding: clamp(28px, 4vw, 44px); display: flex; flex-direction: column; gap: 16px; }
+  .cf-box--scura { background: var(--petrolio); border-color: var(--petrolio); color: #DCE9E4; }
+  .cf-box--scura h2 { color: #fff; }
+  .cf-box--scura .occhiello { color: var(--lime); }
+  .cf-box--scura strong { color: #fff; }
+</style>

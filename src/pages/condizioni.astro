@@ -1,30 +1,31 @@
 ---
 import Legale from '../components/Legale.astro';
-import { prezzi } from '../data/site';
+import { pacchetti, promo, care, euro, notaIva } from '../data/site';
 ---
-<Legale title="Condizioni del servizio" description="Sintesi delle condizioni del servizio ProntoDomani.">
-  <p>Questa pagina riassume l'offerta. Le condizioni che valgono sono quelle del contratto firmato.</p>
+<Legale title="Condizioni del servizio" description="Sintesi delle condizioni del servizio ProntoDomani: pacchetti, prima demo, revisioni, dominio, gestione tecnica e rinnovi.">
+  <p>Questa pagina riassume l’offerta. Le condizioni che valgono sono quelle del contratto firmato.</p>
 
-  <h2>Il pacchetto da {prezzi.sito} €</h2>
+  <h2>Pacchetti</h2>
   <ul>
-    <li>Sito vetrina fino a 4 pagine, ottimizzato per smartphone, tablet e computer.</li>
-    <li>Dominio .it, hosting e certificato SSL per i primi 12 mesi.</li>
-    <li>Due giri di revisione concordati.</li>
+    {pacchetti.map((p) => <li><strong>{p.nome}</strong>: {p.pagine.toLowerCase()}, {euro(p.prezzo)} una tantum.</li>)}
   </ul>
+  {promo.attiva && <p>Promozione di lancio: il pacchetto START costa {euro(promo.prezzo)} per i primi {promo.limite} clienti che lo scelgono; successivamente il prezzo sarà {euro(promo.prezzoListino)}. PLUS e PREMIUM non sono interessati dalla promozione.</p>}
 
-  <h2>La promessa delle 24 ore</h2>
-  <p>La prima demo navigabile viene consegnata entro 24 ore dalla ricezione di brief completo, testi, logo e immagini (o indicazioni approvate per reperirle). Ritardi nel materiale, richieste fuori pacchetto o revisioni aggiuntive possono modificare i tempi. Il sito viene pubblicato solo dopo l'approvazione del cliente.</p>
+  <h2>La prima demo in 24 ore</h2>
+  <p>La prima versione navigabile viene consegnata entro 24 ore dalla ricezione del materiale completo (informazioni, testi, logo e immagini, o indicazioni approvate per reperirle). Ritardi nel materiale, richieste fuori pacchetto o revisioni aggiuntive possono modificare i tempi. Il sito viene pubblicato solo dopo l’approvazione del cliente. Sono inclusi due cicli di revisione.</p>
 
-  <h2 id="dominio">Dominio e rinnovi</h2>
+  <h2 id="dominio">Dominio, gestione tecnica e rinnovi</h2>
   <ul>
-    <li>Il dominio è intestato al cliente fin dalla registrazione.</li>
-    <li>Dal secondo anno la manutenzione costa {prezzi.manutenzione} €/anno: hosting, SSL, {prezzi.rinnovoDominioIncluso ? 'rinnovo del dominio, ' : ''}backup, monitoraggio, aggiornamenti tecnici, assistenza e 30 minuti di piccole modifiche a trimestre.</li>
-    <li>Se il cliente non rinnova, il sito resta online fino alla scadenza; poi consegniamo i file e assistiamo il trasferimento del dominio.</li>
-    <li>[DA DEFINIRE: durata minima, preavviso di disdetta, proprietà e licenze di codice, testi e immagini.]</li>
+    <li>Il dominio è intestato al cliente.</li>
+    <li>Il primo anno di gestione tecnica è incluso in ogni pacchetto.</li>
+    <li>Dal secondo anno il servizio Care costa {euro(care.prezzo)} all’anno e comprende: {care.inclusi.join(', ').toLowerCase()}.</li>
+    <li>Care non comprende {care.esclusi.join(', ').toLowerCase()}.</li>
+    <li>Se il cliente non rinnova, il sito resta online fino alla scadenza; poi consegniamo i file e assistiamo il trasferimento.</li>
+    <li>[DA DEFINIRE NEL CONTRATTO: durata minima, preavviso di disdetta, proprietà e licenze di codice, testi e immagini, costo di registrazione e rinnovo del dominio.]</li>
   </ul>
 
   <h2>Cosa non è incluso</h2>
-  <p>Nuove pagine, restyling, SEO continuativa, campagne pubblicitarie, gestione social, scrittura dei testi, fotografie, funzionalità su misura e modifiche illimitate. Non promettiamo risultati di posizionamento su Google né un aumento dei contatti.</p>
+  <p>Restyling, SEO continuativa, campagne pubblicitarie, gestione social, scrittura completa dei testi, servizi fotografici, funzionalità su misura e modifiche illimitate. Non promettiamo risultati di posizionamento su Google né un aumento dei contatti o dei clienti.</p>
 
-  <p>{prezzi.notaIva}</p>
+  <p>{notaIva}</p>
 </Legale>

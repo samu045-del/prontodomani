@@ -1,0 +1,37 @@
+---
+import Spunta from './Spunta.astro';
+import { care, euro, notaIva } from '../data/site';
+interface Props { compatto?: boolean }
+const { compatto = false } = Astro.props;
+---
+<div class:list={['care', { 'care--compatto': compatto }]}>
+  <div class="care__intro">
+    <p class="occhiello">Dopo la pubblicazione</p>
+    <h3 class="titolo-medio">Care: il sito resta in buone mani.</h3>
+    <p><strong>Il primo anno è incluso in ogni pacchetto.</strong> Dal secondo anno, se vuoi che continuiamo a occuparcene noi, il servizio Care costa <strong>{euro(care.prezzo)} all’anno</strong>. Te lo ricordiamo prima della scadenza: decidi tu se rinnovare.</p>
+  </div>
+  <div class="care__colonne">
+    <div>
+      <p class="care__etichetta">Cosa comprende</p>
+      <ul class="lista-spunte">{care.inclusi.map((v) => <li><Spunta />{v}</li>)}</ul>
+    </div>
+    {!compatto && (
+      <div>
+        <p class="care__etichetta">Cosa non comprende</p>
+        <ul class="lista-spunte">{care.esclusi.map((v) => <li><Spunta tipo="no" />{v}</li>)}</ul>
+        <p class="piccolo care__nota">Queste attività si preventivano a parte, sempre prima di iniziare.</p>
+      </div>
+    )}
+  </div>
+  {!compatto && <p class="piccolo">Se non rinnovi, il sito resta online fino alla scadenza; poi ti consegniamo i file e ti aiutiamo a trasferirlo. Il dominio è sempre intestato a te. {notaIva}</p>}
+</div>
+
+<style>
+  .care { background: var(--menta); border-radius: var(--raggio-grande); padding: clamp(28px, 4vw, 44px); display: grid; gap: 28px; }
+  .care__intro { display: flex; flex-direction: column; gap: 12px; max-width: 720px; }
+  .care__colonne { display: grid; gap: 28px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
+  .care__etichetta { font-weight: 700; color: var(--petrolio); margin-bottom: 12px; }
+  .care__nota { margin-top: 12px; }
+  .care .lista-spunte { font-size: 16px; }
+  @media (min-width: 900px) { .care--compatto { grid-template-columns: 1.3fr 1fr; align-items: center; } }
+</style>

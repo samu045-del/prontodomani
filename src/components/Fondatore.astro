@@ -1,0 +1,51 @@
+---
+import { daCompletare, type Fondatore } from '../data/team';
+interface Props { f: Fondatore; indice: number; compatto?: boolean }
+const { f, indice, compatto = false } = Astro.props;
+const nomeOk = !daCompletare(f.nome);
+const ruoloOk = !daCompletare(f.ruolo);
+const bioOk = !daCompletare(f.bio);
+const iniziali = nomeOk ? f.nome.split(/\s+/).map((p) => p[0]).slice(0, 2).join('') : '';
+---
+<article class:list={['fondatore', { 'fondatore--compatto': compatto }]}>
+  <div class:list={['fondatore__foto', `fondatore__foto--${indice % 2}`]}>
+    {f.foto ? (
+      <img src={f.foto} alt={nomeOk ? `Ritratto di ${f.nome}` : 'Ritratto di un fondatore di ProntoDomani'} width="800" height="1000" loading="lazy" />
+    ) : (
+      <div class="fondatore__segnaposto" aria-hidden="true">
+        {iniziali ? <span class="fondatore__iniziali">{iniziali}</span> : (
+          <svg viewBox="0 0 34 34" width="56" height="56"><path d="M11 25V9h7.5a5 5 0 0 1 0 10H11" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24.5" cy="24.5" r="3.2" fill="#C6F36B"/></svg>
+        )}
+      </div>
+    )}
+  </div>
+  <div class="fondatore__testo">
+    <h3>{nomeOk ? f.nome : `Co-fondatore`}</h3>
+    <p class="fondatore__ruolo">{ruoloOk ? f.ruolo : 'ProntoDomani'}</p>
+    {!compatto && bioOk && <p>{f.bio}</p>}
+  </div>
+</article>
+
+<style>
+  .fondatore { display: flex; flex-direction: column; gap: 18px; }
+  .fondatore__foto { aspect-ratio: 4 / 5; border-radius: 24px; overflow: hidden; }
+  .fondatore__foto img { width: 100%; height: 100%; object-fit: cover; }
+  .fondatore__segnaposto {
+    width: 100%; height: 100%; display: grid; place-items: center; color: var(--petrolio);
+    background:
+      radial-gradient(120% 80% at 50% 110%, rgba(15,58,52,.18), transparent 60%),
+      linear-gradient(160deg, #E8F2EE, #D5E6DF);
+  }
+  .fondatore__foto--1 .fondatore__segnaposto { background: radial-gradient(120% 80% at 50% 110%, rgba(15,58,52,.2), transparent 60%), linear-gradient(160deg, #EFEBDF, #DDD6C3); }
+  .fondatore__iniziali { font-family: var(--font-titoli); font-weight: 800; font-size: 64px; letter-spacing: -.04em; }
+  .fondatore__testo { display: flex; flex-direction: column; gap: 4px; }
+  .fondatore h3 { font-size: 22px; }
+  .fondatore__ruolo { color: var(--verde); font-weight: 600; font-size: 15px; }
+  .fondatore__testo p:last-child:not(.fondatore__ruolo) { margin-top: 8px; }
+  .fondatore--compatto .fondatore__foto { aspect-ratio: 1; border-radius: 20px; }
+  .fondatore--compatto { flex-direction: row; align-items: center; }
+  .fondatore--compatto .fondatore__foto { width: 88px; flex: none; }
+  .fondatore--compatto .fondatore__iniziali { font-size: 28px; }
+  .fondatore--compatto svg { width: 30px; height: 30px; }
+  .fondatore--compatto h3 { font-size: 18px; }
+</style>

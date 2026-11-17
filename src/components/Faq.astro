@@ -1,0 +1,30 @@
+---
+interface Props { voci: { d: string; r: string }[]; titolo?: string; id?: string }
+const { voci, titolo = 'Domande frequenti', id = 'faq' } = Astro.props;
+---
+<section id={id} class="contenitore sezione sezione--stretta" aria-labelledby={`${id}-titolo`}>
+  <h2 id={`${id}-titolo`} class="titolo-sezione faq__titolo">{titolo}</h2>
+  <div class="faq">
+    {voci.map((f, i) => (
+      <details open={i === 0}>
+        <summary>{f.d}</summary>
+        <p>{f.r}</p>
+      </details>
+    ))}
+  </div>
+</section>
+
+<style>
+  .faq__titolo { margin-bottom: 28px; }
+  .faq { border-top: 1px solid #DAD7CD; }
+  .faq details { border-bottom: 1px solid #DAD7CD; padding: 8px 0; }
+  .faq summary {
+    font-family: var(--font-titoli); font-weight: 700; font-size: 19px; color: var(--petrolio);
+    min-height: 52px; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    cursor: pointer; list-style: none;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: '+'; font-size: 26px; font-weight: 500; color: var(--verde); flex: none; }
+  .faq details[open] summary::after { content: '−'; }
+  .faq details p { padding: 2px 0 14px; max-width: 46em; }
+</style>

@@ -1,15 +1,244 @@
 ---
 import Base from '../layouts/Base.astro';
-import Hero from '../components/Hero.astro';
-import Sezioni from '../components/Sezioni.astro';
-import Richiesta from '../components/Richiesta.astro';
-import { prezzi } from '../data/site';
+import MiniSito from '../components/MiniSito.astro';
+import Spunta from '../components/Spunta.astro';
+import Processo from '../components/Processo.astro';
+import Pacchetti from '../components/Pacchetti.astro';
+import Care from '../components/Care.astro';
+import PromoLancio from '../components/PromoLancio.astro';
+import Fondatore from '../components/Fondatore.astro';
+import Faq from '../components/Faq.astro';
+import CtaFinale from '../components/CtaFinale.astro';
+import { promo, euro } from '../data/site';
+import { settori } from '../data/settori';
+import { fondatori } from '../data/team';
+
+const vantaggi = [
+  { titolo: 'Design su misura', testo: 'Partiamo da strutture collaudate per il tuo settore e le adattiamo alla tua identità. Niente modelli uguali per tutti.' },
+  { titolo: 'Perfetto da smartphone', testo: 'La maggior parte delle visite arriva dal telefono: progettiamo prima per quello, poi per tablet e computer.' },
+  { titolo: 'Tempi rapidi', testo: 'Prima demo navigabile entro 24 ore dal materiale completo. Online dopo il tuo ok.' },
+  { titolo: 'Prezzi chiari', testo: 'Tre pacchetti a prezzo fisso, scritti qui. Sai prima cosa paghi e cosa è incluso.' },
+  { titolo: 'Un solo interlocutore', testo: 'Parli con una persona che segue il tuo sito dall’inizio alla fine, senza gergo tecnico.' },
+  { titolo: 'Gestione tecnica inclusa', testo: 'Hosting, SSL, backup e assistenza: il primo anno è compreso, poi decidi tu.' },
+];
+
+const faqHome = [
+  { d: 'Davvero ricevo una demo entro 24 ore?', r: 'Sì, dal momento in cui abbiamo le informazioni, i testi, il logo e le immagini. Se manca qualcosa ti avvisiamo subito e il conteggio parte quando arriva.' },
+  { d: 'Il dominio resta mio?', r: 'Sì, sempre. Se ne hai già uno lo colleghiamo; se non ce l’hai, lo registriamo a tuo nome.' },
+  { d: 'Cosa succede dopo il primo anno?', r: 'Il primo anno di gestione tecnica è incluso. Dal secondo puoi attivare il servizio Care a 149 € all’anno, oppure portare il sito altrove: ti consegniamo i file.' },
+  { d: 'Posso chiedere modifiche?', r: 'Ogni pacchetto include due cicli di revisione prima della pubblicazione. Modifiche successive o nuove sezioni si preventivano a parte.' },
+];
 ---
 <Base
-  title="ProntoDomani · Siti web professionali, prima demo in 24 ore"
-  description={`Siti vetrina per studi, professionisti e società sportive. Prima demo entro 24 ore dal brief completo, online solo dopo il tuo ok. ${prezzi.sito} € con dominio e hosting del primo anno.`}
+  title="ProntoDomani · Siti web professionali per psicologi, dentisti e società sportive"
+  description={`Siti web professionali su misura per psicologi, dentisti e società sportive. Prima demo in 24 ore, prezzi chiari da ${euro(promo.prezzo)}, gestione tecnica del primo anno inclusa.`}
 >
-  <Hero />
-  <Sezioni />
-  <Richiesta />
+  <!-- HERO -->
+  <section class="hero contenitore" aria-labelledby="hero-titolo">
+    <div class="hero__testo">
+      <p class="occhiello">Siti web per psicologi, dentisti e società sportive</p>
+      <h1 id="hero-titolo">Il tuo sito web,<br />fatto <mark>come si deve.</mark></h1>
+      <p class="lead">Siti professionali su misura, pensati per il tuo settore. Prezzi chiari e un processo semplice, dalla prima idea alla pubblicazione: la prima demo arriva in 24 ore.</p>
+      <div class="hero__cta">
+        <a href="/contatti/" class="btn btn--primario">Richiedi il tuo sito</a>
+        <a href="/come-funziona/" class="btn btn--secondario">Scopri come funziona</a>
+      </div>
+      <ul class="hero__prove">
+        <li><Spunta />Prima demo in 24 ore*</li>
+        <li><Spunta />Prezzi fissi, da {euro(promo.prezzo)}</li>
+        <li><Spunta />Dominio sempre a tuo nome</li>
+      </ul>
+      <p class="piccolo">*Dal materiale completo: testi, logo e immagini.</p>
+    </div>
+
+    <div class="hero__visual">
+      <div class="hero__scheda hero__scheda--1"><MiniSito tipo="dentisti" /></div>
+      <div class="hero__scheda hero__scheda--2"><MiniSito tipo="psicologi" /></div>
+      <div class="hero__scheda hero__scheda--3"><MiniSito tipo="societa-sportive" formato="telefono" /></div>
+      {promo.attiva && (
+        <a href="#promozione" class="hero__bollino">
+          <span>Promozione di lancio</span>
+          <strong>START {euro(promo.prezzo)}</strong>
+          <span>primi {promo.limite} clienti</span>
+        </a>
+      )}
+      <p class="hero__didascalia piccolo">Esempi grafici dimostrativi.</p>
+    </div>
+  </section>
+
+  <!-- SETTORI -->
+  <section class="sezione" aria-labelledby="settori-titolo">
+    <div class="contenitore">
+      <div class="intestazione">
+        <p class="occhiello">Per chi è ProntoDomani</p>
+        <h2 id="settori-titolo" class="titolo-sezione">Tre settori, tre modi diversi di presentarsi.</h2>
+        <p class="lead">Uno psicologo, uno studio dentistico e un club sportivo non parlano alle stesse persone. Per questo partiamo da strutture pensate per ciascuno.</p>
+      </div>
+      <div class="settori">
+        {settori.map((s, i) => (
+          <article class:list={['settore', { 'settore--inverso': i % 2 === 1 }]} style={`--acc:${s.tema.accento};--fondo:${s.tema.fondo};--ink:${s.tema.inchiostro}`}>
+            <div class="settore__testo">
+              <p class="settore__etichetta">{s.etichetta}</p>
+              <h3>{s.card.testo}</h3>
+              <ul>{s.card.punti.map((p) => <li>{p}</li>)}</ul>
+              <a href={`/${s.slug}/`} class="settore__link">Scopri il sito per {s.nome.toLowerCase()}</a>
+            </div>
+            <div class="settore__visual">
+              <MiniSito tipo={s.slug} />
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- VANTAGGI -->
+  <section class="fascia-bianca" aria-labelledby="vantaggi-titolo">
+    <div class="contenitore sezione vantaggi">
+      <div class="vantaggi__intro">
+        <p class="occhiello">Perché ProntoDomani</p>
+        <h2 id="vantaggi-titolo" class="titolo-sezione">Professionale, senza complicazioni.</h2>
+        <p class="lead">Molte piccole realtà hanno un sito vecchio, poco efficace o non ce l’hanno affatto. Spesso perché farlo sembra lungo, costoso e complicato. Noi lo rendiamo semplice.</p>
+      </div>
+      <ol class="vantaggi__lista">
+        {vantaggi.map((v, i) => (
+          <li>
+            <span class="vantaggi__n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <div><h3>{v.titolo}</h3><p>{v.testo}</p></div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- COME FUNZIONA -->
+  <section class="contenitore sezione" aria-labelledby="come-titolo">
+    <div class="intestazione">
+      <p class="occhiello">Come funziona</p>
+      <h2 id="come-titolo" class="titolo-sezione">Quattro passaggi, nessuna sorpresa.</h2>
+    </div>
+    <Processo />
+    <p class="nota come__nota">Ritardi nel materiale o richieste fuori pacchetto possono spostare i tempi: te lo diciamo sempre prima. <a href="/come-funziona/">Tutti i dettagli</a></p>
+  </section>
+
+  <!-- PREZZI -->
+  <section id="prezzi" class="fascia-menta" aria-labelledby="prezzi-titolo">
+    <div class="contenitore sezione">
+      <div class="intestazione">
+        <p class="occhiello">Pacchetti e prezzi</p>
+        <h2 id="prezzi-titolo" class="titolo-sezione">Un prezzo fisso, scritto qui.</h2>
+        <p class="lead">Scegli quanto spazio ti serve. Design, versione mobile, SEO tecnica e pubblicazione sono sempre inclusi.</p>
+      </div>
+      <Pacchetti idTitolo="home" />
+      <div class="prezzi__care"><Care compatto /></div>
+      <p class="nota prezzi__nota"><a href="/prezzi/" class="link-freccia">Confronta i pacchetti nel dettaglio</a></p>
+    </div>
+  </section>
+
+  <!-- PROMOZIONE -->
+  <div id="promozione"><PromoLancio /></div>
+
+  <!-- TEAM -->
+  <section class="contenitore sezione team" aria-labelledby="team-titolo">
+    <div class="team__testo">
+      <p class="occhiello">Chi siamo</p>
+      <h2 id="team-titolo" class="titolo-sezione">Dietro ProntoDomani ci sono persone, non solo tecnologia.</h2>
+      <p class="lead">Usiamo strumenti moderni per lavorare in fretta, ma ogni sito è seguito da una persona: ti ascolta, ti propone, ti risponde.</p>
+      <a href="/chi-siamo/" class="link-freccia">Conosci la nostra storia</a>
+    </div>
+    <div class="team__persone">
+      {fondatori.map((f, i) => <Fondatore f={f} indice={i} compatto />)}
+    </div>
+  </section>
+
+  <Faq voci={faqHome} />
+
+  <CtaFinale />
 </Base>
+
+<style>
+  /* Hero */
+  .hero { padding-block: clamp(48px, 7vw, 88px) clamp(56px, 8vw, 104px); display: grid; gap: 56px; align-items: center; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); }
+  .hero__testo { display: flex; flex-direction: column; gap: 22px; }
+  h1 { font-weight: 800; font-size: clamp(40px, 4.6vw, 62px); line-height: 1.04; letter-spacing: -0.045em; }
+  h1 mark {
+    color: inherit; padding: 0 .06em; white-space: nowrap;
+    background: linear-gradient(transparent 58%, var(--lime) 58%, var(--lime) 92%, transparent 92%);
+  }
+  .hero__cta { display: flex; flex-wrap: wrap; gap: 12px; }
+  .hero__prove { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 22px; font-weight: 500; font-size: 15px; color: var(--petrolio); }
+  .hero__prove li { display: flex; gap: 8px; align-items: center; }
+
+  .hero__visual { position: relative; min-height: 470px; }
+  .hero__scheda { position: absolute; }
+  .hero__scheda--1 { width: 78%; right: 0; top: 0; transform: rotate(1.5deg); }
+  .hero__scheda--2 { width: 70%; left: 0; top: 150px; transform: rotate(-2deg); z-index: 1; }
+  .hero__scheda--3 { width: 34%; right: 4%; top: 190px; z-index: 2; transform: rotate(3deg); }
+  .hero__bollino {
+    position: absolute; z-index: 3; left: 0; top: 10px; width: 132px; height: 132px; border-radius: 50%;
+    background: var(--lime); color: var(--petrolio); text-decoration: none;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+    font-size: 11px; font-weight: 600; line-height: 1.25; transform: rotate(-10deg);
+    box-shadow: 0 16px 30px -14px rgba(15, 58, 52, .5);
+  }
+  .hero__bollino strong { font-family: var(--font-titoli); font-size: 19px; font-weight: 800; letter-spacing: -.02em; margin: 2px 0; }
+  .hero__bollino:hover { color: var(--petrolio); transform: rotate(-6deg) scale(1.03); }
+  .hero__didascalia { position: absolute; bottom: -8px; left: 0; }
+
+  @media (max-width: 960px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero__visual { min-height: 0; display: grid; gap: 16px; padding-top: 40px; }
+    .hero__scheda { position: relative; inset: auto; width: 100%; transform: none; }
+    .hero__scheda--2, .hero__scheda--3 { display: none; }
+    .hero__bollino { top: 0; left: auto; right: 8px; width: 112px; height: 112px; }
+    .hero__didascalia { position: static; }
+  }
+
+  /* Settori */
+  .settori { display: flex; flex-direction: column; gap: 20px; }
+  .settore {
+    background: var(--fondo); color: var(--ink); border-radius: var(--raggio-grande);
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 40px; align-items: center;
+    padding: clamp(28px, 4.5vw, 56px); overflow: hidden;
+  }
+  .settore--inverso .settore__testo { order: 2; }
+  .settore__testo { display: flex; flex-direction: column; gap: 16px; }
+  .settore__etichetta { font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--acc); }
+  .settore h3 { color: var(--ink); font-size: clamp(24px, 2.6vw, 32px); line-height: 1.15; letter-spacing: -.03em; }
+  .settore ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .settore li { font-size: 14px; font-weight: 600; padding: 6px 12px; border-radius: 999px; background: rgba(255,255,255,.7); border: 1px solid color-mix(in srgb, var(--acc) 25%, transparent); }
+  .settore__link {
+    align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 22px;
+    border-radius: 999px; background: var(--acc); color: #fff; text-decoration: none; font-weight: 600; margin-top: 4px;
+  }
+  .settore__link::after { content: '→'; }
+  .settore__link:hover { color: #fff; filter: brightness(1.08); }
+  .settore__visual { transform: rotate(-1.2deg); }
+  .settore--inverso .settore__visual { transform: rotate(1.2deg); }
+  @media (max-width: 860px) {
+    .settore { grid-template-columns: 1fr; }
+    .settore--inverso .settore__testo { order: 0; }
+    .settore__visual, .settore--inverso .settore__visual { transform: none; }
+  }
+
+  /* Vantaggi */
+  .vantaggi { display: grid; gap: 48px; grid-template-columns: minmax(0, .9fr) minmax(0, 1.4fr); }
+  .vantaggi__intro { display: flex; flex-direction: column; gap: 16px; align-self: start; position: sticky; top: 110px; }
+  .vantaggi__lista { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0 32px; }
+  .vantaggi__lista li { display: flex; gap: 16px; padding: 24px 0; border-top: 1px solid var(--bordo); }
+  .vantaggi__n { font-family: var(--font-titoli); font-weight: 800; color: var(--verde); font-size: 15px; padding-top: 3px; }
+  .vantaggi__lista h3 { font-size: 20px; margin-bottom: 6px; }
+  .vantaggi__lista p { font-size: 15.5px; }
+  @media (max-width: 900px) { .vantaggi { grid-template-columns: 1fr; } .vantaggi__intro { position: static; } }
+  @media (max-width: 600px) { .vantaggi__lista { grid-template-columns: 1fr; } }
+
+  .come__nota { margin-top: 24px; }
+  .prezzi__care { margin-top: 24px; }
+  .prezzi__nota { margin-top: 16px; }
+
+  /* Team */
+  .team { display: grid; gap: 48px; align-items: center; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
+  .team__testo { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
+  .team__persone { display: flex; flex-direction: column; gap: 20px; background: var(--bianco); border: 1px solid var(--bordo); border-radius: var(--raggio-grande); padding: 28px; }
+  @media (max-width: 860px) { .team { grid-template-columns: 1fr; } }
+</style>

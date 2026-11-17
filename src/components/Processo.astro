@@ -1,0 +1,56 @@
+---
+interface Props { dettagliato?: boolean }
+const { dettagliato = false } = Astro.props;
+const passi = [
+  {
+    quando: 'Giorno 1',
+    titolo: 'Ci racconti la tua attività',
+    testo: 'Una chiamata breve o il modulo guidato. Ti diciamo esattamente quali testi, foto e informazioni servono.',
+    dettaglio: 'Se qualcosa manca, ti aiutiamo a organizzarlo: non devi sapere nulla di tecnica o di web.',
+  },
+  {
+    quando: 'Entro 24 ore',
+    titolo: 'Ricevi la prima demo',
+    testo: 'Una versione navigabile del sito, da aprire su telefono e computer. Le 24 ore partono dal materiale completo.',
+    dettaglio: 'Vedi il sito vero, non un disegno: puoi navigarlo e farlo vedere a chi vuoi.',
+  },
+  {
+    quando: 'Revisioni',
+    titolo: 'Lo sistemiamo insieme',
+    testo: 'Due cicli di revisione inclusi per sistemare testi, immagini e dettagli finché ti convince.',
+    dettaglio: 'Raccogliamo le richieste in un solo elenco per ogni ciclo, così i tempi restano brevi.',
+  },
+  {
+    quando: 'Online',
+    titolo: 'Pubblichiamo, con il tuo ok',
+    testo: 'Colleghiamo il dominio, configuriamo Google Search Console e mettiamo il sito online.',
+    dettaglio: 'Il primo anno di gestione tecnica è incluso: hosting, SSL, backup e assistenza.',
+  },
+];
+---
+<ol class="processo">
+  {passi.map((p, i) => (
+    <li class:list={['passo', { 'passo--evidenza': i === 1 }]}>
+      <span class="passo__numero" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+      <span class="passo__quando">{p.quando}</span>
+      <h3>{p.titolo}</h3>
+      <p>{p.testo}</p>
+      {dettagliato && <p class="passo__dettaglio">{p.dettaglio}</p>}
+    </li>
+  ))}
+</ol>
+
+<style>
+  .processo { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); counter-reset: none; }
+  .passo { position: relative; padding: 28px 24px; border-radius: var(--raggio); background: var(--bianco); border: 1px solid var(--bordo); display: flex; flex-direction: column; gap: 10px; }
+  .passo--evidenza { background: var(--petrolio); border-color: var(--petrolio); color: #DCE9E4; }
+  .passo--evidenza h3 { color: var(--bianco); }
+  .passo__numero { font-family: var(--font-titoli); font-weight: 800; font-size: 40px; line-height: 1; color: var(--menta); letter-spacing: -.04em; -webkit-text-stroke: 1.5px var(--verde); }
+  .passo--evidenza .passo__numero { color: transparent; -webkit-text-stroke: 1.5px var(--lime); }
+  .passo__quando { align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--verde); }
+  .passo--evidenza .passo__quando { color: var(--lime); }
+  .passo h3 { font-size: 20px; line-height: 1.2; }
+  .passo p { font-size: 15.5px; }
+  .passo__dettaglio { padding-top: 10px; border-top: 1px solid var(--bordo); color: var(--grigio-testo); }
+  .passo--evidenza .passo__dettaglio { border-color: rgba(255,255,255,.18); color: #B9D3CB; }
+</style>

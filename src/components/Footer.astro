@@ -1,35 +1,62 @@
 ---
 import Logo from './Logo.astro';
 import { azienda } from '../data/site';
+import { settori } from '../data/settori';
 const anno = new Date().getFullYear();
 ---
 <footer class="footer">
-  <div class="contenitore footer__riga">
-    <div class="footer__dati">
-      <Logo size={28} />
-      <p>{azienda.titolare} · P.IVA {azienda.piva}</p>
-      <p>{azienda.indirizzo}</p>
-      <p>
-        <a href={`mailto:${azienda.email}`}>{azienda.email}</a>
-        {azienda.telefono && <> · <a href={`tel:${azienda.telefono.replace(/\s/g, '')}`}>{azienda.telefono}</a></>}
-      </p>
-      <p class="piccolo">© {anno} {azienda.nome}</p>
+  <div class="contenitore footer__griglia">
+    <div class="footer__marchio">
+      <Logo size={30} />
+      <p>Oggi ci conosci. Domani sei online.</p>
+      <p class="piccolo">Siti web professionali per psicologi, dentisti e società sportive.</p>
     </div>
-    <nav aria-label="Informazioni legali">
-      <ul class="footer__link">
-        <li><a href="/privacy">Privacy</a></li>
-        <li><a href="/cookie">Cookie</a></li>
-        <li><a href="/condizioni">Condizioni del servizio</a></li>
-        <li><a href="/condizioni#dominio">Dominio e rinnovi</a></li>
+
+    <nav aria-label="Settori">
+      <p class="footer__titolo">Per chi è</p>
+      <ul>{settori.map((s) => <li><a href={`/${s.slug}/`}>{s.etichetta}</a></li>)}</ul>
+    </nav>
+
+    <nav aria-label="ProntoDomani">
+      <p class="footer__titolo">ProntoDomani</p>
+      <ul>
+        <li><a href="/come-funziona/">Come funziona</a></li>
+        <li><a href="/prezzi/">Prezzi</a></li>
+        <li><a href="/chi-siamo/">Chi siamo</a></li>
+        <li><a href="/contatti/">Contatti</a></li>
       </ul>
     </nav>
+
+    <div>
+      <p class="footer__titolo">Contatti</p>
+      <ul>
+        <li><a href={`mailto:${azienda.email}`}>{azienda.email}</a></li>
+        {azienda.telefono && <li><a href={`tel:${azienda.telefono.replace(/\s/g, '')}`}>{azienda.telefono}</a></li>}
+        {azienda.whatsapp && <li><a href={`https://wa.me/${azienda.whatsapp}`} rel="noopener">WhatsApp</a></li>}
+      </ul>
+    </div>
+  </div>
+
+  <div class="contenitore footer__legale">
+    <p>© {anno} {azienda.nome} · {azienda.titolare} · P.IVA {azienda.piva} · {azienda.indirizzo}</p>
+    <ul>
+      <li><a href="/privacy/">Privacy</a></li>
+      <li><a href="/cookie/">Cookie</a></li>
+      <li><a href="/condizioni/">Condizioni del servizio</a></li>
+    </ul>
   </div>
 </footer>
 
 <style>
-  .footer { border-top: 1px solid var(--bordo); font-size: 14px; }
-  .footer__riga { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px; padding-block: 48px; }
-  .footer__dati { display: flex; flex-direction: column; gap: 6px; }
-  .footer__link { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 22px; }
-  .footer__link a { display: inline-block; padding: 8px 0; }
+  .footer { background: var(--carta); border-top: 1px solid var(--bordo); font-size: 15px; }
+  .footer__griglia { display: grid; gap: 32px; padding-block: 56px 40px; grid-template-columns: 1.4fr repeat(3, 1fr); }
+  .footer__marchio { display: flex; flex-direction: column; gap: 10px; max-width: 300px; }
+  .footer__marchio p:first-of-type { font-family: var(--font-titoli); font-weight: 700; color: var(--petrolio); }
+  .footer__titolo { font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--verde); margin-bottom: 10px; }
+  .footer ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+  .footer ul a { display: inline-block; padding: 6px 0; text-decoration: none; }
+  .footer ul a:hover { text-decoration: underline; }
+  .footer__legale { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; padding-block: 20px 32px; border-top: 1px solid var(--bordo); font-size: 13px; color: var(--grigio-testo); }
+  .footer__legale ul { flex-direction: row; gap: 18px; }
+  @media (max-width: 860px) { .footer__griglia { grid-template-columns: 1fr 1fr; } .footer__marchio { grid-column: 1 / -1; } }
 </style>

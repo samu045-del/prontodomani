@@ -1,0 +1,35 @@
+---
+interface Props { titolo?: string; testo?: string; href?: string }
+const {
+  titolo = 'La tua attività merita una presenza online all’altezza.',
+  testo = 'Raccontaci cosa fai. Ti rispondiamo entro un giorno lavorativo con una proposta chiara e la lista di ciò che serve.',
+  href = '/contatti/',
+} = Astro.props;
+---
+<section class="cta" aria-labelledby="cta-titolo">
+  <div class="contenitore"><div class="cta__riquadro">
+    <div class="cta__testo">
+      <p class="occhiello">Oggi ci conosci. Domani sei online.</p>
+      <h2 id="cta-titolo" class="titolo-sezione">{titolo}</h2>
+      <p class="lead">{testo}</p>
+    </div>
+    <div class="cta__azioni">
+      <a href={href} class="btn btn--lime">Richiedi il tuo sito</a>
+      <a href="/come-funziona/" class="btn btn--chiaro">Scopri come funziona</a>
+    </div>
+  </div></div>
+</section>
+
+<style>
+  .cta { padding-block: 0 clamp(64px, 9vw, 112px); }
+  .cta__riquadro {
+    background: var(--petrolio); color: #DCE9E4; border-radius: 32px;
+    padding: clamp(36px, 6vw, 72px); display: grid; gap: 32px; align-items: end;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  }
+  .cta__testo { display: flex; flex-direction: column; gap: 16px; }
+  .cta h2 { color: var(--bianco); }
+  .cta .occhiello { color: var(--lime); }
+  .cta__azioni { display: flex; flex-wrap: wrap; gap: 12px; justify-content: flex-start; }
+  @media (min-width: 900px) { .cta__azioni { justify-content: flex-end; } }
+</style>

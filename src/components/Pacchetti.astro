@@ -1,0 +1,62 @@
+---
+import Spunta from './Spunta.astro';
+import { pacchetti, promo, euro, prezzoMostrato } from '../data/site';
+import type { Settore } from '../data/settori';
+
+interface Props {
+  settore?: Settore; // se presente: aggiunge le voci specifiche e il badge "consigliato"
+  idTitolo?: string;
+}
+const { settore, idTitolo } = Astro.props;
+const linkRichiesta = settore ? `/contatti/?settore=${settore.slug}` : '/contatti/';
+---
+<div class="pacchetti">
+  {pacchetti.map((p) => {
+    const inPromo = promo.attiva && p.id === promo.pacchetto;
+    const extra = settore?.pacchettiExtra[p.id] ?? [];
+    const consigliato = settore ? settore.pacchettoConsigliato === p.id : p.inEvidenza;
+    return (
+      <article class:list={['pacchetto', { 'pacchetto--evidenza': consigliato }]} aria-labelledby={`${idTitolo ?? 'p'}-${p.id}`}>
+        <div class="pacchetto__testa">
+          <h3 id={`${idTitolo ?? 'p'}-${p.id}`}>{p.nome}</h3>
+          {consigliato && <span class="badge">{settore ? `Consigliato per ${settore.nome.toLowerCase()}` : 'Il più scelto per iniziare bene'}</span>}
+        </div>
+        <p class="pacchetto__perchi">{p.perChi}</p>
+        <div class="pacchetto__prezzo">
+          <span class="pacchetto__cifra">{euro(prezzoMostrato(p))}</span>
+          <span class="pacchetto__unita">una tantum</span>
+        </div>
+        {inPromo ? (
+          <p class="pacchetto__promo"><strong>Promozione di lancio</strong> per i primi {promo.limite} clienti START. Poi {euro(promo.prezzoListino)}.</p>
+        ) : (
+          <p class="pacchetto__promo pacchetto__promo--vuoto">Primo anno di gestione tecnica incluso.</p>
+        )}
+        <p class="pacchetto__pagine">{p.pagine}</p>
+        <ul class="lista-spunte">
+          {[...p.base.map((v) => settore?.pacchettiRinomina[v] ?? v), ...extra].map((v) => <li><Spunta />{v}</li>)}
+        </ul>
+        <a href={linkRichiesta} class:list={['btn', consigliato ? 'btn--primario' : 'btn--secondario']}>Richiedi {p.nome}</a>
+      </article>
+    );
+  })}
+</div>
+
+<style>
+  .pacchetti { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); align-items: stretch; }
+  .pacchetto {
+    background: var(--bianco); border: 1px solid var(--bordo); border-radius: var(--raggio-grande);
+    padding: 32px 28px; display: flex; flex-direction: column; gap: 14px;
+  }
+  .pacchetto--evidenza { border: 2px solid var(--petrolio); box-shadow: 0 30px 60px -36px rgba(15, 58, 52, .5); }
+  .pacchetto__testa { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
+  .pacchetto h3 { font-size: 15px; font-weight: 800; letter-spacing: .16em; }
+  .pacchetto__perchi { font-size: 16px; min-height: 3em; }
+  .pacchetto__prezzo { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .pacchetto__cifra { font-family: var(--font-titoli); font-weight: 800; font-size: 56px; line-height: 1; letter-spacing: -.04em; color: var(--petrolio); }
+  .pacchetto__unita { color: var(--grigio-testo); font-size: 15px; }
+  .pacchetto__promo { font-size: 14px; background: #F2FBDF; border-radius: 10px; padding: 8px 12px; color: var(--petrolio); }
+  .pacchetto__promo--vuoto { background: var(--menta); }
+  .pacchetto__pagine { font-weight: 700; color: var(--petrolio); padding-top: 6px; border-top: 1px solid var(--bordo); }
+  .pacchetto .lista-spunte { font-size: 15px; gap: 8px; flex: 1; }
+  .pacchetto .btn { width: 100%; margin-top: 8px; }
+</style>

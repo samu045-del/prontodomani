@@ -17,7 +17,7 @@ export interface Env {
 
 const LIMITI: Record<string, number> = {
   nome: 120, azienda: 160, email: 200, telefono: 40, settore: 60,
-  sito: 200, messaggio: 2000, tempistiche: 60,
+  sito: 200, messaggio: 2000, tempistiche: 60, pacchetto: 40,
 };
 const OBBLIGATORI = ['nome', 'azienda', 'email', 'settore', 'messaggio', 'tempistiche'];
 
@@ -27,7 +27,7 @@ function vaiA(request: Request, percorso: string): Response {
 
 function errore(request: Request, motivo: string): Response {
   console.log('Modulo rifiutato:', motivo);
-  return vaiA(request, '/?esito=errore#richiesta');
+  return vaiA(request, '/contatti/?esito=errore#modulo');
 }
 
 function escape(testo: string): string {
@@ -79,6 +79,7 @@ export async function gestisciRichiesta(request: Request, env: Env): Promise<Res
     ['Email', dati.email],
     ['Telefono', dati.telefono || '—'],
     ['Settore', dati.settore],
+    ['Pacchetto', dati.pacchetto || 'Non indicato'],
     ['Sito attuale', dati.sito || '—'],
     ['Tempistiche', dati.tempistiche],
   ];

@@ -1,0 +1,216 @@
+---
+import Base from '../layouts/Base.astro';
+import MiniSito from './MiniSito.astro';
+import Spunta from './Spunta.astro';
+import Pacchetti from './Pacchetti.astro';
+import Care from './Care.astro';
+import Faq from './Faq.astro';
+import CtaFinale from './CtaFinale.astro';
+import { promo, euro } from '../data/site';
+import type { Settore } from '../data/settori';
+
+interface Props { s: Settore }
+const { s } = Astro.props;
+const linkRichiesta = `/contatti/?settore=${s.slug}`;
+const stile = `--acc:${s.tema.accento};--fondo:${s.tema.fondo};--ink:${s.tema.inchiostro}`;
+---
+<Base title={s.seo.title} description={s.seo.description}>
+  <div class={`pagina pagina--${s.slug}`} style={stile}>
+
+    <!-- HERO -->
+    <section class="ps-hero" aria-labelledby="ps-titolo">
+      <div class="contenitore ps-hero__griglia">
+        <div class="ps-hero__testo">
+          <nav aria-label="Percorso" class="briciole"><a href="/">Home</a> <span aria-hidden="true">/</span> <span>{s.etichetta}</span></nav>
+          <p class="ps-etichetta">Siti web per {s.etichetta.toLowerCase()}</p>
+          <h1 id="ps-titolo">{s.h1}</h1>
+          <p class="lead">{s.sottotitolo}</p>
+          <div class="ps-hero__cta">
+            <a href={linkRichiesta} class="btn ps-btn">Richiedi il tuo sito</a>
+            <a href="#struttura" class="btn btn--secondario">Guarda un esempio di struttura</a>
+          </div>
+          {promo.attiva && <p class="piccolo">Pacchetti da <strong>{euro(promo.prezzo)}</strong> con la promozione di lancio START.</p>}
+        </div>
+        <div class="ps-hero__visual">
+          <MiniSito tipo={s.slug} />
+          <div class="ps-hero__telefono"><MiniSito tipo={s.slug} formato="telefono" /></div>
+          <p class="piccolo ps-hero__didascalia">Esempio grafico dimostrativo.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROBLEMA -->
+    <section class="contenitore sezione ps-problema" aria-labelledby="ps-problema">
+      <div>
+        <p class="occhiello ps-occhiello">Il punto di partenza</p>
+        <h2 id="ps-problema" class="titolo-sezione">{s.problema.titolo}</h2>
+        <p class="lead">{s.problema.testo}</p>
+      </div>
+      <div class="ps-segnali">
+        <p class="ps-segnali__titolo">Ti riconosci in almeno uno di questi?</p>
+        <ul>{s.problema.segnali.map((v) => <li>{v}</li>)}</ul>
+      </div>
+    </section>
+
+    <!-- CONTENUTI -->
+    <section class="ps-fascia" aria-labelledby="ps-contenuti">
+      <div class="contenitore sezione">
+        <div class="intestazione">
+          <p class="occhiello ps-occhiello">Cosa può contenere il tuo sito</p>
+          <h2 id="ps-contenuti" class="titolo-sezione">Le informazioni giuste, nell’ordine giusto.</h2>
+        </div>
+        <ol class="ps-contenuti">
+          {s.contenuti.map((c, i) => (
+            <li class:list={[{ 'ps-contenuti__primo': i === 0 }]}>
+              <span class="ps-contenuti__n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <h3>{c.titolo}</h3>
+              <p>{c.testo}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- STRUTTURA -->
+    <section id="struttura" class="contenitore sezione" aria-labelledby="ps-struttura">
+      <div class="intestazione">
+        <p class="occhiello ps-occhiello">Esempio di struttura</p>
+        <h2 id="ps-struttura" class="titolo-sezione">Come potrebbe essere organizzato.</h2>
+        <p class="lead">Una proposta di partenza, da adattare alla tua realtà. Il numero di pagine dipende dal pacchetto che scegli.</p>
+      </div>
+      <ol class="mappa" aria-label="Mappa delle pagine">
+        {s.struttura.map((p, i) => (
+          <li class:list={['mappa__pagina', { 'mappa__pagina--home': i === 0 }]}>
+            <p class="mappa__nome">{p.pagina}</p>
+            <ul>{p.sezioni.map((x) => <li>{x}</li>)}</ul>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <!-- VANTAGGI -->
+    <section class="ps-scura" aria-labelledby="ps-vantaggi">
+      <div class="contenitore sezione ps-vantaggi">
+        <div class="ps-vantaggi__intro">
+          <p class="occhiello">Perché con ProntoDomani</p>
+          <h2 id="ps-vantaggi" class="titolo-sezione">Pensato per il tuo settore, non adattato all’ultimo momento.</h2>
+        </div>
+        <ul class="ps-vantaggi__lista">
+          {s.vantaggi.map((v) => <li><h3>{v.titolo}</h3><p>{v.testo}</p></li>)}
+          <li><h3>Prima demo in 24 ore</h3><p>Dal materiale completo ricevi una versione navigabile. Online solo dopo il tuo ok.</p></li>
+        </ul>
+      </div>
+    </section>
+
+    {s.attenzione && (
+      <div class="contenitore">
+        <aside class="ps-attenzione" aria-label="Nota sulla comunicazione">
+          <Spunta />
+          <p>{s.attenzione}</p>
+        </aside>
+      </div>
+    )}
+
+    <!-- PREZZI -->
+    <section class="contenitore sezione" aria-labelledby="ps-prezzi">
+      <div class="intestazione">
+        <p class="occhiello ps-occhiello">Pacchetti per {s.nome.toLowerCase()}</p>
+        <h2 id="ps-prezzi" class="titolo-sezione">Scegli quanto spazio ti serve.</h2>
+      </div>
+      <Pacchetti settore={s} idTitolo={s.slug} />
+      <div class="ps-care"><Care compatto /></div>
+      <p class="nota ps-care"><a href="/prezzi/" class="link-freccia">Tutti i dettagli su prezzi, dominio e rinnovi</a></p>
+    </section>
+
+    <Faq voci={s.faq} titolo={`Domande frequenti · ${s.nome}`} id={`faq-${s.slug}`} />
+    <CtaFinale href={linkRichiesta} titolo="Partiamo dal tuo sito?" testo="Raccontaci la tua attività: ti rispondiamo entro un giorno lavorativo con una proposta e la lista del materiale che serve." />
+  </div>
+</Base>
+
+<style>
+  .ps-btn { background: var(--acc); color: #fff; }
+  .ps-btn:hover { color: #fff; filter: brightness(1.1); }
+  .ps-occhiello, .ps-etichetta { color: var(--acc); }
+  .ps-etichetta { font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+  .briciole { font-size: 14px; color: var(--grigio-testo); display: flex; gap: 8px; }
+
+  /* Hero */
+  .ps-hero { background: var(--fondo); }
+  .ps-hero__griglia { display: grid; gap: 56px; align-items: center; padding-block: clamp(40px, 6vw, 80px); grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); }
+  .ps-hero__testo { display: flex; flex-direction: column; gap: 20px; }
+  .ps-hero h1 { color: var(--ink); font-weight: 800; font-size: clamp(36px, 4.8vw, 60px); line-height: 1.05; letter-spacing: -.04em; }
+  .ps-hero__cta { display: flex; flex-wrap: wrap; gap: 12px; }
+  .ps-hero__visual { position: relative; padding-right: 12%; padding-bottom: 28px; }
+  .ps-hero__telefono { position: absolute; right: 0; bottom: 0; width: 34%; }
+  .ps-hero__didascalia { margin-top: 12px; }
+  @media (max-width: 900px) {
+    .ps-hero__griglia { grid-template-columns: 1fr; }
+    .ps-hero__visual { padding-right: 0; }
+    .ps-hero__telefono { display: none; }
+  }
+
+  /* Problema */
+  .ps-problema { display: grid; gap: 40px; align-items: center; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
+  .ps-problema > div:first-child { display: flex; flex-direction: column; gap: 16px; }
+  .ps-segnali { background: var(--bianco); border-radius: var(--raggio-grande); padding: 32px; border: 1px solid var(--bordo); border-top: 6px solid var(--acc); }
+  .ps-segnali__titolo { font-family: var(--font-titoli); font-weight: 800; color: var(--ink); font-size: 19px; margin-bottom: 14px; }
+  .ps-segnali ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 10px; }
+  .ps-segnali li::marker { color: var(--acc); }
+  @media (max-width: 860px) { .ps-problema { grid-template-columns: 1fr; } }
+
+  /* Contenuti */
+  .ps-fascia { background: var(--bianco); border-block: 1px solid var(--bordo); }
+  .ps-contenuti { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .ps-contenuti li { grid-column: span 2; padding: 26px; border-radius: var(--raggio); background: var(--fondo); display: flex; flex-direction: column; gap: 8px; }
+  .ps-contenuti li:nth-child(4), .ps-contenuti li:nth-child(5) { grid-column: span 3; }
+  .ps-contenuti__n { font-family: var(--font-titoli); font-weight: 800; color: var(--acc); font-size: 14px; }
+  .ps-contenuti h3 { color: var(--ink); font-size: 20px; }
+  .ps-contenuti p { font-size: 15.5px; }
+  @media (max-width: 860px) { .ps-contenuti { grid-template-columns: 1fr; } .ps-contenuti li, .ps-contenuti li:nth-child(4), .ps-contenuti li:nth-child(5) { grid-column: auto; } }
+
+  /* Mappa del sito */
+  .mappa { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); position: relative; }
+  .mappa__pagina { background: var(--bianco); border: 1.5px solid color-mix(in srgb, var(--acc) 35%, white); border-radius: 18px; padding: 20px; position: relative; }
+  .mappa__pagina--home { background: var(--acc); border-color: var(--acc); color: #fff; }
+  .mappa__nome { font-family: var(--font-titoli); font-weight: 800; font-size: 17px; color: var(--ink); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .mappa__nome::before { content: ''; width: 10px; height: 10px; border-radius: 3px; background: var(--acc); }
+  .mappa__pagina--home .mappa__nome { color: #fff; }
+  .mappa__pagina--home .mappa__nome::before { background: #fff; }
+  .mappa__pagina ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; font-size: 14.5px; }
+  .mappa__pagina li { padding-left: 14px; position: relative; }
+  .mappa__pagina li::before { content: ''; position: absolute; left: 0; top: .7em; width: 7px; height: 1.5px; background: currentColor; opacity: .5; }
+
+  /* Vantaggi */
+  .ps-scura { background: var(--ink); color: rgba(255,255,255,.82); }
+  .ps-scura h2, .ps-scura h3 { color: #fff; }
+  .ps-scura .occhiello { color: var(--lime); }
+  .ps-vantaggi { display: grid; gap: 48px; grid-template-columns: minmax(0, .9fr) minmax(0, 1.3fr); }
+  .ps-vantaggi__lista { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0 32px; }
+  .ps-vantaggi__lista li { padding: 22px 0; border-top: 1px solid rgba(255,255,255,.18); }
+  .ps-vantaggi__lista h3 { font-size: 19px; margin-bottom: 6px; }
+  .ps-vantaggi__lista p { font-size: 15.5px; }
+  @media (max-width: 860px) { .ps-vantaggi, .ps-vantaggi__lista { grid-template-columns: 1fr; } }
+
+  .ps-attenzione { margin-top: 40px; display: flex; gap: 14px; align-items: flex-start; background: var(--fondo); border-radius: 16px; padding: 18px 22px; font-size: 15px; color: var(--ink); }
+  .ps-attenzione :global(svg) { flex: none; margin-top: 2px; }
+  .ps-care { margin-top: 24px; }
+
+  .pagina h2 { color: var(--ink); }
+
+  /* Personalità per settore */
+  .pagina--psicologi h2 { font-family: Georgia, 'Iowan Old Style', 'Times New Roman', serif; font-weight: 400; letter-spacing: -.02em; }
+  .pagina--societa-sportive h2 { text-transform: uppercase; font-style: italic; letter-spacing: -.02em; }
+  .pagina--psicologi .ps-hero h1 { font-family: Georgia, 'Iowan Old Style', 'Times New Roman', serif; font-weight: 400; letter-spacing: -.02em; }
+  .pagina--psicologi .ps-hero { background: linear-gradient(180deg, var(--fondo), var(--avorio)); }
+  .pagina--societa-sportive .ps-hero { background: var(--ink); }
+  .pagina--societa-sportive .ps-hero h1 { color: #fff; text-transform: uppercase; font-style: italic; letter-spacing: -.03em; line-height: .98; }
+  .pagina--societa-sportive .ps-hero .lead, .pagina--societa-sportive .briciole, .pagina--societa-sportive .ps-hero .piccolo { color: rgba(255,255,255,.82); }
+  .pagina--societa-sportive .briciole a { color: #fff; }
+  .pagina--societa-sportive .ps-etichetta { color: var(--lime); }
+  .pagina--societa-sportive .ps-hero .btn--secondario { border-color: rgba(255,255,255,.7); color: #fff; }
+  .pagina--societa-sportive .ps-hero .btn--secondario:hover { background: rgba(255,255,255,.1); }
+  .pagina--societa-sportive .ps-btn { background: var(--lime); color: var(--petrolio); }
+  .pagina--societa-sportive .ps-btn:hover { color: var(--petrolio); }
+  .pagina--societa-sportive .ps-scura { background: #0F3D22; }
+  .pagina--dentisti .ps-hero { background: linear-gradient(135deg, var(--fondo) 0%, #DDEAF3 100%); }
+</style>

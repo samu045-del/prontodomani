@@ -9,7 +9,7 @@ export default {
 
     if (url.pathname === '/api/richiesta') {
       if (request.method === 'POST') return gestisciRichiesta(request, env);
-      return Response.redirect(new URL('/#richiesta', url).toString(), 303);
+      return Response.redirect(new URL('/contatti/', url).toString(), 303);
     }
 
     // Bozze riservate: dopo la scadenza mostrano "non più disponibile".

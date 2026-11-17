@@ -1,43 +1,140 @@
 ---
 import Logo from './Logo.astro';
-import { progetti } from '../data/site';
+import { settori } from '../data/settori';
 
-const haEsempi = progetti.some((p) => p.consenso);
+const percorso = Astro.url.pathname;
+const attivo = (href: string) => (percorso === href || percorso === href.replace(/\/$/, '') ? 'page' : undefined);
 const voci = [
-  { href: '/#come-funziona', label: 'Come funziona' },
-  { href: '/#settori', label: 'Settori' },
-  ...(haEsempi ? [{ href: '/#esempi', label: 'Esempi' }] : []),
-  { href: '/#prezzi', label: 'Prezzi' },
-  { href: '/#faq', label: 'FAQ' },
+  { href: '/come-funziona/', label: 'Come funziona' },
+  { href: '/prezzi/', label: 'Prezzi' },
+  { href: '/chi-siamo/', label: 'Chi siamo' },
+  { href: '/contatti/', label: 'Contatti' },
 ];
+const settoreAttivo = settori.some((s) => percorso.startsWith(`/${s.slug}`));
 ---
 <header class="header">
   <div class="contenitore header__riga">
-    <a href="/" class="header__logo" aria-label="ProntoDomani, torna alla home"><Logo /></a>
-    <nav aria-label="Principale">
-      <ul class="header__nav">
-        {voci.map((v) => <li><a href={v.href}>{v.label}</a></li>)}
+    <a href="/" class="header__logo" aria-label="ProntoDomani, vai alla home"><Logo /></a>
+
+    <nav class="nav-desktop" aria-label="Principale">
+      <ul>
+        <li class="sottomenu">
+          <button type="button" class="sottomenu__pulsante" aria-expanded="false" aria-controls="menu-settori" data-attivo={settoreAttivo ? '' : undefined}>
+            Per chi è
+            <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul id="menu-settori" class="sottomenu__lista">
+            {settori.map((s) => (
+              <li>
+                <a href={`/${s.slug}/`} aria-current={attivo(`/${s.slug}/`)}>
+                  <span class="sottomenu__punto" style={`background:${s.tema.accento}`} aria-hidden="true"></span>
+                  <span><strong>{s.nome}</strong><small>{s.card.testo.split('.')[0]}.</small></span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </li>
+        {voci.map((v) => <li><a href={v.href} aria-current={attivo(v.href)}>{v.label}</a></li>)}
       </ul>
     </nav>
-    <a href="/#richiesta" class="btn btn--primario btn--piccolo">Richiedi una proposta</a>
+
+    <a href="/contatti/" class="btn btn--primario btn--piccolo header__cta">Richiedi il tuo sito</a>
+
+    <details class="nav-mobile">
+      <summary aria-label="Apri il menu">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+        Menu
+      </summary>
+      <nav aria-label="Principale (mobile)">
+        <p class="nav-mobile__gruppo">Per chi è</p>
+        <ul>
+          {settori.map((s) => <li><a href={`/${s.slug}/`}>{s.etichetta}</a></li>)}
+        </ul>
+        <ul>
+          {voci.map((v) => <li><a href={v.href}>{v.label}</a></li>)}
+        </ul>
+        <a href="/contatti/" class="btn btn--primario">Richiedi il tuo sito</a>
+      </nav>
+    </details>
   </div>
 </header>
 
+<script>
+  // Menu "Per chi è": apre/chiude al clic e con la tastiera, chiude con Esc o clic fuori.
+  const pulsante = document.querySelector<HTMLButtonElement>('.sottomenu__pulsante');
+  const voce = pulsante?.closest('.sottomenu');
+  if (pulsante && voce) {
+    const imposta = (aperto: boolean) => {
+      pulsante.setAttribute('aria-expanded', String(aperto));
+      voce.classList.toggle('aperto', aperto);
+    };
+    pulsante.addEventListener('click', () => imposta(pulsante.getAttribute('aria-expanded') !== 'true'));
+    document.addEventListener('click', (e) => { if (!voce.contains(e.target as Node)) imposta(false); });
+    voce.addEventListener('keydown', (e) => {
+      if ((e as KeyboardEvent).key === 'Escape') { imposta(false); pulsante.focus(); }
+    });
+    voce.addEventListener('focusout', (e) => {
+      if (!voce.contains((e as FocusEvent).relatedTarget as Node)) imposta(false);
+    });
+  }
+</script>
+
 <style>
   .header {
-    position: sticky; top: 0; z-index: 10;
-    background: rgba(247, 245, 239, 0.95);
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(247, 245, 239, 0.94);
+    backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--bordo);
-    backdrop-filter: blur(6px);
   }
-  .header__riga { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; padding-block: 12px; }
-  .header__logo { text-decoration: none; }
-  .header__nav { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0 24px; font-size: 15px; font-weight: 500; }
-  .header__nav a { display: inline-block; padding: 10px 0; text-decoration: none; }
-  .header__nav a:hover { text-decoration: underline; }
-  @media (max-width: 720px) {
-    .header { position: static; }
-    .header__riga { justify-content: center; }
-    .header__nav { justify-content: center; gap: 0 18px; }
+  .header__riga { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 72px; }
+  .header__logo { text-decoration: none; flex: none; }
+
+  .nav-desktop > ul { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; gap: 4px; }
+  .nav-desktop a, .sottomenu__pulsante {
+    display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 12px;
+    font: inherit; font-size: 15px; font-weight: 500; color: var(--petrolio);
+    text-decoration: none; background: none; border: 0; border-radius: 999px; cursor: pointer;
+  }
+  .nav-desktop > ul > li > a:hover, .sottomenu__pulsante:hover { background: var(--menta); }
+  .nav-desktop a[aria-current='page'], .sottomenu__pulsante[data-attivo] { box-shadow: inset 0 -2px 0 var(--verde); border-radius: 0; }
+
+  .sottomenu { position: relative; }
+  .sottomenu svg { transition: transform .15s ease; }
+  .sottomenu.aperto svg { transform: rotate(180deg); }
+  .sottomenu__lista {
+    display: none; position: absolute; top: calc(100% + 8px); left: -8px; width: 340px;
+    list-style: none; margin: 0; padding: 8px;
+    background: var(--bianco); border: 1px solid var(--bordo); border-radius: 18px;
+    box-shadow: 0 24px 48px -24px rgba(15, 58, 52, 0.35);
+  }
+  .sottomenu.aperto .sottomenu__lista { display: block; }
+  .sottomenu__lista a { display: flex; align-items: flex-start; gap: 12px; padding: 12px; border-radius: 12px; min-height: 0; }
+  .sottomenu__lista a:hover { background: var(--avorio); }
+  .sottomenu__lista strong { display: block; font-weight: 700; }
+  .sottomenu__lista small { display: block; font-size: 13px; color: var(--grigio-testo); line-height: 1.4; font-weight: 400; }
+  .sottomenu__punto { width: 12px; height: 12px; border-radius: 4px; margin-top: 5px; flex: none; }
+
+  .nav-mobile { display: none; }
+
+  @media (max-width: 1020px) {
+    .nav-desktop, .header__cta { display: none; }
+    .nav-mobile { display: block; position: static; }
+    .nav-mobile summary {
+      list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 10px;
+      min-height: 44px; padding: 0 16px; border: 1.5px solid var(--petrolio); border-radius: 999px;
+      font-weight: 600; color: var(--petrolio);
+    }
+    .nav-mobile summary::-webkit-details-marker { display: none; }
+    .hamburger { display: inline-flex; flex-direction: column; gap: 3px; }
+    .hamburger span { width: 16px; height: 2px; background: currentColor; border-radius: 2px; }
+    .nav-mobile nav {
+      position: absolute; left: 0; right: 0; top: 100%;
+      background: var(--avorio); border-bottom: 1px solid var(--bordo);
+      padding: 16px 24px 24px; display: flex; flex-direction: column; gap: 8px;
+      box-shadow: 0 24px 40px -24px rgba(15, 58, 52, 0.35);
+    }
+    .nav-mobile ul { list-style: none; margin: 0 0 8px; padding: 0; }
+    .nav-mobile li a { display: block; padding: 12px 0; font-size: 18px; font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--bordo); }
+    .nav-mobile__gruppo { font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--verde); margin-top: 4px; }
   }
 </style>

@@ -1,0 +1,99 @@
+---
+import Base from '../layouts/Base.astro';
+import Pacchetti from '../components/Pacchetti.astro';
+import Care from '../components/Care.astro';
+import PromoLancio from '../components/PromoLancio.astro';
+import Faq from '../components/Faq.astro';
+import CtaFinale from '../components/CtaFinale.astro';
+import { pacchetti, promo, euro, prezzoMostrato, notaIva } from '../data/site';
+import { settori } from '../data/settori';
+
+const righe: { voce: string; valori: (string | boolean)[] }[] = [
+  { voce: 'Pagine', valori: ['Fino a 4', 'Fino a 6', 'Fino a 8'] },
+  { voce: 'Design personalizzato e responsive', valori: [true, true, true] },
+  { voce: 'Modulo contatti, telefono, email e WhatsApp', valori: [true, true, true] },
+  { voce: 'Google Maps, dove serve', valori: [true, true, true] },
+  { voce: 'SEO tecnica di base e Google Search Console', valori: [true, true, true] },
+  { voce: 'Collegamento del dominio e pubblicazione', valori: [true, true, true] },
+  { voce: 'Cicli di revisione', valori: ['2', '2', '2'] },
+  { voce: 'Sezioni aggiuntive personalizzate', valori: [false, true, true] },
+  { voce: 'Gallerie fotografiche', valori: [false, true, true] },
+  { voce: 'Maggiore personalizzazione', valori: [false, false, true] },
+  { voce: 'Sezione news', valori: [false, false, true] },
+  { voce: 'Calendario informativo di eventi', valori: [false, false, true] },
+  { voce: 'Supporto nell’organizzazione dei contenuti iniziali', valori: [false, false, true] },
+  { voce: 'Gestione tecnica del primo anno', valori: [true, true, true] },
+];
+
+const faq = [
+  { d: 'I prezzi sono definitivi?', r: 'Sì: sono prezzi fissi per quanto descritto in ogni pacchetto. Se ti serve qualcosa in più, lo preventiviamo a parte prima di iniziare.' },
+  { d: 'Come funziona la promozione di lancio?', r: `Vale per i primi ${promo.limite} clienti che scelgono il pacchetto START: ${euro(promo.prezzo)} invece del prezzo di listino di ${euro(promo.prezzoListino)} che applicheremo dopo. PLUS e PREMIUM hanno i prezzi indicati.` },
+  { d: 'Il dominio è compreso?', r: 'Colleghiamo il tuo dominio, che resta sempre intestato a te. Se non ne hai uno, lo registriamo a tuo nome.' },
+  { d: 'Devo per forza attivare Care dal secondo anno?', r: 'No. Te lo proponiamo prima della scadenza e decidi tu. Se non rinnovi, ti consegniamo i file del sito e ti aiutiamo a trasferirlo.' },
+  { d: 'Care comprende anche le modifiche ai contenuti?', r: 'No: Care riguarda la gestione tecnica (hosting, SSL, backup, monitoraggio, assistenza per problemi tecnici). Nuove pagine, aggiornamenti dei contenuti o nuove funzioni si preventivano a parte.' },
+];
+---
+<Base title="Prezzi e pacchetti · ProntoDomani" description={`Pacchetti START, PLUS e PREMIUM a prezzo fisso, da ${euro(promo.prezzo)}. Primo anno di gestione tecnica incluso, poi servizio Care a 149 € all’anno.`}>
+  <section class="contenitore sezione pr-intro" aria-labelledby="pr-titolo">
+    <p class="occhiello">Prezzi</p>
+    <h1 id="pr-titolo" class="titolo-sezione">Prezzi chiari, scritti prima di iniziare.</h1>
+    <p class="lead">Tre pacchetti a prezzo fisso. Sai subito cosa è incluso, cosa no e quanto costa mantenere il sito negli anni successivi.</p>
+  </section>
+
+  <section class="contenitore" aria-label="Pacchetti">
+    <Pacchetti idTitolo="prezzi" />
+    <p class="nota pr-settori">Vuoi vedere i pacchetti con le voci pensate per il tuo settore?{' '}
+      {settori.map((s, i) => <>{i > 0 && ' · '}<a href={`/${s.slug}/`}>{s.nome}</a></>)}
+    </p>
+  </section>
+
+  <section class="contenitore sezione" aria-labelledby="pr-confronto">
+    <h2 id="pr-confronto" class="titolo-medio pr-confronto__titolo">Confronto dei pacchetti</h2>
+    <div class="tabella-scorri" tabindex="0" role="region" aria-labelledby="pr-confronto">
+      <table class="confronto">
+        <thead>
+          <tr>
+            <th scope="col"><span class="sr-only">Voce</span></th>
+            {pacchetti.map((p) => <th scope="col">{p.nome}<span>{euro(prezzoMostrato(p))}</span></th>)}
+          </tr>
+        </thead>
+        <tbody>
+          {righe.map((r) => (
+            <tr>
+              <th scope="row">{r.voce}</th>
+              {r.valori.map((v) => (
+                <td>{v === true ? <span class="si" aria-label="Incluso">✓</span> : v === false ? <span class="no" aria-label="Non incluso">—</span> : v}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="piccolo pr-iva">{notaIva}</p>
+  </section>
+
+  <PromoLancio />
+
+  <section class="contenitore sezione" aria-label="Servizio Care">
+    <Care />
+  </section>
+
+  <Faq voci={faq} titolo="Domande sui prezzi" />
+  <CtaFinale />
+</Base>
+
+<style>
+  .pr-intro { display: flex; flex-direction: column; gap: 18px; padding-bottom: 48px; max-width: 900px; margin-left: max(0px, calc((100% - var(--contenitore)) / 2)); }
+  .pr-settori { margin-top: 20px; }
+  .pr-confronto__titolo { margin-bottom: 24px; }
+  .tabella-scorri { overflow-x: auto; border-radius: var(--raggio); border: 1px solid var(--bordo); background: var(--bianco); }
+  .confronto { width: 100%; border-collapse: collapse; min-width: 640px; font-size: 15px; }
+  .confronto th, .confronto td { padding: 14px 18px; border-bottom: 1px solid var(--bordo); text-align: center; }
+  .confronto tbody th { text-align: left; font-weight: 500; color: var(--ardesia); }
+  .confronto thead th { font-family: var(--font-titoli); font-weight: 800; letter-spacing: .12em; color: var(--petrolio); background: var(--carta); }
+  .confronto thead th span { display: block; letter-spacing: -.02em; font-size: 22px; margin-top: 2px; }
+  .confronto tr:last-child th, .confronto tr:last-child td { border-bottom: 0; }
+  .si { color: var(--verde); font-weight: 800; }
+  .no { color: #A9A69B; }
+  .pr-iva { margin-top: 14px; }
+</style>
