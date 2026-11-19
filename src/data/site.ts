@@ -15,7 +15,7 @@ export const azienda = {
   titolare: '', // es. 'Mario Rossi' — vuoto = non mostrato
   piva: '04411700232',
   indirizzo: '', // sede — vuoto = non mostrata
-  email: 'info@prontodomani.it',
+  email: 'samuele@prontodomani.it',
   emailDiretta: 'samuele@prontodomani.it',
   telefono: '', // es. '+39 333 1234567' — vuoto = non mostrato
   whatsapp: '', // es. '393331234567' (solo cifre, con prefisso) — vuoto = non mostrato
