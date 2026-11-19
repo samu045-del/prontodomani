@@ -2,73 +2,58 @@
 import Base from '../layouts/Base.astro';
 import CtaFinale from '../components/CtaFinale.astro';
 
-const valori = [
-  { titolo: 'Semplicità', testo: 'Ti chiediamo solo quello che serve e ti spieghiamo tutto senza gergo tecnico.' },
-  { titolo: 'Cura del dettaglio', testo: 'Tipografia, spazi, immagini, testi: un sito professionale si vede dalle piccole cose.' },
-  { titolo: 'Trasparenza', testo: 'Prezzi scritti, cosa è incluso e cosa no, cosa succede dopo il primo anno. Prima di iniziare.' },
-  { titolo: 'Affidabilità', testo: 'Rispondiamo, rispettiamo i tempi che promettiamo e ti diciamo subito se qualcosa cambia.' },
-  { titolo: 'Innovazione concreta', testo: 'Usiamo strumenti moderni, anche l’intelligenza artificiale, per lavorare meglio e più in fretta. Non per sostituire le persone.' },
+const impegni = [
+  { titolo: 'Ti rispondo io', testo: 'Niente centralino, niente ticket. Chi legge la tua richiesta è chi fa il sito.' },
+  { titolo: 'Prezzo scritto prima', testo: 'Sai cosa paghi, cosa è compreso e cosa succede dopo il primo anno. Prima di iniziare, non dopo.' },
+  { titolo: 'Niente gergo', testo: 'Se una scelta tecnica conta, te la spiego con parole normali. Se non conta, non te ne parlo.' },
+  { titolo: 'Ti dico se non serve', testo: 'Se per la tua attività basta il pacchetto più piccolo, ti consiglio quello.' },
 ];
 ---
-<Base title="Chi siamo · ProntoDomani" description="ProntoDomani nasce per rendere semplice e accessibile un sito web professionale per piccole realtà, professionisti e associazioni. Conosci il progetto e le persone.">
+<Base title="Chi siamo · ProntoDomani" description="ProntoDomani è un progetto di Samuele: siti web professionali per società sportive, psicologi e dentisti, con una bozza in 24 ore e prezzi scritti prima di iniziare.">
   <section class="cs-hero" aria-labelledby="cs-titolo">
     <div class="contenitore cs-hero__griglia">
-      <div class="cs-hero__testo">
-        <p class="occhiello">Chi siamo</p>
-        <h1 id="cs-titolo">Dietro ProntoDomani ci sono persone, non solo tecnologia.</h1>
-      </div>
-      <p class="lead cs-hero__lead">Abbiamo creato ProntoDomani per una ragione semplice: un sito web professionale dovrebbe essere alla portata anche di chi non ha tempo, budget o voglia di inseguire un’agenzia. Professionisti, studi e associazioni meritano di presentarsi bene, senza complicazioni.</p>
+      <h1 id="cs-titolo">Ciao, sono Samuele.</h1>
+      <p class="lead cs-hero__lead">ProntoDomani è il mio progetto. Faccio siti per chi ha già un lavoro da mandare avanti e non vuole passare mesi dietro a un’agenzia: società sportive, psicologi, studi dentistici.</p>
     </div>
   </section>
 
   <section class="contenitore sezione cs-idea" aria-labelledby="cs-idea">
-    <div class="cs-idea__titolo">
-      <p class="occhiello">La nostra idea</p>
-      <h2 id="cs-idea" class="titolo-sezione">Meno attrito, più cura.</h2>
-    </div>
+    <h2 id="cs-idea" class="titolo-sezione">Perché “pronto domani”</h2>
     <div class="cs-idea__testo">
-      <p class="lead">Molte attività sanno di avere bisogno di una presenza online migliore. Poi si scontrano con preventivi alti, tempi lunghi, processi complicati o soluzioni fai-da-te che non le rappresentano.</p>
-      <p>ProntoDomani nasce per offrire un’alternativa: strutture pensate per settori precisi, un processo guidato in pochi passaggi, prezzi scritti prima di iniziare e una persona che segue il progetto dall’inizio alla fine.</p>
-      <p>La velocità per noi non significa fretta. Significa non far perdere tempo a chi ha già un lavoro da mandare avanti: ti mostriamo presto qualcosa di concreto, e lo sistemiamo insieme finché ti convince.</p>
+      <p>Molti siti di piccole attività sono fermi a dieci anni fa, oppure non esistono proprio. Quasi mai per pigrizia: è che farne uno sembra lungo, caro e complicato, e alla fine si rimanda.</p>
+      <p>Io ho tolto i passaggi inutili. Per ogni settore ho una struttura che funziona, la adatto alla tua attività e ti mando una bozza vera entro 24 ore dal materiale. Così la prima cosa che vedi non è un preventivo, è il tuo sito.</p>
+      <p>Uso strumenti moderni, anche l’intelligenza artificiale, perché mi fanno lavorare più in fretta. Le scelte però le faccio io, e i testi li rileggo uno per uno.</p>
     </div>
   </section>
 
-  <section class="fascia-bianca" aria-labelledby="cs-valori"><div class="contenitore sezione">
-    <div class="intestazione">
-      <p class="occhiello">I nostri valori</p>
-      <h2 id="cs-valori" class="titolo-sezione">Cosa puoi aspettarti da noi.</h2>
-    </div>
-    <ol class="cs-valori">
-      {valori.map((v, i) => (
+  <section class="fascia-bianca" aria-labelledby="cs-impegni"><div class="contenitore sezione">
+    <h2 id="cs-impegni" class="titolo-sezione cs-impegni__titolo">Cosa ti prometto</h2>
+    <ul class="cs-impegni">
+      {impegni.map((v) => (
         <li>
-          <span aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
           <h3>{v.titolo}</h3>
           <p>{v.testo}</p>
         </li>
       ))}
-    </ol>
+    </ul>
   </div></section>
 
-  <CtaFinale titolo="Vuoi conoscerci meglio?" testo="Il modo migliore è parlarci della tua attività. Ti rispondiamo entro un giorno lavorativo, senza impegno." />
+  <CtaFinale titolo="Parliamone." testo="Scrivimi due righe sulla tua attività. Ti rispondo entro un giorno lavorativo, senza impegno." />
 </Base>
 
 <style>
   .cs-hero { background: var(--petrolio); color: #DCE9E4; }
-  .cs-hero__griglia { display: grid; gap: 40px; align-items: end; padding-block: clamp(56px, 8vw, 104px); grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); }
-  .cs-hero__testo { display: flex; flex-direction: column; gap: 18px; }
-  .cs-hero .occhiello { color: var(--lime); }
+  .cs-hero__griglia { display: grid; gap: 40px; align-items: end; padding-block: clamp(56px, 8vw, 104px); grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); }
   .cs-hero h1 { color: #fff; font-weight: 800; font-size: clamp(38px, 5vw, 64px); line-height: 1.04; letter-spacing: -.04em; }
   .cs-hero__lead { color: #DCE9E4; }
   @media (max-width: 900px) { .cs-hero__griglia { grid-template-columns: 1fr; } }
 
-  .cs-idea { display: grid; gap: 40px; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); }
-  .cs-idea__titolo { display: flex; flex-direction: column; gap: 14px; }
-  .cs-idea__testo { display: flex; flex-direction: column; gap: 18px; max-width: 640px; }
+  .cs-idea { display: grid; gap: 32px 64px; grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr); }
+  .cs-idea__testo { display: flex; flex-direction: column; gap: 18px; max-width: 620px; font-size: 18px; line-height: 1.65; }
   @media (max-width: 860px) { .cs-idea { grid-template-columns: 1fr; } }
 
-
-  .cs-valori { list-style: none; margin: 0; padding: 0; display: grid; gap: 0 40px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
-  .cs-valori li { padding: 26px 0; border-top: 2px solid var(--petrolio); display: flex; flex-direction: column; gap: 8px; }
-  .cs-valori span { font-family: var(--font-titoli); font-weight: 800; color: var(--verde); font-size: 14px; }
-  .cs-valori h3 { font-size: 24px; }
+  .cs-impegni__titolo { margin-bottom: 8px; }
+  .cs-impegni { list-style: none; margin: 0; padding: 0; display: grid; gap: 0 40px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); }
+  .cs-impegni li { padding: 24px 0; border-top: 2px solid var(--petrolio); display: flex; flex-direction: column; gap: 8px; }
+  .cs-impegni h3 { font-size: 21px; }
 </style>

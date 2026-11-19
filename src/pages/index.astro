@@ -1,31 +1,16 @@
 ---
 import Base from '../layouts/Base.astro';
-import MiniSito from '../components/MiniSito.astro';
 import Spunta from '../components/Spunta.astro';
-import Processo from '../components/Processo.astro';
 import Pacchetti from '../components/Pacchetti.astro';
 import Care from '../components/Care.astro';
-import PromoLancio from '../components/PromoLancio.astro';
 import Promessa24 from '../components/Promessa24.astro';
-import Faq from '../components/Faq.astro';
 import CtaFinale from '../components/CtaFinale.astro';
 import { promo, euro } from '../data/site';
 import { settori } from '../data/settori';
 
-const vantaggi = [
-  { titolo: 'Design su misura', testo: 'Partiamo da strutture collaudate per il tuo settore e le adattiamo alla tua identità. Niente modelli uguali per tutti.' },
-  { titolo: 'Perfetto da smartphone', testo: 'La maggior parte delle visite arriva dal telefono: progettiamo prima per quello, poi per tablet e computer.' },
-  { titolo: 'Tempi rapidi', testo: 'Prima bozza navigabile entro 24 ore dal materiale completo. Online dopo il tuo ok.' },
-  { titolo: 'Prezzi chiari', testo: 'Tre pacchetti a prezzo fisso, scritti qui. Sai prima cosa paghi e cosa è incluso.' },
-  { titolo: 'Un solo interlocutore', testo: 'Parli con una persona che segue il tuo sito dall’inizio alla fine, senza gergo tecnico.' },
-  { titolo: 'Gestione tecnica inclusa', testo: 'Hosting, SSL, backup e assistenza: il primo anno è compreso, poi decidi tu.' },
-];
-
-const faqHome = [
-  { d: 'Davvero ricevo una bozza entro 24 ore?', r: 'Sì, dal momento in cui abbiamo le informazioni, i testi, il logo e le immagini. Se manca qualcosa ti avvisiamo subito e il conteggio parte quando arriva.' },
-  { d: 'Il dominio resta mio?', r: 'Sì, sempre. Se ne hai già uno lo colleghiamo; se non ce l’hai, lo registriamo a tuo nome.' },
-  { d: 'Cosa succede dopo il primo anno?', r: 'Il primo anno di gestione tecnica è incluso. Dal secondo puoi attivare il servizio Care a 149 € all’anno, oppure portare il sito altrove: ti consegniamo i file.' },
-  { d: 'Posso chiedere modifiche?', r: 'Ogni pacchetto include due cicli di revisione prima della pubblicazione. Modifiche successive o nuove sezioni si preventivano a parte.' },
+const lavori = [
+  { img: '/lavori/fccds.webp', url: 'https://fccds.it', nome: 'fccds.it', cosa: 'Società di calcio' },
+  { img: '/lavori/emada.webp', url: 'https://emada.it', nome: 'emada.it', cosa: 'Consulenza fiscale, Torino e Milano' },
 ];
 ---
 <Base
@@ -35,215 +20,153 @@ const faqHome = [
   <!-- HERO -->
   <section class="hero contenitore" aria-labelledby="hero-titolo">
     <div class="hero__testo">
-      <p class="occhiello">Siti web per società sportive, psicologi e dentisti</p>
       <h1 id="hero-titolo">Un sito fatto<br />come si deve.<br /><mark>Pronto domani.</mark></h1>
-      <p class="lead">Siti professionali su misura, pensati per il tuo settore. Prezzi chiari e un processo semplice, dalla prima idea alla pubblicazione: la prima bozza arriva in 24 ore.</p>
+      <p class="lead">Mi mandi testi, logo e foto. Il giorno dopo apri sul telefono la bozza del tuo sito. La sistemiamo insieme e va online quando ti convince.</p>
       <div class="hero__cta">
         <a href="/contatti/" class="btn btn--primario">Richiedi il tuo sito</a>
-        <a href="/come-funziona/" class="btn btn--secondario">Scopri come funziona</a>
+        <a href="#prezzi" class="btn btn--secondario">Vedi i prezzi</a>
       </div>
       <ul class="hero__prove">
-        <li><Spunta />Prima bozza in 24 ore, a materiale completo</li>
+        <li><Spunta />Bozza in 24 ore, a materiale completo</li>
         <li><Spunta />Prezzi fissi, da {euro(promo.prezzo)}</li>
         <li><Spunta />Dominio sempre a tuo nome</li>
       </ul>
     </div>
 
     <div class="hero__visual">
-      <div class="hero__scheda hero__scheda--1"><MiniSito tipo="dentisti" /></div>
-      <div class="hero__scheda hero__scheda--2"><MiniSito tipo="psicologi" /></div>
-      <div class="hero__scheda hero__scheda--3"><MiniSito tipo="societa-sportive" formato="telefono" /></div>
+      {lavori.map((l, i) => (
+        <a href={l.url} target="_blank" rel="noopener" class:list={['telefono', `telefono--${i + 1}`]}>
+          <span class="telefono__schermo"><img src={l.img} alt={`Il sito ${l.nome} visto da smartphone`} width="600" height="917" loading="eager" /></span>
+          <span class="telefono__etichetta"><strong>{l.nome}</strong> {l.cosa}</span>
+        </a>
+      ))}
       {promo.attiva && (
-        <a href="#promozione" class="hero__bollino">
+        <a href="/prezzi/#promozione" class="hero__bollino">
           <span>Promozione di lancio</span>
           <strong>START {euro(promo.prezzo)}</strong>
           <span>primi {promo.limite} clienti</span>
         </a>
       )}
-      <p class="hero__didascalia piccolo">Esempi grafici dimostrativi.</p>
     </div>
   </section>
 
   <Promessa24 />
 
-  <!-- SETTORI -->
-  <section class="sezione" aria-labelledby="settori-titolo">
-    <div class="contenitore">
-      <div class="intestazione">
-        <p class="occhiello">Per chi è ProntoDomani</p>
-        <h2 id="settori-titolo" class="titolo-sezione">Tre settori, tre modi diversi di presentarsi.</h2>
-        <p class="lead">Uno psicologo, uno studio dentistico e un club sportivo non parlano alle stesse persone. Per questo partiamo da strutture pensate per ciascuno.</p>
-      </div>
-      <div class="settori">
-        {settori.map((s, i) => (
-          <article class:list={['settore', { 'settore--inverso': i % 2 === 1 }]} style={`--acc:${s.tema.accento};--fondo:${s.tema.fondo};--ink:${s.tema.inchiostro}`}>
-            <div class="settore__testo">
-              <p class="settore__etichetta">{s.etichetta}</p>
-              <h3>{s.card.testo}</h3>
-              <ul>{s.card.punti.map((p) => <li>{p}</li>)}</ul>
-              <a href={`/${s.slug}/`} class="settore__link">Scopri il sito per {s.nome.toLowerCase()}</a>
-            </div>
-            <div class="settore__visual">
-              <MiniSito tipo={s.slug} />
-            </div>
-          </article>
-        ))}
-      </div>
+  <!-- NOTA -->
+  <section class="contenitore sezione nota-s" aria-labelledby="nota-titolo">
+    <h2 id="nota-titolo" class="nota-s__titolo">Perché esiste ProntoDomani</h2>
+    <div class="nota-s__testo">
+      <p>Ciao, sono Samuele.</p>
+      <p>Chi allena una squadra, segue dei pazienti o manda avanti uno studio non ha tempo di stare dietro a un’agenzia per tre mesi. Però ha bisogno di un sito che non faccia brutta figura, che si legga bene dal telefono e che dica le cose giuste.</p>
+      <p>Io lavoro così: mi mandi il materiale e il giorno dopo hai una bozza vera, non un preventivo. Da lì la sistemiamo insieme, con al massimo due giri di modifiche, e il prezzo è quello scritto qui sotto.</p>
+      <p>Gli ultimi due che ho fatto sono <a href="https://fccds.it" target="_blank" rel="noopener">fccds.it</a>, per una società di calcio, e <a href="https://emada.it" target="_blank" rel="noopener">emada.it</a>, per uno studio di consulenza fiscale. Aprili dal telefono: è lì che li guarda la maggior parte delle persone.</p>
+      <p>Ogni richiesta la leggo io. Ti rispondo entro un giorno lavorativo.</p>
+      <p class="nota-s__firma">Samuele</p>
     </div>
   </section>
 
-  <!-- VANTAGGI -->
-  <section class="fascia-bianca" aria-labelledby="vantaggi-titolo">
-    <div class="contenitore sezione vantaggi">
-      <div class="vantaggi__intro">
-        <p class="occhiello">Perché ProntoDomani</p>
-        <h2 id="vantaggi-titolo" class="titolo-sezione">Professionale, senza complicazioni.</h2>
-        <p class="lead">Molte piccole realtà hanno un sito vecchio, poco efficace o non ce l’hanno affatto. Spesso perché farlo sembra lungo, costoso e complicato. Noi lo rendiamo semplice.</p>
-      </div>
-      <ol class="vantaggi__lista">
-        {vantaggi.map((v, i) => (
-          <li>
-            <span class="vantaggi__n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-            <div><h3>{v.titolo}</h3><p>{v.testo}</p></div>
+  <!-- SETTORI -->
+  <section class="fascia-bianca" aria-labelledby="settori-titolo">
+    <div class="contenitore sezione">
+      <h2 id="settori-titolo" class="titolo-sezione settori__titolo">Per chi lavoro</h2>
+      <ul class="settori">
+        {settori.map((s) => (
+          <li style={`--acc:${s.tema.accento}`}>
+            <a href={`/${s.slug}/`}>
+              <strong>{s.etichetta}</strong>
+              <span>{s.card.testo}</span>
+              <em>Com’è fatto il sito →</em>
+            </a>
           </li>
         ))}
-      </ol>
+      </ul>
+      <p class="nota settori__nota">Fai altro? Scrivimi lo stesso: emada.it, per dire, è uno studio di commercialisti.</p>
     </div>
-  </section>
-
-  <!-- COME FUNZIONA -->
-  <section class="contenitore sezione" aria-labelledby="come-titolo">
-    <div class="intestazione">
-      <p class="occhiello">Come funziona</p>
-      <h2 id="come-titolo" class="titolo-sezione">Quattro passaggi, nessuna sorpresa.</h2>
-    </div>
-    <Processo />
-    <p class="nota come__nota">Ritardi nel materiale o richieste fuori pacchetto possono spostare i tempi: te lo diciamo sempre prima. <a href="/come-funziona/">Tutti i dettagli</a></p>
   </section>
 
   <!-- PREZZI -->
   <section id="prezzi" class="fascia-menta" aria-labelledby="prezzi-titolo">
     <div class="contenitore sezione">
       <div class="intestazione">
-        <p class="occhiello">Pacchetti e prezzi</p>
-        <h2 id="prezzi-titolo" class="titolo-sezione">Un prezzo fisso, scritto qui.</h2>
-        <p class="lead">Scegli quanto spazio ti serve. Design, versione mobile, SEO tecnica e pubblicazione sono sempre inclusi.</p>
+        <h2 id="prezzi-titolo" class="titolo-sezione">Quanto costa</h2>
+        <p class="lead">Tre pacchetti a prezzo fisso. Design, versione per smartphone, SEO tecnica, pubblicazione e il primo anno di gestione sono sempre compresi.</p>
       </div>
       <Pacchetti idTitolo="home" />
       <div class="prezzi__care"><Care compatto /></div>
-      <p class="nota prezzi__nota"><a href="/prezzi/" class="link-freccia">Confronta i pacchetti nel dettaglio</a></p>
+      <p class="nota prezzi__nota"><a href="/prezzi/" class="link-freccia">Confronto completo e domande sui prezzi</a></p>
     </div>
   </section>
 
-  <!-- PROMOZIONE -->
-  <PromoLancio />
-
-  <!-- TEAM -->
-  <section class="contenitore sezione team" aria-labelledby="team-titolo">
-    <div class="team__testo">
-      <p class="occhiello">Chi siamo</p>
-      <h2 id="team-titolo" class="titolo-sezione">Dietro ProntoDomani ci sono persone, non solo tecnologia.</h2>
-      <p class="lead">Usiamo strumenti moderni per lavorare in fretta, ma ogni sito è seguito da una persona: ti ascolta, ti propone, ti risponde.</p>
-      <a href="/chi-siamo/" class="link-freccia">Come lavoriamo</a>
-    </div>
-    <ul class="team__impegni">
-      <li><strong>Una persona, dall’inizio alla fine.</strong> Chi ti risponde alla prima chiamata è chi segue il tuo sito.</li>
-      <li><strong>Risposta entro un giorno lavorativo.</strong> Sempre, anche solo per dirti a che punto siamo.</li>
-      <li><strong>Niente gergo tecnico.</strong> Ti spieghiamo le scelte con parole semplici.</li>
-    </ul>
-  </section>
-
-  <Faq voci={faqHome} />
-
-  <CtaFinale />
+  <CtaFinale
+    titolo="Raccontami cosa fai."
+    testo="Bastano due righe. Ti rispondo entro un giorno lavorativo con cosa serve per partire e quale pacchetto ha senso per te."
+  />
 </Base>
 
 <style>
   /* Hero */
-  .hero { padding-block: clamp(48px, 7vw, 88px) clamp(56px, 8vw, 104px); display: grid; gap: 56px; align-items: center; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); }
+  .hero { padding-block: clamp(48px, 7vw, 88px) clamp(56px, 8vw, 96px); display: grid; gap: 56px; align-items: center; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
   .hero__testo { display: flex; flex-direction: column; gap: 22px; }
   h1 { font-weight: 800; font-size: clamp(40px, 4.6vw, 62px); line-height: 1.04; letter-spacing: -0.045em; }
   h1 mark {
     color: inherit; padding: 0 .06em; white-space: nowrap;
     background: linear-gradient(transparent 58%, var(--lime) 58%, var(--lime) 92%, transparent 92%);
   }
+  .hero .lead { max-width: 34em; }
   .hero__cta { display: flex; flex-wrap: wrap; gap: 12px; }
   .hero__prove { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 22px; font-weight: 500; font-size: 15px; color: var(--petrolio); }
   .hero__prove li { display: flex; gap: 8px; align-items: center; }
 
-  .hero__visual { position: relative; min-height: 470px; }
-  .hero__scheda { position: absolute; }
-  .hero__scheda--1 { width: 78%; right: 0; top: 0; transform: rotate(1.5deg); }
-  .hero__scheda--2 { width: 70%; left: 0; top: 150px; transform: rotate(-2deg); z-index: 1; }
-  .hero__scheda--3 { width: 34%; right: 4%; top: 190px; z-index: 2; transform: rotate(3deg); }
+  .hero__visual { position: relative; display: flex; justify-content: center; gap: 0; padding-top: 24px; }
+  .telefono { display: flex; flex-direction: column; gap: 12px; width: min(46%, 240px); text-decoration: none; color: var(--grigio-testo); }
+  .telefono--1 { transform: rotate(-3deg) translateY(10px); z-index: 1; }
+  .telefono--2 { transform: rotate(2.5deg) translateY(56px); margin-left: -18px; }
+  .telefono__schermo {
+    display: block; border-radius: 30px; padding: 7px; background: #11201d;
+    box-shadow: 0 30px 50px -28px rgba(15, 58, 52, .55);
+  }
+  .telefono__schermo img { border-radius: 24px; width: 100%; }
+  .telefono__etichetta { font-size: 13px; line-height: 1.35; padding-left: 6px; }
+  .telefono__etichetta strong { display: block; color: var(--petrolio); font-size: 14px; }
+  .telefono:hover .telefono__etichetta strong { text-decoration: underline; }
   .hero__bollino {
-    position: absolute; z-index: 3; left: 0; top: 10px; width: 132px; height: 132px; border-radius: 50%;
+    position: absolute; z-index: 3; right: 0; top: 0; width: 120px; height: 120px; border-radius: 50%;
     background: var(--lime); color: var(--petrolio); text-decoration: none;
     display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
-    font-size: 11px; font-weight: 600; line-height: 1.25; transform: rotate(-10deg);
+    font-size: 10.5px; font-weight: 600; line-height: 1.25; transform: rotate(8deg);
     box-shadow: 0 16px 30px -14px rgba(15, 58, 52, .5);
   }
-  .hero__bollino strong { font-family: var(--font-titoli); font-size: 19px; font-weight: 800; letter-spacing: -.02em; margin: 2px 0; }
-  .hero__bollino:hover { color: var(--petrolio); transform: rotate(-6deg) scale(1.03); }
-  .hero__didascalia { position: absolute; bottom: -8px; left: 0; }
+  .hero__bollino strong { font-family: var(--font-titoli); font-size: 18px; font-weight: 800; letter-spacing: -.02em; margin: 2px 0; }
+  .hero__bollino:hover { color: var(--petrolio); transform: rotate(4deg) scale(1.03); }
 
   @media (max-width: 960px) {
-    .hero { grid-template-columns: 1fr; }
-    .hero__visual { min-height: 0; display: grid; gap: 16px; padding-top: 40px; }
-    .hero__scheda { position: relative; inset: auto; width: 100%; transform: none; }
-    .hero__scheda--2, .hero__scheda--3 { display: none; }
-    .hero__bollino { top: 0; left: auto; right: 8px; width: 112px; height: 112px; }
-    .hero__didascalia { position: static; }
+    .hero { grid-template-columns: 1fr; gap: 32px; }
+    .hero__visual { padding-bottom: 48px; }
+    .hero__bollino { display: none; } /* su smartphone c'è già il pulsante fisso START */
   }
+
+  /* Nota di Samuele */
+  .nota-s { display: grid; gap: 32px 64px; grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr); }
+  .nota-s__titolo { font-size: clamp(24px, 2.4vw, 30px); line-height: 1.15; letter-spacing: -.03em; }
+  .nota-s__testo { display: flex; flex-direction: column; gap: 16px; max-width: 620px; font-size: 18px; line-height: 1.65; }
+  .nota-s__testo p:first-child { font-family: var(--font-titoli); font-weight: 700; color: var(--petrolio); font-size: 21px; }
+  .nota-s__firma { font-family: var(--font-titoli); font-weight: 800; color: var(--petrolio); font-size: 22px; letter-spacing: -.02em; margin-top: 4px; }
+  @media (max-width: 860px) { .nota-s { grid-template-columns: 1fr; } }
 
   /* Settori */
-  .settori { display: flex; flex-direction: column; gap: 20px; }
-  .settore {
-    background: var(--fondo); color: var(--ink); border-radius: var(--raggio-grande);
-    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 40px; align-items: center;
-    padding: clamp(28px, 4.5vw, 56px); overflow: hidden;
+  .settori__titolo { margin-bottom: 28px; }
+  .settori { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
+  .settori a {
+    height: 100%; display: flex; flex-direction: column; gap: 10px; padding: 26px 26px 22px;
+    border: 1px solid var(--bordo); border-top: 4px solid var(--acc); border-radius: var(--raggio);
+    text-decoration: none; color: var(--ardesia); background: var(--carta);
   }
-  .settore--inverso .settore__testo { order: 2; }
-  .settore__testo { display: flex; flex-direction: column; gap: 16px; }
-  .settore__etichetta { font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--acc); }
-  .settore h3 { color: var(--ink); font-size: clamp(24px, 2.6vw, 32px); line-height: 1.15; letter-spacing: -.03em; }
-  .settore ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
-  .settore li { font-size: 14px; font-weight: 600; padding: 6px 12px; border-radius: 999px; background: rgba(255,255,255,.7); border: 1px solid color-mix(in srgb, var(--acc) 25%, transparent); }
-  .settore__link {
-    align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 22px;
-    border-radius: 999px; background: var(--acc); color: #fff; text-decoration: none; font-weight: 600; margin-top: 4px;
-  }
-  .settore__link::after { content: '→'; }
-  .settore__link:hover { color: #fff; filter: brightness(1.08); }
-  .settore__visual { transform: rotate(-1.2deg); }
-  .settore--inverso .settore__visual { transform: rotate(1.2deg); }
-  @media (max-width: 860px) {
-    .settore { grid-template-columns: 1fr; }
-    .settore--inverso .settore__testo { order: 0; }
-    .settore__visual, .settore--inverso .settore__visual { transform: none; }
-  }
+  .settori a:hover { border-color: var(--acc); }
+  .settori strong { font-family: var(--font-titoli); color: var(--petrolio); font-size: 20px; line-height: 1.2; }
+  .settori span { font-size: 15.5px; flex: 1; }
+  .settori em { font-style: normal; font-weight: 600; color: var(--acc); font-size: 15px; }
+  .settori__nota { margin-top: 20px; }
 
-  /* Vantaggi */
-  .vantaggi { display: grid; gap: 48px; grid-template-columns: minmax(0, .9fr) minmax(0, 1.4fr); }
-  .vantaggi__intro { display: flex; flex-direction: column; gap: 16px; align-self: start; position: sticky; top: 110px; }
-  .vantaggi__lista { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0 32px; }
-  .vantaggi__lista li { display: flex; gap: 16px; padding: 24px 0; border-top: 1px solid var(--bordo); }
-  .vantaggi__n { font-family: var(--font-titoli); font-weight: 800; color: var(--verde); font-size: 15px; padding-top: 3px; }
-  .vantaggi__lista h3 { font-size: 20px; margin-bottom: 6px; }
-  .vantaggi__lista p { font-size: 15.5px; }
-  @media (max-width: 900px) { .vantaggi { grid-template-columns: 1fr; } .vantaggi__intro { position: static; } }
-  @media (max-width: 600px) { .vantaggi__lista { grid-template-columns: 1fr; } }
-
-  .come__nota { margin-top: 24px; }
   .prezzi__care { margin-top: 24px; }
   .prezzi__nota { margin-top: 16px; }
-
-  /* Team */
-  .team { display: grid; gap: 48px; align-items: center; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
-  .team__testo { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
-  .team__impegni { list-style: none; margin: 0; padding: 8px 28px; background: var(--bianco); border: 1px solid var(--bordo); border-radius: var(--raggio-grande); }
-  .team__impegni li { padding: 18px 0; border-bottom: 1px solid var(--bordo); font-size: 16px; }
-  .team__impegni li:last-child { border-bottom: 0; }
-  .team__impegni strong { display: block; font-family: var(--font-titoli); color: var(--petrolio); font-size: 18px; margin-bottom: 2px; }
-  @media (max-width: 860px) { .team { grid-template-columns: 1fr; } }
 </style>
