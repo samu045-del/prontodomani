@@ -9,7 +9,7 @@ const anno = new Date().getFullYear();
     <div class="footer__marchio">
       <Logo size={30} />
       <p>Un sito fatto come si deve. Pronto domani.</p>
-      <p class="piccolo">Siti web professionali per psicologi, dentisti e società sportive.</p>
+      <p class="piccolo">Siti web professionali per società sportive, psicologi e dentisti.</p>
     </div>
 
     <nav aria-label="Settori">
@@ -38,7 +38,7 @@ const anno = new Date().getFullYear();
   </div>
 
   <div class="contenitore footer__legale">
-    <p>© {anno} {azienda.nome} · {azienda.titolare} · P.IVA {azienda.piva} · {azienda.indirizzo}</p>
+    <p>© {anno} {[azienda.nome, azienda.titolare, `P.IVA ${azienda.piva}`, azienda.indirizzo].filter(Boolean).join(' · ')}</p>
     <ul>
       <li><a href="/privacy/">Privacy</a></li>
       <li><a href="/cookie/">Cookie</a></li>

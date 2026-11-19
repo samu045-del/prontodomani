@@ -1,0 +1,34 @@
+---
+// Fascia che mette in evidenza la promessa delle 24 ore, sempre con la sua condizione.
+---
+<section class="p24" aria-labelledby="p24-titolo">
+  <div class="contenitore p24__griglia">
+    <p class="p24__numero" aria-hidden="true">24<span>h</span></p>
+    <div class="p24__testo">
+      <h2 id="p24-titolo">Dal materiale completo alla prima bozza, in 24&nbsp;ore.</h2>
+      <ol class="p24__passi">
+        <li><span>1</span>Ci mandi testi, logo, foto e contatti</li>
+        <li><span>2</span>Entro 24 ore ricevi la bozza navigabile</li>
+        <li><span>3</span>La sistemiamo insieme e va online con il tuo ok</li>
+      </ol>
+      <p class="p24__nota">Le 24 ore partono quando il materiale è completo. Se manca qualcosa te lo diciamo subito, e ti aiutiamo a recuperarlo.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .p24 { background: var(--lime); color: var(--petrolio); }
+  .p24__griglia { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(24px, 5vw, 64px); align-items: center; padding-block: clamp(40px, 6vw, 64px); }
+  .p24__numero { font-family: var(--font-titoli); font-weight: 800; font-size: clamp(96px, 14vw, 180px); line-height: .85; letter-spacing: -.06em; }
+  .p24__numero span { font-size: .38em; letter-spacing: -.02em; margin-left: .04em; }
+  .p24__testo { display: flex; flex-direction: column; gap: 18px; }
+  .p24 h2 { color: var(--petrolio); font-weight: 800; font-size: clamp(26px, 3vw, 38px); line-height: 1.1; letter-spacing: -.03em; }
+  .p24__passi { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px 24px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .p24__passi li { display: flex; gap: 10px; align-items: flex-start; font-weight: 600; font-size: 15.5px; line-height: 1.35; }
+  .p24__passi span { flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--petrolio); color: var(--lime); display: grid; place-items: center; font-size: 13px; font-weight: 800; }
+  .p24__nota { font-size: 14.5px; max-width: 60ch; }
+  @media (max-width: 760px) {
+    .p24__griglia { grid-template-columns: 1fr; }
+    .p24__passi { grid-template-columns: 1fr; }
+  }
+</style>

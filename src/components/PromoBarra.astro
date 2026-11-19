@@ -1,0 +1,64 @@
+---
+// Barra della promozione di lancio (tutte le pagine) + pulsante fisso su smartphone.
+import { promo, euro } from '../data/site';
+const suContatti = Astro.url.pathname.startsWith('/contatti');
+const link = '/contatti/?pacchetto=start';
+---
+{promo.attiva && (
+  <>
+    <div class="pbarra" id="promo-barra">
+      <div class="contenitore pbarra__riga">
+        <p><strong>Promozione di lancio</strong> · Pacchetto START a {euro(promo.prezzo)} per i primi {promo.limite} clienti, poi {euro(promo.prezzoListino)}.</p>
+        <a href={link} class="pbarra__link">Approfitta della promozione</a>
+        <button type="button" class="pbarra__chiudi" aria-label="Chiudi l’avviso della promozione">
+          <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 3l8 8M11 3l-8 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </div>
+    {!suContatti && (
+      <a href={link} class="pfisso">
+        <span>START</span><strong>{euro(promo.prezzo)}</strong>
+        <span class="sr-only">: promozione di lancio per i primi {promo.limite} clienti</span>
+      </a>
+    )}
+  </>
+)}
+
+<script>
+  // Chiusura della barra ricordata per 7 giorni su questo browser.
+  const CHIAVE = 'pd-promo-chiusa';
+  const barra = document.getElementById('promo-barra');
+  try {
+    const t = Number(localStorage.getItem(CHIAVE) || 0);
+    if (barra && Date.now() - t < 7 * 864e5) barra.hidden = true;
+  } catch {}
+  barra?.querySelector('.pbarra__chiudi')?.addEventListener('click', () => {
+    barra.hidden = true;
+    try { localStorage.setItem(CHIAVE, String(Date.now())); } catch {}
+  });
+</script>
+
+<style>
+  .pbarra { background: var(--petrolio); color: #DCE9E4; font-size: 14px; }
+  .pbarra[hidden] { display: none; }
+  .pbarra__riga { display: flex; align-items: center; justify-content: center; gap: 6px 18px; flex-wrap: wrap; padding-block: 8px; position: relative; padding-right: 56px; }
+  .pbarra strong { color: var(--lime); }
+  .pbarra__link { color: #fff; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; display: inline-flex; align-items: center; min-height: 32px; }
+  .pbarra__link:hover { color: var(--lime); }
+  .pbarra__chiudi { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; display: grid; place-items: center; border: 0; border-radius: 50%; background: transparent; color: #DCE9E4; cursor: pointer; }
+  .pbarra__chiudi:hover { background: rgba(255,255,255,.12); }
+
+  .pfisso { display: none; }
+  @media (max-width: 760px) {
+    .pbarra { font-size: 13px; }
+    .pbarra__riga { justify-content: flex-start; text-align: left; }
+    .pfisso {
+      position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 30;
+      display: inline-flex; align-items: center; gap: 8px; min-height: 52px; padding: 0 20px;
+      border-radius: 999px; background: var(--lime); color: var(--petrolio); text-decoration: none;
+      font-size: 14px; font-weight: 700; box-shadow: 0 14px 30px -10px rgba(15, 58, 52, .55);
+    }
+    .pfisso strong { font-family: var(--font-titoli); font-size: 18px; letter-spacing: -.02em; }
+    .pfisso:hover { color: var(--petrolio); }
+  }
+</style>

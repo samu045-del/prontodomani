@@ -12,9 +12,9 @@ export const preLancio = true;
 // --- Dati aziendali (obbligatori prima del lancio) ---------------------
 export const azienda = {
   nome: 'ProntoDomani',
-  titolare: '[NOME E COGNOME / RAGIONE SOCIALE]',
-  piva: '[P.IVA DA INSERIRE]',
-  indirizzo: '[SEDE DA INSERIRE]',
+  titolare: '', // es. 'Mario Rossi' — vuoto = non mostrato
+  piva: '04411700232',
+  indirizzo: '', // sede — vuoto = non mostrata
   email: 'info@prontodomani.it',
   emailDiretta: 'samuele@prontodomani.it',
   telefono: '', // es. '+39 333 1234567' — vuoto = non mostrato
@@ -22,7 +22,7 @@ export const azienda = {
 };
 
 // Nota fiscale mostrata sotto i prezzi. Da confermare col commercialista.
-export const notaIva = '[NOTA IVA DA DEFINIRE: es. "Operazione in regime forfettario, IVA non dovuta"]';
+export const notaIva = 'Prezzi finali: operiamo in regime forfettario (L. 190/2014), l’IVA non è applicata.';
 
 // --- Pacchetti -------------------------------------------------------------
 // Prezzi e contenuti NON vanno cambiati senza decisione commerciale.
@@ -83,13 +83,13 @@ export const pacchetti: Pacchetto[] = [
 
 // --- Promozione di lancio --------------------------------------------------
 // Riguarda SOLO il pacchetto START. Il limite va rispettato davvero: al
-// 50° cliente START metti attiva: false.
+// 30° cliente START metti attiva: false.
 export const promo = {
   attiva: true,
   pacchetto: 'start' as const,
   prezzo: 490,
   prezzoListino: 590,
-  limite: 50,
+  limite: 30,
 };
 
 // --- Care: gestione tecnica annuale -----------------------------------------
@@ -104,7 +104,7 @@ export const care = {
 // Quella sotto è la chiave di prova ufficiale di Cloudflare: passa sempre.
 export const turnstileSiteKey = '1x00000000000000000000AA';
 
-export const opzioniSettore = ['Psicologo o psicoterapeuta', 'Studio dentistico', 'Società sportiva o associazione', 'Altro'];
+export const opzioniSettore = ['Società sportiva o associazione', 'Psicologo o psicoterapeuta', 'Studio dentistico', 'Altro'];
 
 // --- Utilità ------------------------------------------------------------------
 export const euro = (n: number) => `${String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.')}\u00a0€`;

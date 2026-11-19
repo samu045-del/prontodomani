@@ -6,49 +6,47 @@ import Processo from '../components/Processo.astro';
 import Pacchetti from '../components/Pacchetti.astro';
 import Care from '../components/Care.astro';
 import PromoLancio from '../components/PromoLancio.astro';
-import Fondatore from '../components/Fondatore.astro';
+import Promessa24 from '../components/Promessa24.astro';
 import Faq from '../components/Faq.astro';
 import CtaFinale from '../components/CtaFinale.astro';
 import { promo, euro } from '../data/site';
 import { settori } from '../data/settori';
-import { fondatori } from '../data/team';
 
 const vantaggi = [
   { titolo: 'Design su misura', testo: 'Partiamo da strutture collaudate per il tuo settore e le adattiamo alla tua identità. Niente modelli uguali per tutti.' },
   { titolo: 'Perfetto da smartphone', testo: 'La maggior parte delle visite arriva dal telefono: progettiamo prima per quello, poi per tablet e computer.' },
-  { titolo: 'Tempi rapidi', testo: 'Prima demo navigabile entro 24 ore dal materiale completo. Online dopo il tuo ok.' },
+  { titolo: 'Tempi rapidi', testo: 'Prima bozza navigabile entro 24 ore dal materiale completo. Online dopo il tuo ok.' },
   { titolo: 'Prezzi chiari', testo: 'Tre pacchetti a prezzo fisso, scritti qui. Sai prima cosa paghi e cosa è incluso.' },
   { titolo: 'Un solo interlocutore', testo: 'Parli con una persona che segue il tuo sito dall’inizio alla fine, senza gergo tecnico.' },
   { titolo: 'Gestione tecnica inclusa', testo: 'Hosting, SSL, backup e assistenza: il primo anno è compreso, poi decidi tu.' },
 ];
 
 const faqHome = [
-  { d: 'Davvero ricevo una demo entro 24 ore?', r: 'Sì, dal momento in cui abbiamo le informazioni, i testi, il logo e le immagini. Se manca qualcosa ti avvisiamo subito e il conteggio parte quando arriva.' },
+  { d: 'Davvero ricevo una bozza entro 24 ore?', r: 'Sì, dal momento in cui abbiamo le informazioni, i testi, il logo e le immagini. Se manca qualcosa ti avvisiamo subito e il conteggio parte quando arriva.' },
   { d: 'Il dominio resta mio?', r: 'Sì, sempre. Se ne hai già uno lo colleghiamo; se non ce l’hai, lo registriamo a tuo nome.' },
   { d: 'Cosa succede dopo il primo anno?', r: 'Il primo anno di gestione tecnica è incluso. Dal secondo puoi attivare il servizio Care a 149 € all’anno, oppure portare il sito altrove: ti consegniamo i file.' },
   { d: 'Posso chiedere modifiche?', r: 'Ogni pacchetto include due cicli di revisione prima della pubblicazione. Modifiche successive o nuove sezioni si preventivano a parte.' },
 ];
 ---
 <Base
-  title="ProntoDomani · Siti web professionali per psicologi, dentisti e società sportive"
-  description={`Siti web professionali su misura per psicologi, dentisti e società sportive. Prima demo in 24 ore, prezzi chiari da ${euro(promo.prezzo)}, gestione tecnica del primo anno inclusa.`}
+  title="ProntoDomani · Siti web professionali per società sportive, psicologi e dentisti"
+  description={`Siti web professionali su misura per società sportive, psicologi e dentisti. Prima bozza in 24 ore, prezzi chiari da ${euro(promo.prezzo)}, gestione tecnica del primo anno inclusa.`}
 >
   <!-- HERO -->
   <section class="hero contenitore" aria-labelledby="hero-titolo">
     <div class="hero__testo">
-      <p class="occhiello">Siti web per psicologi, dentisti e società sportive</p>
+      <p class="occhiello">Siti web per società sportive, psicologi e dentisti</p>
       <h1 id="hero-titolo">Un sito fatto<br />come si deve.<br /><mark>Pronto domani.</mark></h1>
-      <p class="lead">Siti professionali su misura, pensati per il tuo settore. Prezzi chiari e un processo semplice, dalla prima idea alla pubblicazione: la prima demo arriva in 24 ore.</p>
+      <p class="lead">Siti professionali su misura, pensati per il tuo settore. Prezzi chiari e un processo semplice, dalla prima idea alla pubblicazione: la prima bozza arriva in 24 ore.</p>
       <div class="hero__cta">
         <a href="/contatti/" class="btn btn--primario">Richiedi il tuo sito</a>
         <a href="/come-funziona/" class="btn btn--secondario">Scopri come funziona</a>
       </div>
       <ul class="hero__prove">
-        <li><Spunta />Prima demo in 24 ore*</li>
+        <li><Spunta />Prima bozza in 24 ore, a materiale completo</li>
         <li><Spunta />Prezzi fissi, da {euro(promo.prezzo)}</li>
         <li><Spunta />Dominio sempre a tuo nome</li>
       </ul>
-      <p class="piccolo">*Dal materiale completo: testi, logo e immagini.</p>
     </div>
 
     <div class="hero__visual">
@@ -65,6 +63,8 @@ const faqHome = [
       <p class="hero__didascalia piccolo">Esempi grafici dimostrativi.</p>
     </div>
   </section>
+
+  <Promessa24 />
 
   <!-- SETTORI -->
   <section class="sezione" aria-labelledby="settori-titolo">
@@ -136,7 +136,7 @@ const faqHome = [
   </section>
 
   <!-- PROMOZIONE -->
-  <div id="promozione"><PromoLancio /></div>
+  <PromoLancio />
 
   <!-- TEAM -->
   <section class="contenitore sezione team" aria-labelledby="team-titolo">
@@ -144,11 +144,13 @@ const faqHome = [
       <p class="occhiello">Chi siamo</p>
       <h2 id="team-titolo" class="titolo-sezione">Dietro ProntoDomani ci sono persone, non solo tecnologia.</h2>
       <p class="lead">Usiamo strumenti moderni per lavorare in fretta, ma ogni sito è seguito da una persona: ti ascolta, ti propone, ti risponde.</p>
-      <a href="/chi-siamo/" class="link-freccia">Conosci la nostra storia</a>
+      <a href="/chi-siamo/" class="link-freccia">Come lavoriamo</a>
     </div>
-    <div class="team__persone">
-      {fondatori.map((f, i) => <Fondatore f={f} indice={i} compatto />)}
-    </div>
+    <ul class="team__impegni">
+      <li><strong>Una persona, dall’inizio alla fine.</strong> Chi ti risponde alla prima chiamata è chi segue il tuo sito.</li>
+      <li><strong>Risposta entro un giorno lavorativo.</strong> Sempre, anche solo per dirti a che punto siamo.</li>
+      <li><strong>Niente gergo tecnico.</strong> Ti spieghiamo le scelte con parole semplici.</li>
+    </ul>
   </section>
 
   <Faq voci={faqHome} />
@@ -239,6 +241,9 @@ const faqHome = [
   /* Team */
   .team { display: grid; gap: 48px; align-items: center; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
   .team__testo { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
-  .team__persone { display: flex; flex-direction: column; gap: 20px; background: var(--bianco); border: 1px solid var(--bordo); border-radius: var(--raggio-grande); padding: 28px; }
+  .team__impegni { list-style: none; margin: 0; padding: 8px 28px; background: var(--bianco); border: 1px solid var(--bordo); border-radius: var(--raggio-grande); }
+  .team__impegni li { padding: 18px 0; border-bottom: 1px solid var(--bordo); font-size: 16px; }
+  .team__impegni li:last-child { border-bottom: 0; }
+  .team__impegni strong { display: block; font-family: var(--font-titoli); color: var(--petrolio); font-size: 18px; margin-bottom: 2px; }
   @media (max-width: 860px) { .team { grid-template-columns: 1fr; } }
 </style>

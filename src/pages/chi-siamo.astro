@@ -1,8 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import Fondatore from '../components/Fondatore.astro';
 import CtaFinale from '../components/CtaFinale.astro';
-import { fondatori } from '../data/team';
 
 const valori = [
   { titolo: 'Semplicità', testo: 'Ti chiediamo solo quello che serve e ti spieghiamo tutto senza gergo tecnico.' },
@@ -35,20 +33,7 @@ const valori = [
     </div>
   </section>
 
-  <section class="fascia-bianca" aria-labelledby="cs-persone">
-    <div class="contenitore sezione">
-      <div class="intestazione">
-        <p class="occhiello">Le persone</p>
-        <h2 id="cs-persone" class="titolo-sezione">Chi c’è dietro.</h2>
-        <p class="lead">Ogni progetto è seguito direttamente da uno di noi, dalla prima chiamata alla pubblicazione. Niente passaggi di mano, niente call center.</p>
-      </div>
-      <div class="cs-fondatori">
-        {fondatori.map((f, i) => <Fondatore f={f} indice={i} />)}
-      </div>
-    </div>
-  </section>
-
-  <section class="contenitore sezione" aria-labelledby="cs-valori">
+  <section class="fascia-bianca" aria-labelledby="cs-valori"><div class="contenitore sezione">
     <div class="intestazione">
       <p class="occhiello">I nostri valori</p>
       <h2 id="cs-valori" class="titolo-sezione">Cosa puoi aspettarti da noi.</h2>
@@ -62,7 +47,7 @@ const valori = [
         </li>
       ))}
     </ol>
-  </section>
+  </div></section>
 
   <CtaFinale titolo="Vuoi conoscerci meglio?" testo="Il modo migliore è parlarci della tua attività. Ti rispondiamo entro un giorno lavorativo, senza impegno." />
 </Base>
@@ -81,7 +66,6 @@ const valori = [
   .cs-idea__testo { display: flex; flex-direction: column; gap: 18px; max-width: 640px; }
   @media (max-width: 860px) { .cs-idea { grid-template-columns: 1fr; } }
 
-  .cs-fondatori { display: grid; gap: 32px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); max-width: 640px; }
 
   .cs-valori { list-style: none; margin: 0; padding: 0; display: grid; gap: 0 40px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
   .cs-valori li { padding: 26px 0; border-top: 2px solid var(--petrolio); display: flex; flex-direction: column; gap: 8px; }

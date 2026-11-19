@@ -2,9 +2,9 @@
 // Modulo di richiesta. Invia a /api/richiesta (Cloudflare Worker).
 import { opzioniSettore, turnstileSiteKey, azienda, pacchetti, promo, euro, prezzoMostrato } from '../data/site';
 const mappaSettori: Record<string, string> = {
-  psicologi: opzioniSettore[0],
-  dentisti: opzioniSettore[1],
-  'societa-sportive': opzioniSettore[2],
+  'societa-sportive': 'Società sportiva o associazione',
+  psicologi: 'Psicologo o psicoterapeuta',
+  dentisti: 'Studio dentistico',
 };
 ---
 <form id="modulo" class="modulo" method="post" action="/api/richiesta" data-settori={JSON.stringify(mappaSettori)}>

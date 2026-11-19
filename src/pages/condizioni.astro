@@ -2,7 +2,7 @@
 import Legale from '../components/Legale.astro';
 import { pacchetti, promo, care, euro, notaIva } from '../data/site';
 ---
-<Legale title="Condizioni del servizio" description="Sintesi delle condizioni del servizio ProntoDomani: pacchetti, prima demo, revisioni, dominio, gestione tecnica e rinnovi.">
+<Legale title="Condizioni del servizio" description="Sintesi delle condizioni del servizio ProntoDomani: pacchetti, prima bozza, revisioni, dominio, gestione tecnica e rinnovi.">
   <p>Questa pagina riassume l’offerta. Le condizioni che valgono sono quelle del contratto firmato.</p>
 
   <h2>Pacchetti</h2>
@@ -11,7 +11,7 @@ import { pacchetti, promo, care, euro, notaIva } from '../data/site';
   </ul>
   {promo.attiva && <p>Promozione di lancio: il pacchetto START costa {euro(promo.prezzo)} per i primi {promo.limite} clienti che lo scelgono; successivamente il prezzo sarà {euro(promo.prezzoListino)}. PLUS e PREMIUM non sono interessati dalla promozione.</p>}
 
-  <h2>La prima demo in 24 ore</h2>
+  <h2>La prima bozza in 24 ore</h2>
   <p>La prima versione navigabile viene consegnata entro 24 ore dalla ricezione del materiale completo (informazioni, testi, logo e immagini, o indicazioni approvate per reperirle). Ritardi nel materiale, richieste fuori pacchetto o revisioni aggiuntive possono modificare i tempi. Il sito viene pubblicato solo dopo l’approvazione del cliente. Sono inclusi due cicli di revisione.</p>
 
   <h2 id="dominio">Dominio, gestione tecnica e rinnovi</h2>

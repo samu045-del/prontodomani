@@ -4,6 +4,7 @@ import '@fontsource-variable/inter';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import PromoBarra from '../components/PromoBarra.astro';
 import { preLancio } from '../data/site';
 
 interface Props {
@@ -41,6 +42,7 @@ const bloccaIndicizzazione = preLancio || noindex;
 </head>
 <body>
   <a class="salta" href="#contenuto">Vai al contenuto</a>
+  <PromoBarra />
   <Header />
   <main id="contenuto">
     <slot />

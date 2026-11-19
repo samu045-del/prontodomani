@@ -36,6 +36,84 @@ export type Settore = {
 
 export const settori: Settore[] = [
   {
+    slug: 'societa-sportive',
+    nome: 'Società sportive',
+    etichetta: 'Società sportive e associazioni',
+    tema: { accento: '#1E7A3C', fondo: '#E9F4EC', inchiostro: '#103A20', contrasto: '#FFFFFF' },
+    seo: {
+      title: 'Siti web per società sportive e associazioni · ProntoDomani',
+      description:
+        'Siti web per società sportive e associazioni: squadre, corsi, settore giovanile, sponsor e news. Design su misura, pensato per atleti e famiglie, con prezzi chiari.',
+    },
+    card: {
+      titolo: 'Società sportive e associazioni',
+      testo: 'Un sito che racconta il club, presenta squadre e corsi e dà spazio agli sponsor.',
+      punti: ['Squadre e settore giovanile', 'Sponsor e partner', 'News e calendario'],
+    },
+    h1: 'Il vostro club merita un sito all’altezza del campo.',
+    sottotitolo:
+      'Famiglie, atleti, sponsor e tifosi cercano le stesse cose: chi siete, dove giocate, come iscriversi. Realizziamo un sito dinamico che lo dice chiaramente e che potete mostrare con orgoglio.',
+    problema: {
+      titolo: 'Tutto passa da Facebook e WhatsApp. Ma chi non vi conosce dove vi trova?',
+      testo:
+        'Le informazioni sono sparse tra gruppi, post e passaparola. Un genitore che vuole iscrivere il figlio o un’azienda che vuole sponsorizzarvi non sa da dove cominciare.',
+      segnali: [
+        'Il sito non c’è, oppure è fermo da qualche stagione',
+        'Orari, campi e contatti sono solo sui social',
+        'Gli sponsor non hanno uno spazio dove essere visti',
+        'Le iscrizioni si gestiscono a voce e su WhatsApp',
+      ],
+    },
+    contenuti: [
+      { titolo: 'Il club', testo: 'Storia, valori, stemma, staff e organigramma: l’identità della società.' },
+      { titolo: 'Squadre e corsi', testo: 'Prima squadra, settore giovanile, femminile, discipline e categorie.' },
+      { titolo: 'Iscrizioni', testo: 'Come iscriversi, prova gratuita, quote e documenti, con contatto diretto.' },
+      { titolo: 'Sponsor e partner', testo: 'Uno spazio vero per chi vi sostiene, e un invito a diventare sponsor.' },
+      { titolo: 'Campo e contatti', testo: 'Impianti, come arrivare, segreteria, orari e social.' },
+    ],
+    vantaggi: [
+      { titolo: 'Identità del club', testo: 'Colori, stemma e carattere della società, non un modello qualsiasi.' },
+      { titolo: 'Per famiglie e atleti', testo: 'Informazioni su corsi e iscrizioni trovabili in un minuto, dal telefono.' },
+      { titolo: 'Valore per gli sponsor', testo: 'Una vetrina in più da offrire a chi vi sostiene.' },
+    ],
+    struttura: [
+      { pagina: 'Home', sezioni: ['Il club in breve', 'Prossimi impegni', 'Squadre in evidenza', 'Sponsor'] },
+      { pagina: 'Il club', sezioni: ['Storia e valori', 'Staff e organigramma'] },
+      { pagina: 'Squadre e corsi', sezioni: ['Prima squadra', 'Settore giovanile', 'Femminile o altre discipline'] },
+      { pagina: 'Iscrizioni', sezioni: ['Come iscriversi', 'Prova gratuita', 'Documenti'] },
+      { pagina: 'Sponsor', sezioni: ['Partner attuali', 'Diventa sponsor'] },
+      { pagina: 'Contatti', sezioni: ['Campo e mappa', 'Segreteria', 'Social'] },
+    ],
+    pacchettiExtra: {
+      plus: ['Sezioni dedicate a discipline, squadre, corsi e sponsor'],
+      premium: ['Pagine dedicate a più discipline o sezioni'],
+    },
+    pacchettiRinomina: {
+      'Gallerie fotografiche': 'Gallerie fotografiche di partite ed eventi',
+      'Sezione news': 'News del club',
+      'Calendario informativo di eventi': 'Calendario informativo di partite ed eventi',
+    },
+    pacchettoConsigliato: 'plus',
+    faq: [
+      {
+        d: 'Possiamo aggiornare risultati e news da soli?',
+        r: 'Nel pacchetto PREMIUM c’è una sezione news. Modalità e frequenza degli aggiornamenti si concordano: il servizio Care non include aggiornamenti editoriali continui.',
+      },
+      {
+        d: 'Potete inserire i loghi dei nostri sponsor?',
+        r: 'Sì, con i file che ci fornite e con il link al loro sito. È uno spazio che potete valorizzare quando cercate nuovi partner.',
+      },
+      {
+        d: 'Il dominio sarà intestato alla società?',
+        r: 'Sì, il dominio è sempre intestato a voi.',
+      },
+      {
+        d: 'Abbiamo solo una pagina Facebook: basta?',
+        r: 'I social sono utili per gli aggiornamenti, il sito per le informazioni stabili: chi siete, dove giocate, come iscriversi. Funzionano meglio insieme.',
+      },
+    ],
+  },
+  {
     slug: 'psicologi',
     nome: 'Psicologi',
     etichetta: 'Psicologi e psicoterapeuti',
@@ -183,84 +261,6 @@ export const settori: Settore[] = [
       {
         d: 'Il sito porterà nuovi pazienti?',
         r: 'Non lo promettiamo. Un sito chiaro e veloce rende più facile trovarvi e contattarvi.',
-      },
-    ],
-  },
-  {
-    slug: 'societa-sportive',
-    nome: 'Società sportive',
-    etichetta: 'Società sportive e associazioni',
-    tema: { accento: '#1E7A3C', fondo: '#E9F4EC', inchiostro: '#103A20', contrasto: '#FFFFFF' },
-    seo: {
-      title: 'Siti web per società sportive e associazioni · ProntoDomani',
-      description:
-        'Siti web per società sportive e associazioni: squadre, corsi, settore giovanile, sponsor e news. Design su misura, pensato per atleti e famiglie, con prezzi chiari.',
-    },
-    card: {
-      titolo: 'Società sportive e associazioni',
-      testo: 'Un sito che racconta il club, presenta squadre e corsi e dà spazio agli sponsor.',
-      punti: ['Squadre e settore giovanile', 'Sponsor e partner', 'News e calendario'],
-    },
-    h1: 'Il vostro club merita un sito all’altezza del campo.',
-    sottotitolo:
-      'Famiglie, atleti, sponsor e tifosi cercano le stesse cose: chi siete, dove giocate, come iscriversi. Realizziamo un sito dinamico che lo dice chiaramente e che potete mostrare con orgoglio.',
-    problema: {
-      titolo: 'Tutto passa da Facebook e WhatsApp. Ma chi non vi conosce dove vi trova?',
-      testo:
-        'Le informazioni sono sparse tra gruppi, post e passaparola. Un genitore che vuole iscrivere il figlio o un’azienda che vuole sponsorizzarvi non sa da dove cominciare.',
-      segnali: [
-        'Il sito non c’è, oppure è fermo da qualche stagione',
-        'Orari, campi e contatti sono solo sui social',
-        'Gli sponsor non hanno uno spazio dove essere visti',
-        'Le iscrizioni si gestiscono a voce e su WhatsApp',
-      ],
-    },
-    contenuti: [
-      { titolo: 'Il club', testo: 'Storia, valori, stemma, staff e organigramma: l’identità della società.' },
-      { titolo: 'Squadre e corsi', testo: 'Prima squadra, settore giovanile, femminile, discipline e categorie.' },
-      { titolo: 'Iscrizioni', testo: 'Come iscriversi, prova gratuita, quote e documenti, con contatto diretto.' },
-      { titolo: 'Sponsor e partner', testo: 'Uno spazio vero per chi vi sostiene, e un invito a diventare sponsor.' },
-      { titolo: 'Campo e contatti', testo: 'Impianti, come arrivare, segreteria, orari e social.' },
-    ],
-    vantaggi: [
-      { titolo: 'Identità del club', testo: 'Colori, stemma e carattere della società, non un modello qualsiasi.' },
-      { titolo: 'Per famiglie e atleti', testo: 'Informazioni su corsi e iscrizioni trovabili in un minuto, dal telefono.' },
-      { titolo: 'Valore per gli sponsor', testo: 'Una vetrina in più da offrire a chi vi sostiene.' },
-    ],
-    struttura: [
-      { pagina: 'Home', sezioni: ['Il club in breve', 'Prossimi impegni', 'Squadre in evidenza', 'Sponsor'] },
-      { pagina: 'Il club', sezioni: ['Storia e valori', 'Staff e organigramma'] },
-      { pagina: 'Squadre e corsi', sezioni: ['Prima squadra', 'Settore giovanile', 'Femminile o altre discipline'] },
-      { pagina: 'Iscrizioni', sezioni: ['Come iscriversi', 'Prova gratuita', 'Documenti'] },
-      { pagina: 'Sponsor', sezioni: ['Partner attuali', 'Diventa sponsor'] },
-      { pagina: 'Contatti', sezioni: ['Campo e mappa', 'Segreteria', 'Social'] },
-    ],
-    pacchettiExtra: {
-      plus: ['Sezioni dedicate a discipline, squadre, corsi e sponsor'],
-      premium: ['Pagine dedicate a più discipline o sezioni'],
-    },
-    pacchettiRinomina: {
-      'Gallerie fotografiche': 'Gallerie fotografiche di partite ed eventi',
-      'Sezione news': 'News del club',
-      'Calendario informativo di eventi': 'Calendario informativo di partite ed eventi',
-    },
-    pacchettoConsigliato: 'plus',
-    faq: [
-      {
-        d: 'Possiamo aggiornare risultati e news da soli?',
-        r: 'Nel pacchetto PREMIUM c’è una sezione news. Modalità e frequenza degli aggiornamenti si concordano: il servizio Care non include aggiornamenti editoriali continui.',
-      },
-      {
-        d: 'Potete inserire i loghi dei nostri sponsor?',
-        r: 'Sì, con i file che ci fornite e con il link al loro sito. È uno spazio che potete valorizzare quando cercate nuovi partner.',
-      },
-      {
-        d: 'Il dominio sarà intestato alla società?',
-        r: 'Sì, il dominio è sempre intestato a voi.',
-      },
-      {
-        d: 'Abbiamo solo una pagina Facebook: basta?',
-        r: 'I social sono utili per gli aggiornamenti, il sito per le informazioni stabili: chi siete, dove giocate, come iscriversi. Funzionano meglio insieme.',
       },
     ],
   },
