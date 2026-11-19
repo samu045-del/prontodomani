@@ -100,9 +100,9 @@ export const care = {
 };
 
 // --- Antispam del modulo (Cloudflare Turnstile) -----------------------------
-// Chiave PUBBLICA (Site key). La segreta va solo nelle variabili Cloudflare.
-// Quella sotto è la chiave di prova ufficiale di Cloudflare: passa sempre.
-export const turnstileSiteKey = '1x00000000000000000000AA';
+// Chiave PUBBLICA (Site key) del widget "ProntoDomani modulo".
+// La chiave segreta va solo nei segreti del Worker (TURNSTILE_SECRET_KEY).
+export const turnstileSiteKey = '0x4AAAAAAGIjttuey5yvNFwh';
 
 export const opzioniSettore = ['Società sportiva o associazione', 'Psicologo o psicoterapeuta', 'Studio dentistico', 'Altro'];
 

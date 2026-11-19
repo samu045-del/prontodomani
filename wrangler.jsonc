@@ -11,7 +11,7 @@
   },
   "vars": {
     "MAIL_TO": "samuele@prontodomani.it",
-    "MAIL_FROM": "ProntoDomani <modulo@send.prontodomani.it>"
+    "MAIL_FROM": "ProntoDomani <modulo@prontodomani.it>"
   },
   "observability": { "enabled": true }
 }
