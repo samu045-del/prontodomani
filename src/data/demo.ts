@@ -45,7 +45,7 @@ export const demo: Demo[] = [
     immagini: ['parte-1.webp', 'parte-2.webp', 'parte-3.webp'],
     larghezza: 1636,
     altezze: [2080, 2105, 2088],
-    inviata: '',
+    inviata: '2026-11-19',
   },
   {
     slug: 'asd-lenno',
@@ -53,7 +53,7 @@ export const demo: Demo[] = [
     immagini: ['parte-1.webp', 'parte-2.webp', 'parte-3.webp'],
     larghezza: 1636,
     altezze: [2668, 2668, 2669],
-    inviata: '',
+    inviata: '2026-11-19',
   },
   {
     slug: 'valeria-lazzarini',
