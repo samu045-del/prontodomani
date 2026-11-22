@@ -1,7 +1,7 @@
 // =====================================================================
 // CONTENUTI E IMPOSTAZIONI DI PRONTODOMANI
 // Prezzi, pacchetti, promozione, dati aziendali e testi condivisi.
-// I contenuti dei tre settori sono in src/data/settori.ts.
+// Dal 22/11/2026 ProntoDomani è solo per società sportive (ASD e SSD).
 // =====================================================================
 
 // --- Stato del lancio ------------------------------------------------
@@ -44,16 +44,16 @@ export const pacchetti: Pacchetto[] = [
     nome: 'START',
     prezzo: 590,
     pagine: 'Fino a 4 pagine',
-    perChi: 'Per presentarti online in modo chiaro e professionale.',
+    perChi: 'Per la società che deve farsi trovare: chi siete, dove giocate, come iscriversi.',
     base: [
-      'Design personalizzato e responsive',
-      'Modulo contatti',
-      'Collegamenti a telefono, email e WhatsApp',
-      'Google Maps, dove serve',
-      'SEO tecnica di base',
-      'Configurazione Google Search Console',
-      'Collegamento del dominio e pubblicazione',
-      '2 cicli di revisione',
+      'Colori e stemma della società, su misura',
+      'Perfetto da smartphone',
+      'Modulo per iscrizioni e informazioni',
+      'Telefono, email, WhatsApp e social a un tocco',
+      'Mappa del campo e indicazioni',
+      'SEO tecnica di base e Google Search Console',
+      'Dominio collegato e sito pubblicato',
+      '2 giri di modifiche',
     ],
   },
   {
@@ -61,8 +61,12 @@ export const pacchetti: Pacchetto[] = [
     nome: 'PLUS',
     prezzo: 790,
     pagine: 'Fino a 6 pagine',
-    perChi: 'Per chi ha più da raccontare e vuole più spazio.',
-    base: ['Tutto quanto previsto da START', 'Sezioni aggiuntive personalizzate', 'Gallerie fotografiche'],
+    perChi: 'Per il club con più squadre e sponsor da mettere in vetrina.',
+    base: [
+      'Tutto quanto previsto da START',
+      'Squadre, settore giovanile e sponsor in pagine dedicate',
+      'Gallerie foto di partite ed eventi',
+    ],
     inEvidenza: true,
   },
   {
@@ -70,13 +74,13 @@ export const pacchetti: Pacchetto[] = [
     nome: 'PREMIUM',
     prezzo: 1190,
     pagine: 'Fino a 8 pagine',
-    perChi: 'Per realtà strutturate, con più aree e aggiornamenti.',
+    perChi: 'Per la società strutturata, con più discipline e una stagione da raccontare.',
     base: [
       'Tutto quanto previsto da PLUS',
-      'Maggiore personalizzazione',
-      'Sezione news',
-      'Calendario informativo di eventi',
-      'Supporto nell’organizzazione dei contenuti iniziali',
+      'Personalizzazione più spinta',
+      'News del club',
+      'Calendario delle partite e degli eventi',
+      'Ti aiuto a mettere in ordine i contenuti iniziali',
     ],
   },
 ];
@@ -104,7 +108,7 @@ export const care = {
 // La chiave segreta va solo nei segreti del Worker (TURNSTILE_SECRET_KEY).
 export const turnstileSiteKey = '0x4AAAAAAGIjttuey5yvNFwh';
 
-export const opzioniSettore = ['Società sportiva o associazione', 'Psicologo o psicoterapeuta', 'Studio dentistico', 'Altro'];
+export const opzioniSettore = ['Calcio', 'Calcio a 5', 'Pallavolo', 'Basket', 'Rugby', 'Nuoto', 'Arti marziali e sport da combattimento', 'Palestra o polisportiva', 'Altro sport'];
 
 // --- Utilità ------------------------------------------------------------------
 export const euro = (n: number) => `${String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.')}\u00a0€`;

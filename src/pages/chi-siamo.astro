@@ -6,22 +6,22 @@ const impegni = [
   { titolo: 'Ti rispondo io', testo: 'Niente centralino, niente ticket. Chi legge la tua richiesta è chi fa il sito.' },
   { titolo: 'Prezzo scritto prima', testo: 'Sai cosa paghi, cosa è compreso e cosa succede dopo il primo anno. Prima di iniziare, non dopo.' },
   { titolo: 'Niente gergo', testo: 'Se una scelta tecnica conta, te la spiego con parole normali. Se non conta, non te ne parlo.' },
-  { titolo: 'Ti dico se non serve', testo: 'Se per la tua attività basta il pacchetto più piccolo, ti consiglio quello.' },
+  { titolo: 'Ti dico se non serve', testo: 'Se per la tua società basta il pacchetto più piccolo, ti consiglio quello.' },
 ];
 ---
-<Base title="Chi siamo · ProntoDomani" description="ProntoDomani è un progetto di Samuele: siti web professionali per società sportive, psicologi e dentisti, con una bozza in 24 ore e prezzi scritti prima di iniziare.">
-  <section class="cs-hero" aria-labelledby="cs-titolo">
+<Base title="Chi siamo · ProntoDomani" description="ProntoDomani è un progetto di Samuele: siti web per società sportive, ASD e SSD, con una bozza in 24 ore e prezzi scritti prima di iniziare.">
+  <section class="cs-hero erba" aria-labelledby="cs-titolo">
     <div class="contenitore cs-hero__griglia">
       <h1 id="cs-titolo">Ciao, sono Samuele.</h1>
-      <p class="lead cs-hero__lead">ProntoDomani è il mio progetto. Faccio siti per chi ha già un lavoro da mandare avanti e non vuole passare mesi dietro a un’agenzia: società sportive, psicologi, studi dentistici.</p>
+      <p class="lead cs-hero__lead">ProntoDomani è il mio progetto. Faccio siti per società sportive: ASD e SSD che hanno già una stagione da mandare avanti e non possono passare mesi dietro a un’agenzia.</p>
     </div>
   </section>
 
   <section class="contenitore sezione cs-idea" aria-labelledby="cs-idea">
     <h2 id="cs-idea" class="titolo-sezione">Perché “pronto domani”</h2>
     <div class="cs-idea__testo">
-      <p>Molti siti di piccole attività sono fermi a dieci anni fa, oppure non esistono proprio. Quasi mai per pigrizia: è che farne uno sembra lungo, caro e complicato, e alla fine si rimanda.</p>
-      <p>Io ho tolto i passaggi inutili. Per ogni settore ho una struttura che funziona, la adatto alla tua attività e ti mando una bozza vera entro 24 ore dal materiale. Così la prima cosa che vedi non è un preventivo, è il tuo sito.</p>
+      <p>Molte società hanno un sito fermo a qualche stagione fa, oppure non ce l’hanno proprio e vivono su Facebook e WhatsApp. Quasi mai per pigrizia: è che farne uno sembra lungo, caro e complicato, e alla fine si rimanda.</p>
+      <p>Io ho tolto i passaggi inutili. Ho una struttura che funziona per le società sportive, la adatto ai vostri colori e alle vostre squadre e ti mando una bozza vera entro 24 ore dal materiale. Così la prima cosa che vedi non è un preventivo, è il tuo sito.</p>
       <p>Uso strumenti moderni, anche l’intelligenza artificiale, perché mi fanno lavorare più in fretta. Le scelte però le faccio io, e i testi li rileggo uno per uno.</p>
     </div>
   </section>
@@ -38,13 +38,13 @@ const impegni = [
     </ul>
   </div></section>
 
-  <CtaFinale titolo="Parliamone." testo="Scrivimi due righe sulla tua attività. Ti rispondo entro un giorno lavorativo, senza impegno." />
+  <CtaFinale titolo="Parliamone." testo="Scrivimi due righe sulla tua società. Ti rispondo entro un giorno lavorativo, senza impegno." />
 </Base>
 
 <style>
-  .cs-hero { background: var(--petrolio); color: #DCE9E4; }
+  .cs-hero { color: #DCE9E4; }
   .cs-hero__griglia { display: grid; gap: 40px; align-items: end; padding-block: clamp(56px, 8vw, 104px); grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); }
-  .cs-hero h1 { color: #fff; font-weight: 800; font-size: clamp(38px, 5vw, 64px); line-height: 1.04; letter-spacing: -.04em; }
+  .cs-hero h1 { color: #fff; font-size: clamp(54px, 7vw, 96px); }
   .cs-hero__lead { color: #DCE9E4; }
   @media (max-width: 900px) { .cs-hero__griglia { grid-template-columns: 1fr; } }
 

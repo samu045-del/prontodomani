@@ -1,0 +1,92 @@
+---
+// "La formazione del tuo sito": le parti del sito schierate in campo (4-3-3).
+// x/y in % sul campo orizzontale (porta a sinistra, attacco a destra).
+const titolari = [
+  { n: 1, ruolo: 'POR', nome: 'Contatti e campo', testo: 'Indirizzo, mappa e orari della segreteria. Chi vi cerca vi trova.', x: 7, y: 50 },
+  { n: 2, ruolo: 'DIF', nome: 'Dominio vostro', testo: 'Il nome del sito è intestato alla società. Sempre.', x: 23, y: 14 },
+  { n: 5, ruolo: 'DIF', nome: 'Da telefono', testo: 'Genitori e tifosi vi guardano dallo smartphone, a bordo campo.', x: 21, y: 38 },
+  { n: 4, ruolo: 'DIF', nome: 'Sicurezza', testo: 'Certificato SSL e backup: il primo anno è compreso.', x: 21, y: 62 },
+  { n: 3, ruolo: 'DIF', nome: 'Velocità', testo: 'Si apre in un attimo, anche con il 4G che prende male al campo.', x: 23, y: 86 },
+  { n: 6, ruolo: 'CEN', nome: 'Il club', testo: 'Storia, valori, stemma e staff. Chi siete, detto bene.', x: 44, y: 50 },
+  { n: 8, ruolo: 'CEN', nome: 'Squadre e rosa', testo: 'Prima squadra e giovanili, con le figurine dei giocatori.', x: 48, y: 24 },
+  { n: 10, ruolo: 'CEN', nome: 'Calendario', testo: 'Prossima partita, risultati e classifica della stagione.', x: 48, y: 76 },
+  { n: 7, ruolo: 'ATT', nome: 'Sponsor', testo: 'Loghi, link e una pagina per chi vuole diventare partner.', x: 74, y: 18 },
+  { n: 9, ruolo: 'ATT', nome: 'Iscrizioni', testo: 'Come iscriversi e un modulo che arriva dritto in segreteria.', x: 79, y: 50 },
+  { n: 11, ruolo: 'ATT', nome: 'Social e dirette', testo: 'Instagram, Facebook e YouTube collegati al sito.', x: 74, y: 82 },
+];
+const distinta = [...titolari].sort((a, b) => a.n - b.n);
+---
+<section class="formazione contenitore sezione" aria-labelledby="formazione-titolo">
+  <div class="formazione__testa">
+    <h2 id="formazione-titolo" class="titolo-sezione">La formazione<br />del tuo sito</h2>
+    <p class="lead">Undici cose che il sito di una società sportiva deve avere. Quante ne scendono in campo dipende dal pacchetto.</p>
+  </div>
+
+  <div class="formazione__griglia">
+    <div class="campo-gioco" aria-hidden="true">
+      <svg class="campo-gioco__linee" viewBox="0 0 1050 680" preserveAspectRatio="none">
+        <g fill="none" stroke="rgba(255,255,255,.55)" stroke-width="3">
+          <rect x="8" y="8" width="1034" height="664" />
+          <line x1="525" y1="8" x2="525" y2="672" />
+          <circle cx="525" cy="340" r="88" />
+          <rect x="8" y="138" width="165" height="404" />
+          <rect x="8" y="248" width="55" height="184" />
+          <rect x="877" y="138" width="165" height="404" />
+          <rect x="987" y="248" width="55" height="184" />
+        </g>
+      </svg>
+      {titolari.map((g) => (
+        <div class="giocatore" style={`left:${g.x}%;top:${g.y}%`}>
+          <span class="giocatore__maglia">{g.n}</span>
+          <span class="giocatore__nome">{g.nome}</span>
+        </div>
+      ))}
+    </div>
+
+    <ol class="distinta">
+      {distinta.map((g) => (
+        <li>
+          <span class="distinta__n">{g.n}</span>
+          <div><strong>{g.nome}</strong> <em>{g.ruolo}</em><p>{g.testo}</p></div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .formazione__testa { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px 48px; margin-bottom: 36px; }
+  .formazione__testa .lead { max-width: 30em; }
+  .formazione__griglia { display: flex; flex-direction: column; gap: 24px; }
+
+  .campo-gioco {
+    position: relative; aspect-ratio: 105 / 52; border-radius: 18px; overflow: hidden;
+    background: repeating-linear-gradient(90deg, #2f8a4a 0 9.09%, #2a7f43 9.09% 18.18%);
+    box-shadow: inset 0 0 0 6px #2a7f43;
+  }
+  .campo-gioco__linee { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .giocatore { position: absolute; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; gap: 4px; width: 120px; text-align: center; }
+  .giocatore__maglia {
+    width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center;
+    background: var(--lime); color: var(--petrolio); border: 3px solid #fff;
+    font-family: var(--font-sport); font-weight: 800; font-size: 21px; font-style: italic;
+    box-shadow: 0 6px 12px -6px rgba(0,0,0,.6);
+  }
+  .giocatore__nome { font-size: 12.5px; font-weight: 700; color: #fff; line-height: 1.15; background: rgba(7, 30, 20, .55); padding: 2px 7px; border-radius: 6px; }
+
+  .distinta { list-style: none; margin: 0; padding: 8px 24px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 32px; background: var(--bianco); border: 1px solid var(--bordo); border-radius: var(--raggio-grande); }
+  .distinta li { display: flex; gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--bordo); }
+  
+  .distinta__n { flex: none; width: 30px; font-family: var(--font-sport); font-style: italic; font-weight: 800; font-size: 24px; line-height: 1; color: var(--verde); text-align: right; }
+  .distinta strong { font-family: var(--font-titoli); color: var(--petrolio); font-size: 15.5px; }
+  .distinta em { font-style: normal; font-size: 10.5px; font-weight: 700; letter-spacing: .08em; color: #fff; background: var(--petrolio); padding: 2px 6px; border-radius: 4px; vertical-align: 2px; margin-left: 4px; }
+  .distinta p { font-size: 14px; line-height: 1.45; margin-top: 2px; }
+
+  @media (max-width: 1000px) { .distinta { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 640px) { .distinta { grid-template-columns: 1fr; } .campo-gioco { aspect-ratio: 105 / 68; } }
+  @media (max-width: 640px) {
+    .giocatore { width: auto; }
+    .giocatore__nome { display: none; }
+    .giocatore__maglia { width: 30px; height: 30px; font-size: 16px; border-width: 2px; }
+  }
+</style>

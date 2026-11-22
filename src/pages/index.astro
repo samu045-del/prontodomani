@@ -4,83 +4,100 @@ import Spunta from '../components/Spunta.astro';
 import Pacchetti from '../components/Pacchetti.astro';
 import Care from '../components/Care.astro';
 import Promessa24 from '../components/Promessa24.astro';
+import Formazione from '../components/Formazione.astro';
 import CtaFinale from '../components/CtaFinale.astro';
 import { promo, euro } from '../data/site';
-import { settori } from '../data/settori';
 
-const lavori = [
-  { img: '/lavori/fccds.webp', url: 'https://fccds.it', nome: 'fccds.it', cosa: 'Società di calcio' },
-  { img: '/lavori/emada.webp', url: 'https://emada.it', nome: 'emada.it', cosa: 'Consulenza fiscale, Torino e Milano' },
+const schermate = [
+  { img: '/lavori/fccds-home.webp', cosa: 'Prossima partita con il conto alla rovescia' },
+  { img: '/lavori/fccds-rosa.webp', cosa: 'La rosa, con le figurine da girare' },
+  { img: '/lavori/fccds-calendario.webp', cosa: 'Calendario, risultati e classifica' },
+  { img: '/lavori/fccds-partner.webp', cosa: 'Gli sponsor, in vetrina' },
 ];
 ---
 <Base
-  title="ProntoDomani · Siti web professionali per società sportive, psicologi e dentisti"
-  description={`Siti web professionali su misura per società sportive, psicologi e dentisti. Prima bozza in 24 ore, prezzi chiari da ${euro(promo.prezzo)}, gestione tecnica del primo anno inclusa.`}
+  title="ProntoDomani · Siti web per società sportive, ASD e SSD"
+  description={`Il sito della tua società sportiva, con calendario, rosa, sponsor e iscrizioni. Prima bozza in 24 ore, prezzi fissi da ${euro(promo.prezzo)}, dominio intestato alla società.`}
 >
   <!-- HERO -->
   <section class="hero contenitore" aria-labelledby="hero-titolo">
     <div class="hero__testo">
-      <h1 id="hero-titolo">Un sito fatto<br />come si deve.<br /><mark>Pronto domani.</mark></h1>
-      <p class="lead">Mi mandi testi, logo e foto. Il giorno dopo apri sul telefono la bozza del tuo sito. La sistemiamo insieme e va online quando ti convince.</p>
+      <p class="hero__etichetta">Per società sportive · ASD e SSD</p>
+      <h1 id="hero-titolo">Un sito fatto come si deve. <mark>Pronto domani.</mark></h1>
+      <p class="lead">Calendario, rosa, sponsor e iscrizioni: tutto quello che oggi sta sparso tra Facebook e i gruppi WhatsApp, finalmente in un sito vero. Mi mandi stemma e foto, il giorno dopo hai la bozza sul telefono.</p>
       <div class="hero__cta">
-        <a href="/contatti/" class="btn btn--primario">Richiedi il tuo sito</a>
+        <a href="/contatti/" class="btn btn--primario">Richiedi il sito della tua società</a>
         <a href="#prezzi" class="btn btn--secondario">Vedi i prezzi</a>
       </div>
       <ul class="hero__prove">
         <li><Spunta />Bozza in 24 ore, a materiale completo</li>
         <li><Spunta />Prezzi fissi, da {euro(promo.prezzo)}</li>
-        <li><Spunta />Dominio sempre a tuo nome</li>
+        <li><Spunta />Dominio intestato alla società</li>
       </ul>
     </div>
 
-    <div class="hero__visual">
-      {lavori.map((l, i) => (
-        <a href={l.url} target="_blank" rel="noopener" class:list={['telefono', `telefono--${i + 1}`]}>
-          <span class="telefono__schermo"><img src={l.img} alt={`Il sito ${l.nome} visto da smartphone`} width="600" height="917" loading="eager" /></span>
-          <span class="telefono__etichetta"><strong>{l.nome}</strong> {l.cosa}</span>
-        </a>
-      ))}
-      {promo.attiva && (
-        <a href="/prezzi/#promozione" class="hero__bollino">
-          <span>Promozione di lancio</span>
-          <strong>START {euro(promo.prezzo)}</strong>
-          <span>primi {promo.limite} clienti</span>
-        </a>
-      )}
-    </div>
+    <a href="https://fccds.it" target="_blank" rel="noopener" class="hero__visual" aria-label="Apri fccds.it, un sito fatto da ProntoDomani">
+      <span class="tel tel--sx"><img src="/lavori/fccds-rosa.webp" alt="" width="520" height="795" /></span>
+      <span class="tel tel--dx"><img src="/lavori/fccds-calendario.webp" alt="" width="520" height="795" /></span>
+      <span class="tel tel--centro"><img src="/lavori/fccds-home.webp" alt="La home di fccds.it vista da smartphone" width="520" height="795" /></span>
+      <span class="hero__didascalia"><strong>fccds.it</strong> · fatto da me</span>
+    </a>
+    {promo.attiva && (
+      <a href="/prezzi/#promozione" class="hero__bollino">
+        <span>Promozione di lancio</span>
+        <strong>START {euro(promo.prezzo)}</strong>
+        <span>primi {promo.limite} club</span>
+      </a>
+    )}
   </section>
 
   <Promessa24 />
 
-  <!-- NOTA -->
-  <section class="contenitore sezione nota-s" aria-labelledby="nota-titolo">
-    <h2 id="nota-titolo" class="nota-s__titolo">Perché esiste ProntoDomani</h2>
-    <div class="nota-s__testo">
-      <p>Ciao, sono Samuele.</p>
-      <p>Chi allena una squadra, segue dei pazienti o manda avanti uno studio non ha tempo di stare dietro a un’agenzia per tre mesi. Però ha bisogno di un sito che non faccia brutta figura, che si legga bene dal telefono e che dica le cose giuste.</p>
-      <p>Io lavoro così: mi mandi il materiale e il giorno dopo hai una bozza vera, non un preventivo. Da lì la sistemiamo insieme, con al massimo due giri di modifiche, e il prezzo è quello scritto qui sotto.</p>
-      <p>Gli ultimi due che ho fatto sono <a href="https://fccds.it" target="_blank" rel="noopener">fccds.it</a>, per una società di calcio, e <a href="https://emada.it" target="_blank" rel="noopener">emada.it</a>, per uno studio di consulenza fiscale. Aprili dal telefono: è lì che li guarda la maggior parte delle persone.</p>
-      <p>Ogni richiesta la leggo io. Ti rispondo entro un giorno lavorativo.</p>
-      <p class="nota-s__firma">Samuele</p>
-    </div>
-  </section>
+  <Formazione />
 
-  <!-- SETTORI -->
-  <section class="fascia-bianca" aria-labelledby="settori-titolo">
+  <!-- LAVORI -->
+  <section id="lavori" class="fascia-bianca" aria-labelledby="lavori-titolo">
     <div class="contenitore sezione">
-      <h2 id="settori-titolo" class="titolo-sezione settori__titolo">Per chi lavoro</h2>
-      <ul class="settori">
-        {settori.map((s) => (
-          <li style={`--acc:${s.tema.accento}`}>
-            <a href={`/${s.slug}/`}>
-              <strong>{s.etichetta}</strong>
-              <span>{s.card.testo}</span>
-              <em>Com’è fatto il sito →</em>
-            </a>
+      <div class="lavori__testa">
+        <h2 id="lavori-titolo" class="titolo-sezione">Già in campo:<br />FC CDS</h2>
+        <p class="lead">Terza Categoria, Roma. Il conto alla rovescia per la prossima partita, la diretta su YouTube, la rosa, il calendario con la classifica e una pagina vera per gli sponsor. <a href="https://fccds.it" target="_blank" rel="noopener">Aprilo dal telefono</a>: è lì che lo guardano genitori e tifosi.</p>
+      </div>
+      <ul class="lavori">
+        {schermate.map((s) => (
+          <li>
+            <span class="tel tel--piatto"><img src={s.img} alt="" width="520" height="795" loading="lazy" /></span>
+            <p>{s.cosa}</p>
           </li>
         ))}
       </ul>
-      <p class="nota settori__nota">Fai altro? Scrivimi lo stesso: emada.it, per dire, è uno studio di commercialisti.</p>
+    </div>
+  </section>
+
+  <!-- SPONSOR -->
+  <section class="sponsor" aria-labelledby="sponsor-titolo">
+    <div class="contenitore sponsor__griglia">
+      <div class="sponsor__testo">
+        <h2 id="sponsor-titolo">Il sito si ripaga<br />con gli sponsor.</h2>
+        <p>Facciamo un esempio. Tre aziende del paese vi danno 200 € a stagione per avere il logo sul sito, con il link al loro. Il pacchetto START è già pagato, e l’anno dopo lo sponsor rinnova mentre il sito resta.</p>
+        <p class="piccolo">Le cifre sono un esempio: quanto chiedere agli sponsor lo decidete voi.</p>
+      </div>
+      <div class="risultato" aria-label={`Esempio: tre sponsor da 200 euro fanno 600 euro, il pacchetto START costa ${promo.prezzo} euro`}>
+        <div class="risultato__riga"><span>3 sponsor × 200 €</span><b>600 €</b></div>
+        <div class="risultato__riga"><span>Sito START</span><b>−{euro(promo.prezzo)}</b></div>
+        <div class="risultato__riga risultato__riga--totale"><span>Risultato</span><b>+{euro(600 - promo.prezzo)}</b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOTA -->
+  <section class="contenitore sezione nota-s" aria-labelledby="nota-titolo">
+    <h2 id="nota-titolo" class="titolo-medio">Due righe<br />da chi lo fa</h2>
+    <div class="nota-s__testo">
+      <p>Ciao, sono Samuele.</p>
+      <p>Chi manda avanti una società sportiva fa già tre lavori: allenatore, segretario, magazziniere. Il sito finisce sempre in fondo alla lista, e intanto tutto passa da Facebook e dai gruppi WhatsApp dei genitori.</p>
+      <p>Io lavoro così: mi mandi stemma, foto e le informazioni che hai, e il giorno dopo hai una bozza vera da aprire sul telefono. Da lì la sistemiamo insieme, con al massimo due giri di modifiche, e il prezzo è quello scritto qui sotto.</p>
+      <p>Ogni richiesta la leggo io. Ti rispondo entro un giorno lavorativo.</p>
+      <p class="nota-s__firma">Samuele</p>
     </div>
   </section>
 
@@ -89,7 +106,7 @@ const lavori = [
     <div class="contenitore sezione">
       <div class="intestazione">
         <h2 id="prezzi-titolo" class="titolo-sezione">Quanto costa</h2>
-        <p class="lead">Tre pacchetti a prezzo fisso. Design, versione per smartphone, SEO tecnica, pubblicazione e il primo anno di gestione sono sempre compresi.</p>
+        <p class="lead">Tre pacchetti a prezzo fisso. Colori e stemma della società, versione da telefono, pubblicazione e il primo anno di gestione tecnica sono sempre compresi.</p>
       </div>
       <Pacchetti idTitolo="home" />
       <div class="prezzi__care"><Care compatto /></div>
@@ -98,74 +115,87 @@ const lavori = [
   </section>
 
   <CtaFinale
-    titolo="Raccontami cosa fai."
-    testo="Bastano due righe. Ti rispondo entro un giorno lavorativo con cosa serve per partire e quale pacchetto ha senso per te."
+    titolo="Raccontami la tua società."
+    testo="Bastano due righe: che sport fate, quante squadre avete, cosa vi manca oggi. Ti rispondo entro un giorno lavorativo con cosa serve per partire."
   />
 </Base>
 
 <style>
   /* Hero */
-  .hero { padding-block: clamp(48px, 7vw, 88px) clamp(56px, 8vw, 96px); display: grid; gap: 56px; align-items: center; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
+  .hero { position: relative; padding-block: clamp(40px, 6vw, 80px) clamp(56px, 8vw, 96px); display: grid; gap: 48px; align-items: center; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); }
   .hero__testo { display: flex; flex-direction: column; gap: 22px; }
-  h1 { font-weight: 800; font-size: clamp(40px, 4.6vw, 62px); line-height: 1.04; letter-spacing: -0.045em; }
-  h1 mark {
-    color: inherit; padding: 0 .06em; white-space: nowrap;
-    background: linear-gradient(transparent 58%, var(--lime) 58%, var(--lime) 92%, transparent 92%);
+  .hero__etichetta {
+    align-self: flex-start; background: var(--petrolio); color: var(--lime); padding: 6px 12px; border-radius: 4px;
+    font-family: var(--font-sport); font-style: italic; font-weight: 800; text-transform: uppercase; font-size: 17px; letter-spacing: .04em;
   }
-  .hero .lead { max-width: 34em; }
+  h1 { font-size: clamp(54px, 7vw, 96px); color: var(--petrolio); }
+  h1 mark {
+    display: inline-block; color: var(--petrolio); background: var(--lime); padding: .02em .12em .04em .08em;
+    transform: skewX(-6deg); margin-top: .06em;
+  }
+  .hero .lead { max-width: 33em; }
   .hero__cta { display: flex; flex-wrap: wrap; gap: 12px; }
   .hero__prove { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 22px; font-weight: 500; font-size: 15px; color: var(--petrolio); }
   .hero__prove li { display: flex; gap: 8px; align-items: center; }
 
-  .hero__visual { position: relative; display: flex; justify-content: center; gap: 0; padding-top: 24px; }
-  .telefono { display: flex; flex-direction: column; gap: 12px; width: min(46%, 240px); text-decoration: none; color: var(--grigio-testo); }
-  .telefono--1 { transform: rotate(-3deg) translateY(10px); z-index: 1; }
-  .telefono--2 { transform: rotate(2.5deg) translateY(56px); margin-left: -18px; }
-  .telefono__schermo {
-    display: block; border-radius: 30px; padding: 7px; background: #11201d;
-    box-shadow: 0 30px 50px -28px rgba(15, 58, 52, .55);
-  }
-  .telefono__schermo img { border-radius: 24px; width: 100%; }
-  .telefono__etichetta { font-size: 13px; line-height: 1.35; padding-left: 6px; }
-  .telefono__etichetta strong { display: block; color: var(--petrolio); font-size: 14px; }
-  .telefono:hover .telefono__etichetta strong { text-decoration: underline; }
+  .tel { display: block; border-radius: 28px; padding: 6px; background: #0c1513; box-shadow: 0 30px 50px -28px rgba(15, 58, 52, .6); }
+  .tel img { border-radius: 22px; width: 100%; }
+
+  .hero__visual { position: relative; display: block; height: clamp(420px, 44vw, 560px); text-decoration: none; }
+  .hero__visual .tel { position: absolute; width: 44%; }
+  .tel--centro { left: 28%; top: 0; z-index: 2; }
+  .tel--sx { left: 0; top: 13%; transform: rotate(-6deg); opacity: .96; }
+  .tel--dx { right: 0; top: 13%; transform: rotate(6deg); opacity: .96; }
+  .hero__didascalia { position: absolute; left: 0; right: 0; bottom: -6px; text-align: center; font-size: 14px; color: var(--grigio-testo); }
+  .hero__didascalia strong { color: var(--petrolio); }
+  .hero__visual:hover .hero__didascalia strong { text-decoration: underline; }
   .hero__bollino {
-    position: absolute; z-index: 3; right: 0; top: 0; width: 120px; height: 120px; border-radius: 50%;
-    background: var(--lime); color: var(--petrolio); text-decoration: none;
+    position: absolute; z-index: 3; right: 24px; top: clamp(32px, 5vw, 64px); width: 116px; height: 116px; border-radius: 50%;
+    background: var(--lime); color: var(--petrolio); text-decoration: none; border: 3px solid var(--petrolio);
     display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
-    font-size: 10.5px; font-weight: 600; line-height: 1.25; transform: rotate(8deg);
-    box-shadow: 0 16px 30px -14px rgba(15, 58, 52, .5);
+    font-size: 10.5px; font-weight: 700; line-height: 1.2; transform: rotate(10deg);
   }
-  .hero__bollino strong { font-family: var(--font-titoli); font-size: 18px; font-weight: 800; letter-spacing: -.02em; margin: 2px 0; }
-  .hero__bollino:hover { color: var(--petrolio); transform: rotate(4deg) scale(1.03); }
+  .hero__bollino strong { font-family: var(--font-sport); font-style: italic; font-size: 21px; font-weight: 800; margin: 2px 0; }
+  .hero__bollino:hover { color: var(--petrolio); transform: rotate(4deg) scale(1.04); }
 
   @media (max-width: 960px) {
-    .hero { grid-template-columns: 1fr; gap: 32px; }
-    .hero__visual { padding-bottom: 48px; }
+    .hero { grid-template-columns: 1fr; gap: 28px; }
+    .hero__visual { height: auto; aspect-ratio: 1 / .82; max-width: 520px; width: 100%; margin-inline: auto; }
     .hero__bollino { display: none; } /* su smartphone c'è già il pulsante fisso START */
   }
 
+  /* Lavori */
+  .lavori__testa { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 20px 56px; align-items: end; margin-bottom: 40px; }
+  .lavori { list-style: none; margin: 0; padding: 0; display: grid; gap: 24px; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .lavori li { display: flex; flex-direction: column; gap: 12px; }
+  .lavori p { font-size: 14.5px; font-weight: 600; color: var(--petrolio); line-height: 1.35; }
+  @media (max-width: 900px) {
+    .lavori__testa { grid-template-columns: 1fr; }
+    .lavori { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  /* Sponsor */
+  .sponsor { background: var(--lime); color: var(--petrolio); }
+  .sponsor__griglia { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 40px 64px; align-items: center; padding-block: clamp(56px, 8vw, 96px); }
+  .sponsor__testo { display: flex; flex-direction: column; gap: 16px; }
+  .sponsor h2 { font-size: clamp(42px, 5.4vw, 70px); }
+  .sponsor p { font-size: 18px; max-width: 34em; }
+  .sponsor .piccolo { color: var(--petrolio); opacity: .75; font-size: 14px; }
+  .risultato { background: var(--petrolio); color: #fff; border-radius: 16px; padding: 10px 24px; box-shadow: 0 24px 40px -26px rgba(15, 58, 52, .8); }
+  .risultato__riga { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.15); }
+  .risultato__riga span { font-size: 15px; font-weight: 600; color: #BFD6CF; }
+  .risultato__riga b { font-family: var(--font-sport); font-style: italic; font-weight: 800; font-size: 40px; line-height: 1; font-variant-numeric: tabular-nums; }
+  .risultato__riga--totale { border-bottom: 0; }
+  .risultato__riga--totale span { color: var(--lime); text-transform: uppercase; letter-spacing: .1em; font-size: 13px; }
+  .risultato__riga--totale b { color: var(--lime); font-size: 56px; }
+  @media (max-width: 860px) { .sponsor__griglia { grid-template-columns: 1fr; } }
+
   /* Nota di Samuele */
-  .nota-s { display: grid; gap: 32px 64px; grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr); }
-  .nota-s__titolo { font-size: clamp(24px, 2.4vw, 30px); line-height: 1.15; letter-spacing: -.03em; }
+  .nota-s { display: grid; gap: 28px 64px; grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr); }
   .nota-s__testo { display: flex; flex-direction: column; gap: 16px; max-width: 620px; font-size: 18px; line-height: 1.65; }
   .nota-s__testo p:first-child { font-family: var(--font-titoli); font-weight: 700; color: var(--petrolio); font-size: 21px; }
-  .nota-s__firma { font-family: var(--font-titoli); font-weight: 800; color: var(--petrolio); font-size: 22px; letter-spacing: -.02em; margin-top: 4px; }
+  .nota-s__firma { font-family: var(--font-sport); font-style: italic; font-weight: 800; color: var(--petrolio); font-size: 30px; text-transform: uppercase; }
   @media (max-width: 860px) { .nota-s { grid-template-columns: 1fr; } }
-
-  /* Settori */
-  .settori__titolo { margin-bottom: 28px; }
-  .settori { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
-  .settori a {
-    height: 100%; display: flex; flex-direction: column; gap: 10px; padding: 26px 26px 22px;
-    border: 1px solid var(--bordo); border-top: 4px solid var(--acc); border-radius: var(--raggio);
-    text-decoration: none; color: var(--ardesia); background: var(--carta);
-  }
-  .settori a:hover { border-color: var(--acc); }
-  .settori strong { font-family: var(--font-titoli); color: var(--petrolio); font-size: 20px; line-height: 1.2; }
-  .settori span { font-size: 15.5px; flex: 1; }
-  .settori em { font-style: normal; font-weight: 600; color: var(--acc); font-size: 15px; }
-  .settori__nota { margin-top: 20px; }
 
   .prezzi__care { margin-top: 24px; }
   .prezzi__nota { margin-top: 16px; }

@@ -1,34 +1,69 @@
 ---
-// Fascia che mette in evidenza la promessa delle 24 ore, sempre con la sua condizione.
+// Tabellone delle 24 ore: la promessa, sempre con la sua condizione.
 ---
-<section class="p24" aria-labelledby="p24-titolo">
+<section class="p24 erba" aria-labelledby="p24-titolo">
   <div class="contenitore p24__griglia">
-    <p class="p24__numero" aria-hidden="true">24<span>h</span></p>
+    <div class="tabellone" aria-hidden="true">
+      <div class="tabellone__squadre"><span>Materiale</span><span class="tabellone__vs">vs</span><span>Bozza</span></div>
+      <div class="tabellone__cifre">
+        <div><b data-t="h">24</b><small>Ore</small></div>
+        <div><b data-t="m">00</b><small>Min</small></div>
+        <div class="acceso"><b data-t="s">00</b><small>Sec</small></div>
+      </div>
+    </div>
+
     <div class="p24__testo">
-      <h2 id="p24-titolo">Dal materiale completo alla prima bozza, in 24&nbsp;ore.</h2>
+      <h2 id="p24-titolo">Mi mandi il materiale.<br /><span>Entro 24 ore hai la bozza.</span></h2>
       <ol class="p24__passi">
-        <li><span>1</span>Ci mandi testi, logo, foto e contatti</li>
-        <li><span>2</span>Entro 24 ore ricevi la bozza navigabile</li>
-        <li><span>3</span>La sistemiamo insieme e va online con il tuo ok</li>
+        <li><strong>Calcio d’inizio</strong>Stemma, foto, squadre, campo e contatti</li>
+        <li><strong>Entro 24 ore</strong>La bozza vera, da aprire sul telefono</li>
+        <li><strong>Fischio finale</strong>La sistemiamo insieme e va online col tuo ok</li>
       </ol>
-      <p class="p24__nota">Le 24 ore partono quando il materiale è completo. Se manca qualcosa te lo diciamo subito, e ti aiutiamo a recuperarlo.</p>
+      <p class="p24__nota">Il conto parte quando il materiale è completo. Se manca qualcosa te lo dico subito e ti aiuto a recuperarlo.</p>
     </div>
   </div>
 </section>
 
+<script>
+  // Il tabellone scende davvero, da 24:00:00. Solo decorativo.
+  const cifre = { h: document.querySelector('[data-t="h"]'), m: document.querySelector('[data-t="m"]'), s: document.querySelector('[data-t="s"]') };
+  if (cifre.h && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let resto = 24 * 3600;
+    const due = (n: number) => String(n).padStart(2, '0');
+    setInterval(() => {
+      resto = resto > 0 ? resto - 1 : 24 * 3600;
+      cifre.h!.textContent = due(Math.floor(resto / 3600));
+      cifre.m!.textContent = due(Math.floor((resto % 3600) / 60));
+      cifre.s!.textContent = due(resto % 60);
+    }, 1000);
+  }
+</script>
+
 <style>
-  .p24 { background: var(--lime); color: var(--petrolio); }
-  .p24__griglia { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(24px, 5vw, 64px); align-items: center; padding-block: clamp(40px, 6vw, 64px); }
-  .p24__numero { font-family: var(--font-titoli); font-weight: 800; font-size: clamp(96px, 14vw, 180px); line-height: .85; letter-spacing: -.06em; }
-  .p24__numero span { font-size: .38em; letter-spacing: -.02em; margin-left: .04em; }
-  .p24__testo { display: flex; flex-direction: column; gap: 18px; }
-  .p24 h2 { color: var(--petrolio); font-weight: 800; font-size: clamp(26px, 3vw, 38px); line-height: 1.1; letter-spacing: -.03em; }
-  .p24__passi { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px 24px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .p24__passi li { display: flex; gap: 10px; align-items: flex-start; font-weight: 600; font-size: 15.5px; line-height: 1.35; }
-  .p24__passi span { flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--petrolio); color: var(--lime); display: grid; place-items: center; font-size: 13px; font-weight: 800; }
-  .p24__nota { font-size: 14.5px; max-width: 60ch; }
-  @media (max-width: 760px) {
+  .p24 { color: #DCE9E4; }
+  .p24__griglia { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(32px, 6vw, 80px); align-items: center; padding-block: clamp(48px, 7vw, 88px); }
+
+  .tabellone { background: #071512; border: 3px solid #1d3a35; border-radius: 14px; padding: 18px 18px 20px; box-shadow: 0 24px 50px -30px #000; }
+  .tabellone__squadre { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 14px; font-family: var(--font-sport); font-style: italic; font-weight: 800; text-transform: uppercase; font-size: 20px; color: #fff; letter-spacing: .02em; }
+  .tabellone__vs { color: var(--lime); font-size: 15px; }
+  .tabellone__cifre { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .tabellone__cifre div { background: #0d2420; border: 1px solid #23433d; border-radius: 6px; padding: 10px 6px 8px; text-align: center; min-width: 88px; }
+  .tabellone__cifre b { display: block; font-family: var(--font-sport); font-weight: 800; font-size: clamp(52px, 6vw, 72px); line-height: .9; color: #fff; font-variant-numeric: tabular-nums; }
+  .tabellone__cifre small { display: block; margin-top: 6px; font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: #8FB3AA; }
+  .tabellone__cifre .acceso { background: var(--lime); border-color: var(--lime); }
+  .tabellone__cifre .acceso b, .tabellone__cifre .acceso small { color: var(--petrolio); }
+
+  .p24__testo { display: flex; flex-direction: column; gap: 22px; }
+  .p24 h2 { color: #fff; font-size: clamp(38px, 4.6vw, 60px); }
+  .p24 h2 span { color: var(--lime); }
+  .p24__passi { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px 28px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .p24__passi li { font-size: 15.5px; line-height: 1.4; border-top: 2px solid rgba(198, 243, 107, .5); padding-top: 10px; }
+  .p24__passi strong { display: block; font-family: var(--font-sport); font-style: italic; font-weight: 800; text-transform: uppercase; color: var(--lime); font-size: 20px; letter-spacing: .02em; }
+  .p24__nota { font-size: 14.5px; max-width: 60ch; color: #A9C5BE; }
+  @media (max-width: 900px) {
     .p24__griglia { grid-template-columns: 1fr; }
+    .tabellone { justify-self: start; }
     .p24__passi { grid-template-columns: 1fr; }
   }
+  @media (max-width: 420px) { .tabellone__cifre div { min-width: 0; } }
 </style>

@@ -6,29 +6,29 @@ import PromoLancio from '../components/PromoLancio.astro';
 import Faq from '../components/Faq.astro';
 import CtaFinale from '../components/CtaFinale.astro';
 import { pacchetti, promo, euro, prezzoMostrato, notaIva } from '../data/site';
-import { settori } from '../data/settori';
 
 const righe: { voce: string; valori: (string | boolean)[] }[] = [
   { voce: 'Pagine', valori: ['Fino a 4', 'Fino a 6', 'Fino a 8'] },
-  { voce: 'Design personalizzato e responsive', valori: [true, true, true] },
-  { voce: 'Modulo contatti, telefono, email e WhatsApp', valori: [true, true, true] },
-  { voce: 'Google Maps, dove serve', valori: [true, true, true] },
+  { voce: 'Colori e stemma della società, versione da telefono', valori: [true, true, true] },
+  { voce: 'Modulo per iscrizioni e informazioni', valori: [true, true, true] },
+  { voce: 'Telefono, email, WhatsApp e social a un tocco', valori: [true, true, true] },
+  { voce: 'Mappa del campo e indicazioni', valori: [true, true, true] },
   { voce: 'SEO tecnica di base e Google Search Console', valori: [true, true, true] },
-  { voce: 'Collegamento del dominio e pubblicazione', valori: [true, true, true] },
-  { voce: 'Cicli di revisione', valori: ['2', '2', '2'] },
-  { voce: 'Sezioni aggiuntive personalizzate', valori: [false, true, true] },
-  { voce: 'Gallerie fotografiche', valori: [false, true, true] },
-  { voce: 'Maggiore personalizzazione', valori: [false, false, true] },
-  { voce: 'Sezione news', valori: [false, false, true] },
-  { voce: 'Calendario informativo di eventi', valori: [false, false, true] },
-  { voce: 'Supporto nell’organizzazione dei contenuti iniziali', valori: [false, false, true] },
+  { voce: 'Dominio collegato e sito pubblicato', valori: [true, true, true] },
+  { voce: 'Giri di modifiche', valori: ['2', '2', '2'] },
+  { voce: 'Squadre, settore giovanile e sponsor in pagine dedicate', valori: [false, true, true] },
+  { voce: 'Gallerie foto di partite ed eventi', valori: [false, true, true] },
+  { voce: 'Personalizzazione più spinta', valori: [false, false, true] },
+  { voce: 'News del club', valori: [false, false, true] },
+  { voce: 'Calendario delle partite e degli eventi', valori: [false, false, true] },
+  { voce: 'Aiuto a mettere in ordine i contenuti iniziali', valori: [false, false, true] },
   { voce: 'Gestione tecnica del primo anno', valori: [true, true, true] },
 ];
 
 const faq = [
   { d: 'I prezzi sono definitivi?', r: 'Sì: sono prezzi fissi per quanto descritto in ogni pacchetto. Se ti serve qualcosa in più, lo preventiviamo a parte prima di iniziare.' },
   { d: 'Come funziona la promozione di lancio?', r: `Vale per i primi ${promo.limite} clienti che scelgono il pacchetto START: ${euro(promo.prezzo)} invece del prezzo di listino di ${euro(promo.prezzoListino)} che applicheremo dopo. PLUS e PREMIUM hanno i prezzi indicati.` },
-  { d: 'Il dominio è compreso?', r: 'Colleghiamo il tuo dominio, che resta sempre intestato a te. Se non ne hai uno, lo registriamo a tuo nome.' },
+  { d: 'Il dominio è compreso?', r: 'Colleghiamo il vostro dominio, che resta sempre intestato alla società. Se non ne avete uno, lo registriamo a nome della società.' },
   { d: 'Devo per forza attivare Care dal secondo anno?', r: 'No. Te lo proponiamo prima della scadenza e decidi tu. Se non rinnovi, ti consegniamo i file del sito e ti aiutiamo a trasferirlo.' },
   { d: 'Care comprende anche le modifiche ai contenuti?', r: 'No: Care riguarda la gestione tecnica (hosting, SSL, backup, monitoraggio, assistenza per problemi tecnici). Nuove pagine, aggiornamenti dei contenuti o nuove funzioni si preventivano a parte.' },
 ];
@@ -42,9 +42,6 @@ const faq = [
 
   <section class="contenitore" aria-label="Pacchetti">
     <Pacchetti idTitolo="prezzi" />
-    <p class="nota pr-settori">Vuoi vedere i pacchetti con le voci pensate per il tuo settore?{' '}
-      {settori.map((s, i) => <>{i > 0 && ' · '}<a href={`/${s.slug}/`}>{s.nome}</a></>)}
-    </p>
   </section>
 
   <section class="contenitore sezione" aria-labelledby="pr-confronto">

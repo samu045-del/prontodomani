@@ -14,6 +14,7 @@
 
   --font-titoli: 'Manrope Variable', system-ui, sans-serif;
   --font-testo: 'Inter Variable', system-ui, sans-serif;
+  --font-sport: 'Barlow Condensed', 'Arial Narrow', sans-serif;
 
   --raggio: 20px;
   --raggio-grande: 28px;
@@ -66,8 +67,15 @@ p { margin: 0; }
 .intestazione { display: flex; flex-direction: column; gap: 14px; max-width: 760px; margin-bottom: 48px; }
 .intestazione--centro { margin-inline: auto; text-align: center; align-items: center; }
 .occhiello { font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--verde); }
-.titolo-sezione { font-weight: 800; font-size: clamp(32px, 4.2vw, 50px); line-height: 1.06; letter-spacing: -0.035em; }
-.titolo-medio { font-weight: 800; font-size: clamp(26px, 3vw, 34px); line-height: 1.12; letter-spacing: -0.03em; }
+.titolo-sezione { font-size: clamp(40px, 5.4vw, 68px); }
+.titolo-medio { font-size: clamp(30px, 3.4vw, 42px); }
+/* Titoli da campo: condensato, corsivo, maiuscolo (come le scritte sulle maglie) */
+h1, h2, .titolo-sezione, .titolo-medio {
+  font-family: var(--font-sport); font-style: italic; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0; line-height: .94;
+}
+/* Erba tagliata a strisce, per le fasce scure */
+.erba { background: repeating-linear-gradient(90deg, #0F3A34 0 90px, #12443d 90px 180px); }
 .lead { font-size: clamp(18px, 1.6vw, 20px); line-height: 1.55; max-width: 38em; }
 .griglia { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--min, 300px)), 1fr)); }
 .nota { font-size: 15px; max-width: 820px; }

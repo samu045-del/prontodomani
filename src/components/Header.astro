@@ -1,16 +1,15 @@
 ---
 import Logo from './Logo.astro';
-import { settori } from '../data/settori';
 
 const percorso = Astro.url.pathname;
 const attivo = (href: string) => (percorso === href || percorso === href.replace(/\/$/, '') ? 'page' : undefined);
 const voci = [
+  { href: '/#lavori', label: 'Lavori' },
   { href: '/come-funziona/', label: 'Come funziona' },
   { href: '/prezzi/', label: 'Prezzi' },
   { href: '/chi-siamo/', label: 'Chi siamo' },
   { href: '/contatti/', label: 'Contatti' },
 ];
-const settoreAttivo = settori.some((s) => percorso.startsWith(`/${s.slug}`));
 ---
 <header class="header">
   <div class="contenitore header__riga">
@@ -18,22 +17,6 @@ const settoreAttivo = settori.some((s) => percorso.startsWith(`/${s.slug}`));
 
     <nav class="nav-desktop" aria-label="Principale">
       <ul>
-        <li class="sottomenu">
-          <button type="button" class="sottomenu__pulsante" aria-expanded="false" aria-controls="menu-settori" data-attivo={settoreAttivo ? '' : undefined}>
-            Per chi è
-            <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <ul id="menu-settori" class="sottomenu__lista">
-            {settori.map((s) => (
-              <li>
-                <a href={`/${s.slug}/`} aria-current={attivo(`/${s.slug}/`)}>
-                  <span class="sottomenu__punto" style={`background:${s.tema.accento}`} aria-hidden="true"></span>
-                  <span><strong>{s.nome}</strong><small>{s.card.testo.split('.')[0]}.</small></span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </li>
         {voci.map((v) => <li><a href={v.href} aria-current={attivo(v.href)}>{v.label}</a></li>)}
       </ul>
     </nav>
@@ -46,10 +29,6 @@ const settoreAttivo = settori.some((s) => percorso.startsWith(`/${s.slug}`));
         Menu
       </summary>
       <nav aria-label="Principale (mobile)">
-        <p class="nav-mobile__gruppo">Per chi è</p>
-        <ul>
-          {settori.map((s) => <li><a href={`/${s.slug}/`}>{s.etichetta}</a></li>)}
-        </ul>
         <ul>
           {voci.map((v) => <li><a href={v.href}>{v.label}</a></li>)}
         </ul>
@@ -59,25 +38,6 @@ const settoreAttivo = settori.some((s) => percorso.startsWith(`/${s.slug}`));
   </div>
 </header>
 
-<script>
-  // Menu "Per chi è": apre/chiude al clic e con la tastiera, chiude con Esc o clic fuori.
-  const pulsante = document.querySelector<HTMLButtonElement>('.sottomenu__pulsante');
-  const voce = pulsante?.closest('.sottomenu');
-  if (pulsante && voce) {
-    const imposta = (aperto: boolean) => {
-      pulsante.setAttribute('aria-expanded', String(aperto));
-      voce.classList.toggle('aperto', aperto);
-    };
-    pulsante.addEventListener('click', () => imposta(pulsante.getAttribute('aria-expanded') !== 'true'));
-    document.addEventListener('click', (e) => { if (!voce.contains(e.target as Node)) imposta(false); });
-    voce.addEventListener('keydown', (e) => {
-      if ((e as KeyboardEvent).key === 'Escape') { imposta(false); pulsante.focus(); }
-    });
-    voce.addEventListener('focusout', (e) => {
-      if (!voce.contains((e as FocusEvent).relatedTarget as Node)) imposta(false);
-    });
-  }
-</script>
 
 <style>
   .header {

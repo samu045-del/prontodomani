@@ -78,7 +78,7 @@ export async function gestisciRichiesta(request: Request, env: Env): Promise<Res
     ['Studio/azienda', dati.azienda],
     ['Email', dati.email],
     ['Telefono', dati.telefono || '—'],
-    ['Settore', dati.settore],
+    ['Sport', dati.settore],
     ['Pacchetto', dati.pacchetto || 'Non indicato'],
     ['Sito attuale', dati.sito || '—'],
     ['Tempistiche', dati.tempistiche],

@@ -1,7 +1,6 @@
 ---
 import Logo from './Logo.astro';
 import { azienda } from '../data/site';
-import { settori } from '../data/settori';
 const anno = new Date().getFullYear();
 ---
 <footer class="footer">
@@ -9,13 +8,8 @@ const anno = new Date().getFullYear();
     <div class="footer__marchio">
       <Logo size={30} />
       <p>Un sito fatto come si deve. Pronto domani.</p>
-      <p class="piccolo">Siti web professionali per società sportive, psicologi e dentisti.</p>
+      <p class="piccolo">Siti web per società sportive, ASD e SSD.</p>
     </div>
-
-    <nav aria-label="Settori">
-      <p class="footer__titolo">Per chi è</p>
-      <ul>{settori.map((s) => <li><a href={`/${s.slug}/`}>{s.etichetta}</a></li>)}</ul>
-    </nav>
 
     <nav aria-label="ProntoDomani">
       <p class="footer__titolo">ProntoDomani</p>
@@ -49,7 +43,7 @@ const anno = new Date().getFullYear();
 
 <style>
   .footer { background: var(--carta); border-top: 1px solid var(--bordo); font-size: 15px; }
-  .footer__griglia { display: grid; gap: 32px; padding-block: 56px 40px; grid-template-columns: 1.4fr repeat(3, 1fr); }
+  .footer__griglia { display: grid; gap: 32px; padding-block: 56px 40px; grid-template-columns: 2fr 1fr 1fr; }
   .footer__marchio { display: flex; flex-direction: column; gap: 10px; max-width: 300px; }
   .footer__marchio p:first-of-type { font-family: var(--font-titoli); font-weight: 700; color: var(--petrolio); }
   .footer__titolo { font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--verde); margin-bottom: 10px; }
