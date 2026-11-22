@@ -4,6 +4,7 @@ import Logo from './Logo.astro';
 const percorso = Astro.url.pathname;
 const attivo = (href: string) => (percorso === href || percorso === href.replace(/\/$/, '') ? 'page' : undefined);
 const voci = [
+  { href: '/', label: 'Home' },
   { href: '/#lavori', label: 'Lavori' },
   { href: '/come-funziona/', label: 'Come funziona' },
   { href: '/prezzi/', label: 'Prezzi' },

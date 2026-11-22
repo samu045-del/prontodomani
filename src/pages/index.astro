@@ -37,9 +37,9 @@ const schermate = [
     </div>
 
     <a href="https://fccds.it" target="_blank" rel="noopener" class="hero__visual" aria-label="Apri fccds.it, un sito fatto da ProntoDomani">
-      <span class="tel tel--sx"><img src="/lavori/fccds-rosa.webp" alt="" width="520" height="795" /></span>
-      <span class="tel tel--dx"><img src="/lavori/fccds-calendario.webp" alt="" width="520" height="795" /></span>
-      <span class="tel tel--centro"><img src="/lavori/fccds-home.webp" alt="La home di fccds.it vista da smartphone" width="520" height="795" /></span>
+      <span class="tel tel--sx"><span class="tel__schermo"><img src="/lavori/fccds-rosa.webp" alt="" width="470" height="1017" /></span></span>
+      <span class="tel tel--dx"><span class="tel__schermo"><img src="/lavori/fccds-calendario.webp" alt="" width="470" height="1017" /></span></span>
+      <span class="tel tel--centro"><span class="tel__schermo"><img src="/lavori/fccds-home.webp" alt="La home di fccds.it vista da smartphone" width="470" height="1017" /></span></span>
       <span class="hero__didascalia"><strong>fccds.it</strong> · fatto da me</span>
     </a>
     {promo.attiva && (
@@ -65,7 +65,7 @@ const schermate = [
       <ul class="lavori">
         {schermate.map((s) => (
           <li>
-            <span class="tel tel--piatto"><img src={s.img} alt="" width="520" height="795" loading="lazy" /></span>
+            <span class="tel tel--piatto"><span class="tel__schermo"><img src={s.img} alt="" width="470" height="1017" loading="lazy" /></span></span>
             <p>{s.cosa}</p>
           </li>
         ))}
@@ -94,7 +94,7 @@ const schermate = [
     <h2 id="nota-titolo" class="titolo-medio">Due righe<br />da chi lo fa</h2>
     <div class="nota-s__testo">
       <p>Ciao, sono Samuele.</p>
-      <p>Chi manda avanti una società sportiva fa già tre lavori: allenatore, segretario, magazziniere. Il sito finisce sempre in fondo alla lista, e intanto tutto passa da Facebook e dai gruppi WhatsApp dei genitori.</p>
+      <p>Per anni ho lavorato nel marketing sportivo, tra pagine social e atleti. Lì ho visto una cosa che si ripete sempre: chi manda avanti una società fa già tre lavori (allenatore, segretario, magazziniere) e il sito finisce in fondo alla lista. Intanto tutto passa da Facebook e dai gruppi WhatsApp dei genitori.</p>
       <p>Io lavoro così: mi mandi stemma, foto e le informazioni che hai, e il giorno dopo hai una bozza vera da aprire sul telefono. Da lì la sistemiamo insieme, con al massimo due giri di modifiche, e il prezzo è quello scritto qui sotto.</p>
       <p>Ogni richiesta la leggo io. Ti rispondo entro un giorno lavorativo.</p>
       <p class="nota-s__firma">Samuele</p>
@@ -138,14 +138,16 @@ const schermate = [
   .hero__prove { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 22px; font-weight: 500; font-size: 15px; color: var(--petrolio); }
   .hero__prove li { display: flex; gap: 8px; align-items: center; }
 
-  .tel { display: block; border-radius: 28px; padding: 6px; background: #0c1513; box-shadow: 0 30px 50px -28px rgba(15, 58, 52, .6); }
-  .tel img { border-radius: 22px; width: 100%; }
-
-  .hero__visual { position: relative; display: block; height: clamp(420px, 44vw, 560px); text-decoration: none; }
-  .hero__visual .tel { position: absolute; width: 44%; }
-  .tel--centro { left: 28%; top: 0; z-index: 2; }
-  .tel--sx { left: 0; top: 13%; transform: rotate(-6deg); opacity: .96; }
-  .tel--dx { right: 0; top: 13%; transform: rotate(6deg); opacity: .96; }
+  /* iPhone: cornice sottile, angoli molto tondi, Dynamic Island e barra di stato */
+  .tel { position: relative; display: block; padding: 3.4%; border-radius: 16% / 7.4%; background: #1b1b1d; box-shadow: inset 0 0 0 1.5px #48484c, 0 0 0 1px #0a0a0a, 0 34px 56px -30px rgba(15, 58, 52, .7); }
+  .tel::before { content: ''; position: absolute; z-index: 1; top: 5.2%; left: 50%; width: 30%; height: 2.6%; transform: translateX(-50%); background: #000; border-radius: 999px; }
+  .tel__schermo { display: block; overflow: hidden; border-radius: 13% / 6%; background: #0b1b44; padding-top: 12%; }
+  .tel__schermo img { width: 100%; }
+  .hero__visual { position: relative; display: block; height: clamp(440px, 40vw, 540px); text-decoration: none; }
+  .hero__visual .tel { position: absolute; width: 38%; }
+  .tel--centro { left: 31%; top: 0; z-index: 2; }
+  .tel--sx { left: 2%; top: 9%; transform: rotate(-7deg); }
+  .tel--dx { right: 2%; top: 9%; transform: rotate(7deg); }
   .hero__didascalia { position: absolute; left: 0; right: 0; bottom: -6px; text-align: center; font-size: 14px; color: var(--grigio-testo); }
   .hero__didascalia strong { color: var(--petrolio); }
   .hero__visual:hover .hero__didascalia strong { text-decoration: underline; }
@@ -160,7 +162,7 @@ const schermate = [
 
   @media (max-width: 960px) {
     .hero { grid-template-columns: 1fr; gap: 28px; }
-    .hero__visual { height: auto; aspect-ratio: 1 / .82; max-width: 520px; width: 100%; margin-inline: auto; }
+    .hero__visual { height: auto; aspect-ratio: 1 / 1.02; max-width: 520px; width: 100%; margin-inline: auto; }
     .hero__bollino { display: none; } /* su smartphone c'è già il pulsante fisso START */
   }
 

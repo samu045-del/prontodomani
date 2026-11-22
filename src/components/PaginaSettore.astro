@@ -14,7 +14,7 @@ const { s } = Astro.props;
 const linkRichiesta = `/contatti/?settore=${s.slug}`;
 const stile = `--acc:${s.tema.accento};--fondo:${s.tema.fondo};--ink:${s.tema.inchiostro}`;
 ---
-<Base title={s.seo.title} description={s.seo.description}>
+<Base title={s.seo.title} description={s.seo.description} noindex>
   <div class={`pagina pagina--${s.slug}`} style={stile}>
 
     <!-- HERO -->
