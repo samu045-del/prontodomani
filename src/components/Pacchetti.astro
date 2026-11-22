@@ -27,7 +27,7 @@ const linkRichiesta = settore ? `/contatti/?settore=${settore.slug}` : '/contatt
           <span class="pacchetto__unita">una tantum</span>
         </div>
         {inPromo ? (
-          <p class="pacchetto__promo"><strong>Promozione di lancio</strong> per i primi {promo.limite} clienti START. Poi {euro(promo.prezzoListino)}.</p>
+          <p class="pacchetto__promo"><strong>Promozione di lancio</strong> per i primi {promo.limite} club che scelgono START. Poi {euro(promo.prezzoListino)}.</p>
         ) : (
           <p class="pacchetto__promo pacchetto__promo--vuoto">Primo anno di gestione tecnica incluso.</p>
         )}

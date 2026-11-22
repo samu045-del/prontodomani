@@ -1,9 +1,16 @@
 ---
 import Base from '../layouts/Base.astro';
-import Processo from '../components/Processo.astro';
 import Spunta from '../components/Spunta.astro';
 import Faq from '../components/Faq.astro';
 import CtaFinale from '../components/CtaFinale.astro';
+
+// La "partita" del sito: dal primo messaggio alla pubblicazione.
+const partita = [
+  { minuto: '1’', titolo: 'Ci scrivi', testo: 'Due righe dal modulo o una telefonata breve. Entro un giorno lavorativo ti rispondiamo con la proposta e la lista di quello che serve.' },
+  { minuto: '24h', titolo: 'La bozza', testo: 'Quando il materiale è completo, entro 24 ore ti mandiamo il link alla bozza. È il sito vero, non un disegno: lo apri dal telefono e lo fai vedere al direttivo.' },
+  { minuto: '2×', titolo: 'Le modifiche', testo: 'Due giri di correzioni compresi. Ci mandi un elenco unico per giro, così i tempi restano brevi.' },
+  { minuto: '90’', titolo: 'Fischio finale', testo: 'Con il tuo ok colleghiamo il dominio e mettiamo il sito online. Il primo anno di gestione tecnica è compreso: hosting, SSL, backup e assistenza.' },
+];
 
 const materiale = [
   'Nome della società, sport e squadre, in poche righe',
@@ -11,42 +18,47 @@ const materiale = [
   'Fotografie: squadre, partite, campo, eventi',
   'Indirizzo del campo, contatti della segreteria e orari',
   'Loghi e link degli sponsor, se li avete',
-  'Eventuali testi che hai già, anche da un vecchio sito o dai social',
-  'Il dominio, se ne hai già uno',
+  'Testi che avete già, anche dai social o da un vecchio sito',
+  'Il dominio, se ne avete già uno',
 ];
 
 const faq = [
   { d: 'Da quando partono le 24 ore?', r: 'Da quando abbiamo tutto il materiale dell’elenco qui sopra. Se manca qualcosa ti scriviamo subito, e il conteggio parte quando arriva.' },
-  { d: 'La bozza è già il sito definitivo?', r: 'È una prima versione navigabile, su un indirizzo di prova. La sistemiamo con le tue revisioni e la pubblichiamo solo dopo la tua approvazione.' },
-  { d: 'Cosa conta come ciclo di revisione?', r: 'Un elenco unico di correzioni che ci mandi su testi, immagini e dettagli. Ne sono inclusi due. Nuove pagine o cambi di struttura si preventivano a parte.' },
-  { d: 'Devo saper usare strumenti tecnici?', r: 'No. Pensiamo noi a hosting, dominio, sicurezza e pubblicazione. A te chiediamo solo informazioni sulla tua società.' },
-  { d: 'Scrivete voi i testi?', r: 'Organizziamo e adattiamo per il web le informazioni che ci dai. La scrittura completa dei contenuti non è inclusa nei pacchetti.' },
+  { d: 'La bozza è già il sito definitivo?', r: 'È una prima versione navigabile, su un indirizzo di prova. La sistemiamo con le tue correzioni e la pubblichiamo solo dopo la tua approvazione.' },
+  { d: 'Cosa conta come giro di modifiche?', r: 'Un elenco unico di correzioni su testi, foto e dettagli. Ne sono compresi due. Nuove pagine o cambi di struttura si preventivano a parte.' },
+  { d: 'Devo saper usare strumenti tecnici?', r: 'No. A hosting, dominio, sicurezza e pubblicazione pensiamo noi. A te chiediamo solo le informazioni sulla società.' },
+  { d: 'Scrivete voi i testi?', r: 'Mettiamo in ordine e adattiamo al sito le informazioni che ci dai. La scrittura completa dei contenuti da zero non è compresa nei pacchetti.' },
+  { d: 'Possiamo mettere le foto dei ragazzi?', r: 'Sì, se la società ha il consenso delle famiglie per pubblicarle. Per i minorenni consigliamo foto di squadra e solo il nome, senza cognome.' },
 ];
 ---
-<Base title="Come funziona · ProntoDomani" description="Come realizziamo il tuo sito: una chiamata, la prima bozza in 24 ore dal materiale completo, due cicli di revisione e la pubblicazione con il tuo ok.">
+<Base title="Come funziona · ProntoDomani" description="Come nasce il sito della tua società: ci scrivi, entro 24 ore dal materiale completo hai la bozza, due giri di modifiche e poi online con il tuo ok.">
   <section class="contenitore sezione cf-intro" aria-labelledby="cf-titolo">
-    <p class="occhiello">Come funziona</p>
-    <h1 id="cf-titolo" class="titolo-sezione">Dalla prima chiamata al sito online, senza complicazioni.</h1>
-    <p class="lead">Ti chiediamo poche cose, ti mostriamo presto un risultato concreto e pubblichiamo solo quando ti convince. Tutto il lato tecnico è affare nostro.</p>
+    <h1 id="cf-titolo">Dal primo messaggio<br />al sito online.</h1>
+    <p class="lead">Ti chiediamo poche cose, ti mandiamo presto qualcosa di concreto e pubblichiamo solo quando ti convince. Alla parte tecnica pensiamo noi.</p>
   </section>
 
-  <section class="contenitore" aria-label="I passaggi">
-    <Processo dettagliato />
+  <section class="contenitore cf-partita" aria-label="I passaggi">
+    <ol>
+      {partita.map((p) => (
+        <li>
+          <span class="cf-minuto">{p.minuto}</span>
+          <div><h2>{p.titolo}</h2><p>{p.testo}</p></div>
+        </li>
+      ))}
+    </ol>
   </section>
 
   <section class="contenitore sezione cf-due" aria-labelledby="cf-materiale">
     <div class="cf-box">
-      <p class="occhiello">Cosa ci serve da te</p>
-      <h2 id="cf-materiale" class="titolo-medio">Il materiale per partire.</h2>
+      <h2 id="cf-materiale" class="titolo-medio">Cosa ci serve da voi</h2>
       <ul class="lista-spunte">{materiale.map((m) => <li><Spunta />{m}</li>)}</ul>
-      <p class="piccolo">Non hai tutto? Nessun problema: ti diciamo cosa è indispensabile e cosa può arrivare dopo.</p>
+      <p class="piccolo">Non avete tutto? Nessun problema: vi diciamo cosa serve subito e cosa può arrivare dopo.</p>
     </div>
     <div class="cf-box cf-box--scura">
-      <p class="occhiello">La promessa delle 24 ore</p>
-      <h2 class="titolo-medio">Cosa promettiamo, esattamente.</h2>
+      <h2 class="titolo-medio">Cosa promettiamo, nero su bianco</h2>
       <p>Entro 24 ore dal materiale completo ricevi la <strong>prima versione navigabile</strong> del sito, su un indirizzo di prova.</p>
-      <p>Non è la pubblicazione automatica di un sito non ancora approvato: quella avviene dopo le revisioni e il tuo ok.</p>
-      <p>Ritardi nel materiale, richieste fuori pacchetto o revisioni aggiuntive possono spostare i tempi. Te lo diciamo sempre prima.</p>
+      <p>Non è la pubblicazione automatica di un sito che non hai ancora visto: quella arriva dopo le modifiche e il tuo ok.</p>
+      <p>Se il materiale arriva a pezzi o chiedi qualcosa fuori pacchetto, i tempi possono cambiare. Te lo diciamo sempre prima.</p>
     </div>
   </section>
 
@@ -55,11 +67,28 @@ const faq = [
 </Base>
 
 <style>
-  .cf-intro { display: flex; flex-direction: column; gap: 18px; padding-bottom: 48px; max-width: 900px; margin-left: max(0px, calc((100% - var(--contenitore)) / 2)); }
+  .cf-intro { display: flex; flex-direction: column; gap: 20px; padding-bottom: 40px; }
+  .cf-intro h1 { font-size: clamp(50px, 6.6vw, 90px); }
+
+  .cf-partita ol { list-style: none; margin: 0; padding: 0; position: relative; }
+  .cf-partita ol::before { content: ''; position: absolute; left: 47px; top: 10px; bottom: 10px; width: 3px; background: var(--lime); border-radius: 2px; }
+  .cf-partita li { position: relative; display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 28px; padding: 18px 0 30px; max-width: 860px; }
+  .cf-minuto {
+    position: relative; z-index: 1; justify-self: center; min-width: 72px; height: 52px; padding: 0 10px; border-radius: 8px;
+    display: grid; place-items: center; background: var(--petrolio); color: var(--lime);
+    font-family: var(--font-sport); font-style: italic; font-weight: 800; font-size: 28px;
+  }
+  .cf-partita h2 { font-size: clamp(30px, 3.2vw, 40px); margin-bottom: 6px; }
+  .cf-partita p { font-size: 17.5px; max-width: 40em; }
+  @media (max-width: 600px) {
+    .cf-partita ol::before { left: 31px; }
+    .cf-partita li { grid-template-columns: 64px minmax(0, 1fr); gap: 16px; }
+    .cf-minuto { min-width: 58px; height: 44px; font-size: 22px; }
+  }
+
   .cf-due { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); }
   .cf-box { background: var(--bianco); border: 1px solid var(--bordo); border-radius: var(--raggio-grande); padding: clamp(28px, 4vw, 44px); display: flex; flex-direction: column; gap: 16px; }
-  .cf-box--scura { background: var(--petrolio); border-color: var(--petrolio); color: #DCE9E4; }
+  .cf-box--scura { background: repeating-linear-gradient(90deg, #0F3A34 0 90px, #12443d 90px 180px); border-color: var(--petrolio); color: #DCE9E4; }
   .cf-box--scura h2 { color: #fff; }
-  .cf-box--scura .occhiello { color: var(--lime); }
-  .cf-box--scura strong { color: #fff; }
+  .cf-box--scura strong { color: var(--lime); }
 </style>

@@ -32,7 +32,7 @@ const anno = new Date().getFullYear();
   </div>
 
   <div class="contenitore footer__legale">
-    <p>© {anno} {[azienda.nome, azienda.titolare, `P.IVA ${azienda.piva}`, azienda.indirizzo].filter(Boolean).join(' · ')}</p>
+    <p>© {anno} {azienda.nome} è un servizio di {azienda.ragioneSociale} · {azienda.indirizzo} · P.IVA {azienda.piva} · REA {azienda.rea}</p>
     <ul>
       <li><a href="/privacy/">Privacy</a></li>
       <li><a href="/cookie/">Cookie</a></li>

@@ -8,7 +8,7 @@ const link = '/contatti/?pacchetto=start';
   <>
     <div class="pbarra" id="promo-barra">
       <div class="contenitore pbarra__riga">
-        <p><strong>Promozione di lancio</strong> · Pacchetto START a {euro(promo.prezzo)} per i primi {promo.limite} clienti, poi {euro(promo.prezzoListino)}.</p>
+        <p><strong>Promozione di lancio</strong> · Pacchetto START a {euro(promo.prezzo)} per i primi {promo.limite} club, poi {euro(promo.prezzoListino)}.</p>
         <a href={link} class="pbarra__link">Approfitta della promozione</a>
         <button type="button" class="pbarra__chiudi" aria-label="Chiudi l’avviso della promozione">
           <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 3l8 8M11 3l-8 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
@@ -18,7 +18,7 @@ const link = '/contatti/?pacchetto=start';
     {!suContatti && (
       <a href={link} class="pfisso">
         <span>START</span><strong>{euro(promo.prezzo)}</strong>
-        <span class="sr-only">: promozione di lancio per i primi {promo.limite} clienti</span>
+        <span class="sr-only">: promozione di lancio per i primi {promo.limite} club</span>
       </a>
     )}
   </>

@@ -7,22 +7,24 @@
 // --- Stato del lancio ------------------------------------------------
 // true = il sito chiede a Google di NON indicizzarlo. Mettilo a false
 // solo quando P.IVA, privacy e condizioni sono completi.
-export const preLancio = true;
+export const preLancio = false;
 
 // --- Dati aziendali (obbligatori prima del lancio) ---------------------
+// ProntoDomani è un servizio di LESGO S.R.L.S. (dati dal Registro Imprese).
 export const azienda = {
   nome: 'ProntoDomani',
-  titolare: '', // es. 'Mario Rossi' — vuoto = non mostrato
-  piva: '04411700232',
-  indirizzo: '', // sede — vuoto = non mostrata
+  ragioneSociale: 'LESGO S.R.L.S.',
+  piva: '12415510960',
+  rea: 'MI-2660224',
+  indirizzo: 'Via Marciano 4, 20133 Milano (MI)',
   email: 'samuele@prontodomani.it',
   emailDiretta: 'samuele@prontodomani.it',
   telefono: '', // es. '+39 333 1234567' — vuoto = non mostrato
   whatsapp: '', // es. '393331234567' (solo cifre, con prefisso) — vuoto = non mostrato
 };
 
-// Nota fiscale mostrata sotto i prezzi. Da confermare col commercialista.
-export const notaIva = 'Prezzi finali: operiamo in regime forfettario (L. 190/2014), l’IVA non è applicata.';
+// Nota fiscale mostrata sotto i prezzi. Fattura LESGO S.R.L.S.: prezzi IVA inclusa (decisione del 22/11/2026).
+export const notaIva = 'Tutti i prezzi sono IVA inclusa.';
 
 // --- Pacchetti -------------------------------------------------------------
 // Prezzi e contenuti NON vanno cambiati senza decisione commerciale.

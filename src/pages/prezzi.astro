@@ -27,17 +27,17 @@ const righe: { voce: string; valori: (string | boolean)[] }[] = [
 
 const faq = [
   { d: 'I prezzi sono definitivi?', r: 'Sì: sono prezzi fissi per quanto descritto in ogni pacchetto. Se ti serve qualcosa in più, lo preventiviamo a parte prima di iniziare.' },
-  { d: 'Come funziona la promozione di lancio?', r: `Vale per i primi ${promo.limite} clienti che scelgono il pacchetto START: ${euro(promo.prezzo)} invece del prezzo di listino di ${euro(promo.prezzoListino)} che applicheremo dopo. PLUS e PREMIUM hanno i prezzi indicati.` },
+  { d: 'Come funziona la promozione di lancio?', r: `Vale per i primi ${promo.limite} club che scelgono il pacchetto START: ${euro(promo.prezzo)} invece del prezzo di listino di ${euro(promo.prezzoListino)} che applicheremo dopo. PLUS e PREMIUM hanno i prezzi indicati.` },
+  { d: 'L’IVA è compresa?', r: 'Sì, tutti i prezzi sono IVA inclusa: quello che leggi è quello che paghi. Fattura LESGO S.R.L.S., la società dietro ProntoDomani.' },
   { d: 'Il dominio è compreso?', r: 'Colleghiamo il vostro dominio, che resta sempre intestato alla società. Se non ne avete uno, lo registriamo a nome della società.' },
   { d: 'Devo per forza attivare Care dal secondo anno?', r: 'No. Te lo proponiamo prima della scadenza e decidi tu. Se non rinnovi, ti consegniamo i file del sito e ti aiutiamo a trasferirlo.' },
   { d: 'Care comprende anche le modifiche ai contenuti?', r: 'No: Care riguarda la gestione tecnica (hosting, SSL, backup, monitoraggio, assistenza per problemi tecnici). Nuove pagine, aggiornamenti dei contenuti o nuove funzioni si preventivano a parte.' },
 ];
 ---
-<Base title="Prezzi e pacchetti · ProntoDomani" description={`Pacchetti START, PLUS e PREMIUM a prezzo fisso, da ${euro(promo.prezzo)}. Primo anno di gestione tecnica incluso, poi servizio Care a 149 € all’anno.`}>
+<Base title="Prezzi e pacchetti · ProntoDomani" description={`Il sito della tua società sportiva a prezzo fisso, IVA inclusa: pacchetti START, PLUS e PREMIUM da ${euro(promo.prezzo)}. Primo anno di gestione tecnica incluso, poi servizio Care a 149 € all’anno.`}>
   <section class="contenitore sezione pr-intro" aria-labelledby="pr-titolo">
-    <p class="occhiello">Prezzi</p>
-    <h1 id="pr-titolo" class="titolo-sezione">Prezzi chiari, scritti prima di iniziare.</h1>
-    <p class="lead">Tre pacchetti a prezzo fisso. Sai subito cosa è incluso, cosa no e quanto costa mantenere il sito negli anni successivi.</p>
+    <h1 id="pr-titolo" class="titolo-sezione">Quanto costa il sito<br />della tua società</h1>
+    <p class="lead">Tre pacchetti a prezzo fisso, IVA inclusa. Sai subito cosa c’è dentro, cosa no e quanto costa tenere il sito online dal secondo anno.</p>
   </section>
 
   <section class="contenitore" aria-label="Pacchetti">

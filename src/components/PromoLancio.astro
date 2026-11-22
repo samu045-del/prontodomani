@@ -6,14 +6,14 @@ import { promo, euro } from '../data/site';
     <div class="contenitore promo__griglia">
       <div class="promo__testo">
         <p class="occhiello">Promozione di lancio</p>
-        <h2 id="promo-titolo" class="titolo-sezione promo__titolo">ProntoDomani parte oggi.<br />Il tuo sito parte da {euro(promo.prezzo)}.</h2>
-        <p class="lead">Per il lancio abbiamo riservato una condizione dedicata ai primi {promo.limite} clienti che scelgono il pacchetto START. Un sito professionale, con un investimento chiaro e senza complicazioni.</p>
+        <h2 id="promo-titolo" class="titolo-sezione promo__titolo">ProntoDomani parte oggi.<br />Il sito della tua società da {euro(promo.prezzo)}.</h2>
+        <p class="lead">Per il lancio abbiamo riservato una condizione dedicata ai primi {promo.limite} club che scelgono il pacchetto START.</p>
         <a href="/contatti/?pacchetto=start" class="btn btn--lime">Approfitta della promozione</a>
       </div>
       <dl class="promo__dati">
         <div><dt>Pacchetto START</dt><dd>{euro(promo.prezzo)}</dd></div>
         <div><dt>Prezzo dopo la promozione</dt><dd>{euro(promo.prezzoListino)}</dd></div>
-        <div><dt>Valida per</dt><dd>i primi {promo.limite} clienti</dd></div>
+        <div><dt>Valida per</dt><dd>i primi {promo.limite} club</dd></div>
         <div><dt>Gestione tecnica</dt><dd>primo anno incluso</dd></div>
       </dl>
     </div>

@@ -5,7 +5,7 @@ const mappaSettori: Record<string, string> = {};
 ---
 <form id="modulo" class="modulo" method="post" action="/api/richiesta" data-settori={JSON.stringify(mappaSettori)}>
   <p id="esito-errore" class="modulo__errore" role="alert" hidden>
-    Non sono riuscito a ricevere la richiesta. Riprova tra qualche minuto o scrivimi a <a href={`mailto:${azienda.email}`}>{azienda.email}</a>.
+    Non siamo riusciti a ricevere la richiesta. Riprova tra qualche minuto o scrivici a <a href={`mailto:${azienda.email}`}>{azienda.email}</a>.
   </p>
 
   <label class="campo">Nome e cognome
@@ -46,7 +46,7 @@ const mappaSettori: Record<string, string> = {};
       <option>Sto solo valutando</option>
     </select>
   </label>
-  <label class="campo campo--intero">Raccontami la tua società
+  <label class="campo campo--intero">Raccontaci la tua società
     <textarea name="messaggio" rows="4" required maxlength="2000"></textarea>
     <span class="aiuto">Bastano poche righe: quante squadre avete, cosa vi manca oggi. Non inserire dati personali di atleti o tesserati.</span>
   </label>
@@ -62,7 +62,7 @@ const mappaSettori: Record<string, string> = {};
 
   <div class="campo--intero">
     <div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-language="it" data-theme="light"></div>
-    <noscript><p class="aiuto">Per inviare il modulo serve JavaScript attivo (protezione antispam). In alternativa scrivimi a {azienda.email}.</p></noscript>
+    <noscript><p class="aiuto">Per inviare il modulo serve JavaScript attivo (protezione antispam). In alternativa scrivici a {azienda.email}.</p></noscript>
   </div>
 
   <button type="submit" class="btn btn--primario campo--intero">Invia la richiesta</button>
