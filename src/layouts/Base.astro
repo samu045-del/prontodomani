@@ -13,11 +13,12 @@ interface Props {
   title: string;
   description: string;
   noindex?: boolean;
+  riservata?: boolean; // pagina non pubblica: niente barra promo, sempre noindex
 }
 
-const { title, description, noindex = false } = Astro.props;
+const { title, description, noindex = false, riservata = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const bloccaIndicizzazione = preLancio || noindex;
+const bloccaIndicizzazione = preLancio || noindex || riservata;
 ---
 <!doctype html>
 <html lang="it">
@@ -44,7 +45,7 @@ const bloccaIndicizzazione = preLancio || noindex;
 </head>
 <body>
   <a class="salta" href="#contenuto">Vai al contenuto</a>
-  <PromoBarra />
+  {!riservata && <PromoBarra />}
   <Header />
   <main id="contenuto">
     <slot />
