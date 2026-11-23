@@ -1,11 +1,12 @@
 ---
-// Pagina RISERVATA per il partner in Ticino. Non è nel menu, né nella sitemap,
-// ed è in noindex. Chi ha il link la vede: non metterci dati riservati.
+// Pagina RISERVATA per il contatto in Ticino (Christian, contatto di Thomas).
+// Non è nel menu, né nella sitemap, ed è in noindex. Chi ha il link la vede.
+// Indirizzo volutamente non indovinabile: contiene i prezzi di cessione.
+// Tono: cordiale e morbido, è un contatto che conosciamo.
 import Base from '../layouts/Base.astro';
 import { pacchetti, care, euro } from '../data/site';
-// Indirizzo volutamente non indovinabile: contiene i prezzi di cessione.
 
-const aggiornata = '22 novembre 2026';
+const aggiornata = '23 novembre 2026';
 
 // Prezzo consigliato al cliente finale, in franchi. PROPOSTA da discutere.
 const consigliato: Record<string, string> = { start: '1.290 CHF', plus: '1.790 CHF', premium: '2.490 CHF' };
@@ -13,22 +14,22 @@ const minimo: Record<string, string> = { start: '990 CHF', plus: '1.390 CHF', pr
 
 const passi = [
   { t: 'Trovi il cliente', d: 'Fai il preventivo e firmi con la tua società, in franchi.' },
-  { t: 'Arriva il materiale', d: 'Testi, logo, foto e contatti. Lo raccogli tu e me lo giri, oppure il cliente lo manda direttamente a me.' },
+  { t: 'Arriva il materiale', d: 'Testi, logo, foto e contatti. Lo raccogli tu e ce lo giri, oppure il cliente lo manda direttamente a noi.' },
   { t: 'Bozza in 24 ore', d: 'Dal materiale completo, nei giorni lavorativi. Su un indirizzo di prova, da aprire sul telefono.' },
-  { t: 'Due giri di modifiche', d: 'Le raccogli tu, oppure parlo io con il cliente: in italiano non c’è nessun problema.' },
-  { t: 'Online', d: 'Pubblico sul dominio del cliente con il tuo ok. Tu fatturi al cliente, io fatturo a te.' },
+  { t: 'Due giri di modifiche', d: 'Le raccogli tu, oppure parliamo noi con il cliente: in italiano nessun problema.' },
+  { t: 'Online', d: 'Pubblichiamo sul dominio del cliente con il tuo ok. Tu fatturi al cliente, noi fatturiamo a te.' },
 ];
 
 const ruoli: [string, string][] = [
-  ['Trovare i clienti e vendere', 'Tu'],
-  ['Contratto e fattura al cliente, in CHF', 'Tu'],
-  ['Primo contatto e raccolta del materiale', 'Tu'],
-  ['Design, sviluppo e bozza in 24 ore', 'Io'],
-  ['Due giri di modifiche', 'Io'],
-  ['Dominio, pubblicazione, hosting, SSL e backup', 'Io'],
-  ['Prima risposta al cliente per l’assistenza', 'Tu'],
-  ['Assistenza tecnica e problemi del sito', 'Io'],
-  ['Testi legali (privacy secondo la nLPD, note legali)', 'Il cliente, con il suo fiduciario. Io li inserisco'],
+  ['Trovare i clienti e vendere', 'Christian'],
+  ['Contratto e fattura al cliente, in CHF', 'Christian'],
+  ['Primo contatto e raccolta del materiale', 'Christian'],
+  ['Design, sviluppo e bozza in 24 ore', 'ProntoDomani'],
+  ['Due giri di modifiche', 'ProntoDomani'],
+  ['Dominio, pubblicazione, hosting, SSL e backup', 'ProntoDomani'],
+  ['Prima risposta al cliente per l’assistenza', 'Christian'],
+  ['Assistenza tecnica e problemi del sito', 'ProntoDomani'],
+  ['Testi legali (privacy secondo la nLPD, note legali)', 'Il cliente, con il suo fiduciario. Noi li inseriamo'],
 ];
 ---
 <Base riservata title="ProntoDomani in Ticino · Proposta di collaborazione" description="Proposta di collaborazione riservata.">
@@ -39,9 +40,9 @@ const ruoli: [string, string][] = [
         <h1 id="sv-titolo">ProntoDomani in Ticino</h1>
       </div>
       <div class="sv-hero__testo">
-        <p>Ciao, qui trovi tutto quello che ci siamo detti, messo in ordine: come lavoriamo, chi fa cosa, i prezzi e le regole.</p>
-        <p>I numeri sono una proposta. Li fissiamo insieme e poi li mettiamo in un accordo scritto di una pagina, anche se siamo amici. Anzi, proprio per quello.</p>
-        <p class="sv-firma">Samuele</p>
+        <p>Ciao Christian, qui trovi tutto quello che ci siamo detti, messo in ordine: una possibile struttura di collaborazione, chi fa cosa e un suggerimento sui prezzi.</p>
+        <p>Tutto quello che vedi è modulabile: ascoltiamo volentieri anche la tua esperienza.</p>
+        <p class="sv-firma">Samuele e Thomas</p>
       </div>
     </div>
   </section>
@@ -49,9 +50,8 @@ const ruoli: [string, string][] = [
   <section class="contenitore sezione sv-due" aria-labelledby="sv-idea">
     <h2 id="sv-idea" class="titolo-medio">L’idea<br />in breve</h2>
     <div class="sv-testo">
-      <p>Tu hai i clienti in Ticino e la fiducia di chi ti conosce. A volte perdi un lavoro perché un sito fatto da un’agenzia svizzera costa troppo per una piccola attività.</p>
-      <p>Io faccio siti in fretta e con costi bassi. Tu li vendi con la tua società, al prezzo giusto per il Ticino. Io li realizzo e ti fatturo la mia parte. La differenza resta a te.</p>
-      <p>Vale per qualsiasi piccola attività: artigiani, negozi, studi, associazioni. Il mio punto forte sono le società sportive, e <a href="https://fccds.it" target="_blank" rel="noopener">fccds.it</a> è l’esempio da mostrare.</p>
+      <p>Portare in Ticino l’idea dei siti in 24 ore a costi contenuti, recuperando tutti i clienti che ti dicono che un sito “costa troppo” e sfruttando, magari, il tuo network attraverso il passaparola.</p>
+      <p>Vale per qualsiasi piccola attività: artigiani, negozi, studi, associazioni.</p>
     </div>
   </section>
 
@@ -68,7 +68,7 @@ const ruoli: [string, string][] = [
       <div class="tabella-scorri" tabindex="0" role="region" aria-label="Chi fa cosa">
         <table class="sv-tabella">
           <tbody>
-            {ruoli.map(([cosa, chi]) => <tr><th scope="row">{cosa}</th><td class:list={{ io: chi === 'Io', tu: chi === 'Tu' }}>{chi}</td></tr>)}
+            {ruoli.map(([cosa, chi]) => <tr><th scope="row">{cosa}</th><td class:list={{ io: chi === 'ProntoDomani', tu: chi === 'Christian' }}>{chi}</td></tr>)}
           </tbody>
         </table>
       </div>
@@ -76,11 +76,12 @@ const ruoli: [string, string][] = [
   </section>
 
   <section class="contenitore sezione" aria-labelledby="sv-prezzi">
-    <h2 id="sv-prezzi" class="titolo-medio sv-titolo">Prezzi: la mia proposta</h2>
+    <h2 id="sv-prezzi" class="titolo-medio sv-titolo">Prezzi: la nostra proposta</h2>
+    <p class="sv-cappello">Questi numeri vengono da una ricerca che abbiamo fatto con Claude sui prezzi dei siti in Ticino. Sono un punto di partenza: li rivediamo volentieri insieme a te, che il mercato lo conosci da dentro.</p>
     <div class="tabella-scorri" tabindex="0" role="region" aria-labelledby="sv-prezzi">
       <table class="sv-tabella sv-tabella--prezzi">
         <thead>
-          <tr><th scope="col">Pacchetto</th><th scope="col">Pagine</th><th scope="col">Il mio prezzo a te</th><th scope="col">Consigliato al cliente</th><th scope="col">Minimo al cliente</th></tr>
+          <tr><th scope="col">Pacchetto</th><th scope="col">Pagine</th><th scope="col">Il nostro prezzo a te</th><th scope="col">Consigliato al cliente</th><th scope="col">Minimo al cliente</th></tr>
         </thead>
         <tbody>
           {pacchetti.map((p) => (
@@ -96,10 +97,10 @@ const ruoli: [string, string][] = [
       </table>
     </div>
     <ul class="sv-note">
-      <li><strong>Il mio prezzo a te</strong> è il listino italiano, senza la promozione di lancio. Non cambia se tu vendi a di più: la differenza è tua.</li>
-      <li><strong>Il prezzo minimo</strong> serve a non svendere il lavoro, e a non far sembrare il Ticino un posto dove si paga come in Italia. Sotto quella cifra ne parliamo prima.</li>
-      <li><strong>I prezzi sono per un sito in italiano.</strong> Ogni lingua in più (tedesco, francese, inglese) costa il 50% in più sul mio prezzo. I testi tradotti li fornisce o li approva il cliente.</li>
-      <li><strong>Lavori fuori pacchetto</strong> (pagine in più, prenotazioni, negozio online): ti faccio un preventivo prima di iniziare e tu ci metti il tuo margine.</li>
+      <li><strong>Il nostro prezzo a te</strong> è il listino italiano, senza la promozione di lancio, e non cambia se vendi a di più: la differenza è tua.</li>
+      <li><strong>Il prezzo minimo</strong> è un’idea per tenere il valore del lavoro allineato al mercato ticinese. Se un caso particolare lo richiede, ne parliamo.</li>
+      <li><strong>I prezzi sono per un sito in italiano.</strong> Per ogni lingua in più (tedesco, francese, inglese) pensavamo a un 50% in più sul nostro prezzo. I testi tradotti li fornisce o li approva il cliente.</li>
+      <li><strong>Lavori fuori pacchetto</strong> (pagine in più, prenotazioni, negozio online): ti mandiamo un preventivo prima di iniziare e tu ci aggiungi il tuo margine.</li>
     </ul>
   </section>
 
@@ -107,8 +108,8 @@ const ruoli: [string, string][] = [
     <div class="contenitore sezione sv-due">
       <h2 id="sv-anni" class="titolo-medio">Dal secondo<br />anno</h2>
       <div class="sv-testo">
-        <p>Il primo anno di gestione tecnica è compreso nel prezzo. Dal secondo, a te costa <strong>{euro(care.prezzo)} all’anno per sito</strong>: hosting, certificato SSL, backup periodici, monitoraggio e assistenza per problemi tecnici.</p>
-        <p>Il rinnovo al cliente lo proponi e lo incassi tu. Prezzo consigliato: <strong>290 CHF all’anno</strong>. Modifiche ai contenuti, nuove pagine e nuove funzioni restano fuori e si preventivano a parte.</p>
+        <p>Il primo anno di gestione tecnica è compreso nel prezzo. Dal secondo, per noi il costo è di <strong>{euro(care.prezzo)} all’anno per sito</strong>: hosting, certificato SSL, backup periodici, monitoraggio e assistenza per problemi tecnici.</p>
+        <p>Il rinnovo al cliente lo proponi e lo incassi tu; come prezzo pensavamo a circa <strong>290 CHF all’anno</strong>. Modifiche ai contenuti, nuove pagine e nuove funzioni si preventivano a parte.</p>
       </div>
     </div>
   </section>
@@ -116,36 +117,34 @@ const ruoli: [string, string][] = [
   <section class="contenitore sezione sv-due" aria-labelledby="sv-soldi">
     <h2 id="sv-soldi" class="titolo-medio">Pagamenti<br />e fatture</h2>
     <div class="sv-testo">
-      <p>Ti fatturo il <strong>50% quando parte il lavoro</strong>, cioè quando arriva il materiale completo, e il <strong>50% alla pubblicazione</strong>. Pagamento a 15 giorni. Il rischio che un cliente paghi in ritardo è tuo, come il guadagno in più.</p>
-      <p>Fattura dall’Italia LESGO S.R.L.S., la società dietro ProntoDomani, in euro: è un servizio a un’azienda fuori dall’Unione europea, quindi senza IVA italiana. Dalla tua parte, se sulla mia fattura devi pagare l’IVA svizzera (imposta sull’acquisto) lo verifica il tuo fiduciario. Noi lo verifichiamo con il nostro commercialista.</p>
+      <p>Pensavamo a qualcosa di semplice: <strong>metà quando parte il lavoro</strong>, cioè quando arriva il materiale completo, e <strong>metà alla pubblicazione</strong>. Sui tempi di pagamento ci mettiamo d’accordo insieme, in base a come lavori tu con i tuoi clienti.</p>
+      <p>La fattura parte dall’Italia da LESGO S.R.L.S., la società dietro ProntoDomani, in euro e senza IVA italiana, perché è un servizio a un’azienda fuori dall’Unione europea. Per l’eventuale IVA svizzera dalla tua parte sentiamo il tuo fiduciario; noi verifichiamo tutto con il nostro commercialista.</p>
     </div>
   </section>
 
   <section class="fascia-bianca" aria-labelledby="sv-nome">
     <div class="contenitore sezione">
-      <h2 id="sv-nome" class="titolo-medio sv-titolo">Con che nome vendiamo? Da decidere</h2>
+      <h2 id="sv-nome" class="titolo-medio sv-titolo">Con che nome vendiamo? Da decidere insieme</h2>
       <div class="sv-scelte">
-        <div class="sv-scelta sv-scelta--consigliata">
-          <p class="badge">Il mio consiglio</p>
+        <div class="sv-scelta">
           <h3>A. Con il nome della tua agenzia</h3>
-          <p>Il cliente vede solo te. Non trova prontodomani.it con i prezzi italiani e non si chiede perché paga di più. Nel sito del cliente non metto la mia firma, se non la vuoi.</p>
+          <p>Il cliente vede solo te e non incontra il listino italiano di prontodomani.it. Nel sito del cliente non mettiamo la nostra firma, se preferisci di no.</p>
         </div>
         <div class="sv-scelta">
           <h3>B. Come “ProntoDomani”</h3>
-          <p>Il marchio e gli esempi sono già pronti. Ma a mezz’ora da Como qualcuno troverà il listino italiano: devi essere pronto a spiegare cosa aggiungi tu (incontro di persona, fattura svizzera, assistenza in Ticino). Si può fare, ma con una risposta pronta.</p>
+          <p>Il marchio e gli esempi sono già pronti. Va messo in conto che qualcuno possa trovare i prezzi italiani: in quel caso conviene avere pronta la risposta su cosa aggiungi tu (incontro di persona, fattura svizzera, assistenza in Ticino).</p>
         </div>
       </div>
     </div>
   </section>
 
   <section class="contenitore sezione sv-due" aria-labelledby="sv-regole">
-    <h2 id="sv-regole" class="titolo-medio">Regole<br />chiare</h2>
+    <h2 id="sv-regole" class="titolo-medio">Regole</h2>
     <ul class="sv-regole">
       <li><strong>Siti e domini sono sempre del cliente.</strong> Il dominio .ch è registrato a suo nome.</li>
-      <li><strong>Se smettiamo di collaborare</strong>, i siti già online restano online fino alla fine della gestione pagata. Poi il cliente rinnova con chi vuole e io consegno i file.</li>
-      <li><strong>Niente login, pagamenti online o dati sensibili</strong> nei siti. Se un cliente li vuole, si collega un servizio esterno fatto apposta.</li>
-      <li><strong>Tempi:</strong> 24 ore dal materiale completo, nei giorni lavorativi. Se arrivano più di tre richieste nello stesso giorno, ti dico subito quando consegno.</li>
-      <li><strong>Esclusiva (da decidere):</strong> per il Ticino lavoro solo con te per 12 mesi, se nel frattempo vendiamo almeno 6 siti.</li>
+      <li><strong>Se un giorno smettessimo di collaborare</strong>, i siti già online restano online fino alla fine della gestione pagata. Poi il cliente rinnova con chi vuole e noi consegniamo i file.</li>
+      <li><strong>Niente login per utenti esterni:</strong> i siti non hanno aree riservate per i clienti del cliente. Se servono, si collega un servizio esterno fatto apposta.</li>
+      <li><strong>Tempi:</strong> 24 ore dal materiale completo, nei giorni lavorativi. Se arrivano più richieste nello stesso giorno, ti diciamo subito quando consegniamo.</li>
     </ul>
   </section>
 
@@ -153,9 +152,9 @@ const ruoli: [string, string][] = [
     <div class="contenitore sezione">
       <h2 id="sv-passi" class="titolo-medio">Prossimi passi</h2>
       <ol class="sv-prossimi">
-        <li>Rileggi e segnami cosa cambieresti.</li>
-        <li>Fissiamo i numeri e scegliamo il nome: A o B.</li>
-        <li>Mettiamo tutto in un accordo di una pagina.</li>
+        <li>Rileggi con calma e dicci cosa cambieresti.</li>
+        <li>Fissiamo insieme i numeri e il nome: A o B.</li>
+        <li>Mettiamo tutto in un accordo semplice, di una pagina.</li>
         <li>Primo cliente di prova: lo seguiamo insieme, dall’inizio alla fine.</li>
       </ol>
     </div>
@@ -173,6 +172,7 @@ const ruoli: [string, string][] = [
   .sv-due { display: grid; gap: 24px 64px; grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr); }
   .sv-testo { display: flex; flex-direction: column; gap: 16px; font-size: 18px; line-height: 1.65; max-width: 640px; }
   .sv-titolo { margin-bottom: 32px; }
+  .sv-cappello { font-size: 17px; max-width: 46em; margin: -12px 0 24px; padding: 14px 18px; background: var(--menta, #E6F2EE); border-radius: 12px; }
   .sv-sotto { font-size: 22px; margin: 48px 0 16px; }
 
   .sv-passi { list-style: none; margin: 0; padding: 0; display: grid; gap: 20px; grid-template-columns: repeat(5, minmax(0, 1fr)); }
