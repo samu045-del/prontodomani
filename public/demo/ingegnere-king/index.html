@@ -13,21 +13,23 @@
 .kick{display:block;text-align:center;font-family:Anton;font-size:19px;text-transform:uppercase;color:var(--y);margin:4px 0 16px;letter-spacing:.02em}
 
 /* HERO TELEGRAM */
-.tg{position:relative;display:block;background:var(--y);color:var(--k);border-radius:18px;padding:26px 22px 22px;overflow:hidden;box-shadow:0 0 0 1px var(--y),0 18px 50px rgba(242,238,0,.18)}
-.tg .badge{position:absolute;top:16px;right:16px;background:var(--k);color:var(--y);font-size:10px;font-weight:700;padding:6px 10px;border-radius:30px}
+:root{--tg:#229ED9;--tg2:#1A86BA}
+.tg{position:relative;display:block;background:linear-gradient(160deg,#2AABEE 0%,#229ED9 55%,#1A86BA 100%);color:#fff;border-radius:18px;padding:26px 22px 22px;overflow:hidden;box-shadow:0 18px 50px rgba(34,158,217,.28)}
+.tg::after{content:"";position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.07)}
+.tg .badge{position:absolute;top:16px;right:16px;background:#fff;color:var(--tg2);font-size:10px;font-weight:700;padding:6px 10px;border-radius:30px;z-index:1}
 .tg .live{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:700}
-.tg .live i{width:8px;height:8px;border-radius:50%;background:#0B0B0B;box-shadow:0 0 0 4px rgba(0,0,0,.15)}
-.tg .ico{width:64px;height:64px;border-radius:16px;background:var(--k);display:grid;place-items:center;margin:16px 0 14px}
-.tg .ico svg{width:34px;height:34px;fill:var(--y)}
+.tg .live i{width:8px;height:8px;border-radius:50%;background:#7CFC9A;box-shadow:0 0 0 4px rgba(124,252,154,.25)}
+.tg .ico{width:64px;height:64px;border-radius:50%;background:#fff;display:grid;place-items:center;margin:16px 0 14px}
+.tg .ico svg{width:32px;height:32px;fill:var(--tg);margin-left:-3px}
 .tg h2{font-size:44px;line-height:.95}
-.tg p{font-size:15px;line-height:1.45;margin:12px 0 18px;font-weight:500}
+.tg p{font-size:15px;line-height:1.45;margin:12px 0 18px;font-weight:500;color:rgba(255,255,255,.92)}
 .tg ul{list-style:none;display:grid;gap:8px;margin-bottom:20px}
 .tg li{font-size:14px;font-weight:600;display:flex;gap:10px;align-items:center}
-.tg li::before{content:"";width:18px;height:18px;border-radius:50%;background:var(--k) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' stroke='%23F2EE00' stroke-width='3' fill='none'/%3E%3C/svg%3E") center/12px no-repeat;flex:none}
-.tg .cta{display:flex;justify-content:center;align-items:center;gap:10px;background:var(--k);color:var(--y);font-family:Anton;font-size:24px;text-transform:uppercase;padding:18px;border-radius:12px;letter-spacing:.02em}
+.tg li::before{content:"";width:18px;height:18px;border-radius:50%;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' stroke='%23229ED9' stroke-width='3' fill='none'/%3E%3C/svg%3E") center/12px no-repeat;flex:none}
+.tg .cta{display:flex;justify-content:center;align-items:center;gap:10px;background:#fff;color:var(--tg2);font-family:Anton;font-size:24px;text-transform:uppercase;padding:18px;border-radius:12px;letter-spacing:.02em}
 .tg .proof{display:flex;justify-content:center;align-items:center;gap:10px;margin-top:12px;font-size:12px;font-weight:600}
-.faces{display:flex}.faces span{width:22px;height:22px;border-radius:50%;border:2px solid var(--y);margin-left:-7px;background:#333}
-.faces span:nth-child(2){background:#555}.faces span:nth-child(3){background:#777}.faces span:first-child{margin-left:0}
+.faces{display:flex}.faces span{width:22px;height:22px;border-radius:50%;border:2px solid #229ED9;margin-left:-7px;background:#cfe9f7}
+.faces span:nth-child(2){background:#9fd3ef}.faces span:nth-child(3){background:#6dbde6}.faces span:first-child{margin-left:0}
 
 /* COMPARATORE */
 .cmp{display:flex;align-items:center;gap:14px;margin-top:14px;background:var(--k2);border:1.5px solid var(--y);border-radius:16px;padding:18px}
@@ -80,9 +82,9 @@
   <div class="proof"><span class="faces"><span></span><span></span><span></span></span>Unisciti a 00.000+ membri</div>
 </a>
 
-<a class="cmp" href="/demo/ingegnere-king/comparazione-quote/">
-  <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div>
-  <div><h3>Comparatore quote<span class="new">NUOVO</span></h3><p>Le quote migliori delle partite di oggi, a colpo d'occhio.</p></div>
+<a class="cmp" href="/demo/ingegnere-king/comparazione-bookmakers/">
+  <div class="ico"><svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18M8 3v18"/></svg></div>
+  <div><h3>Comparazione bookmakers<span class="new">NUOVO</span></h3><p>Payout, app, live e prelievi: i bookmaker messi a confronto.</p></div>
   <span class="arr">→</span>
 </a>
 
