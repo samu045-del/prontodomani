@@ -3,9 +3,34 @@
 import { gestisciRichiesta, type Env } from './richiesta';
 import { demo, scaduta } from '../src/data/demo';
 
+// dominio del cliente -> cartella in public/siti/
+const SITI_CLIENTI: Record<string, string> = {
+  'kingegnere.com': 'kingegnere',
+};
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
+
+    // Siti dei clienti ospitati su questo Worker, per dominio.
+    const sito = SITI_CLIENTI[url.hostname.replace(/^www\./, '')];
+    if (sito) {
+      if (url.hostname.startsWith('www.')) {
+        url.hostname = url.hostname.slice(4);
+        return Response.redirect(url.toString(), 301);
+      }
+      const percorso = url.pathname;
+      const interno = new URL(`/siti/${sito}${percorso}`, url);
+      const r = await env.ASSETS.fetch(new Request(interno, request));
+      if (r.status === 404) return env.ASSETS.fetch(new Request(new URL(`/siti/${sito}/`, url), request));
+      return r;
+    }
+
+    // Le cartelle dei clienti non si vedono da prontodomani.it.
+    if (url.pathname.startsWith('/siti/')) {
+      const p = await env.ASSETS.fetch(new Request(new URL('/404', url), request));
+      return new Response(p.body, { status: 404, headers: p.headers });
+    }
 
     if (url.pathname === '/api/richiesta') {
       if (request.method === 'POST') return gestisciRichiesta(request, env);
