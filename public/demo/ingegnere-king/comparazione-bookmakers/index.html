@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="/demo/ingegnere-king/assets/base.css">
 <style>
 .bar{display:flex;align-items:center;justify-content:space-between;padding:18px 0 14px;border-bottom:1px solid var(--k3)}
-.back{display:flex;align-items:center;gap:10px;font-size:13px;color:#bdbdb5}
+.back{display:flex;align-items:center;gap:10px;font-size:13px;color:#bdbdb5;min-height:44px}
 .back span{width:34px;height:34px;border-radius:50%;background:var(--k2);border:1px solid var(--k3);display:grid;place-items:center;color:var(--w)}
 .bar img{width:36px;height:36px;border-radius:50%}
 .head{padding:24px 0 6px}
@@ -15,126 +15,109 @@
 .head h1{font-size:46px;margin-top:8px;line-height:.95}
 .head h1 span{color:var(--y)}
 .head p{font-size:13.5px;color:#a9a9a2;margin-top:10px;line-height:1.45}
-.tabs{display:grid;grid-template-columns:repeat(3,1fr);background:var(--k2);border:1px solid var(--k3);border-radius:10px;padding:4px;margin:18px 0 16px}
-.tabs button{all:unset;cursor:pointer;text-align:center;padding:9px 0;font-size:12px;font-weight:700;border-radius:7px;color:var(--g)}
-.tabs button.on{background:var(--y);color:var(--k)}
 
-.b{background:var(--k2);border:1px solid var(--k3);border-radius:14px;margin-bottom:12px;overflow:hidden}
-.b.first{border-color:var(--y);box-shadow:0 0 0 1px var(--y)}
-.bh{display:flex;align-items:center;gap:12px;padding:16px 14px 12px}
-.rank{font-family:Anton;font-size:30px;color:transparent;-webkit-text-stroke:1.2px var(--y);width:34px;flex:none}
-.logo{width:44px;height:44px;border-radius:10px;background:#2a2a2a;display:grid;place-items:center;font-family:Anton;font-size:20px;color:#ddd;flex:none}
-.nm{flex:1}
-.nm b{display:block;font-size:16px}
-.nm small{font-size:11px;color:var(--g)}
-.score{text-align:right}
-.score b{font-family:Anton;font-weight:400;font-size:30px;color:var(--y);line-height:1}
-.score small{display:block;font-size:10px;color:var(--g);font-family:JBM}
-.top-tag{display:inline-block;background:var(--y);color:var(--k);font-size:9.5px;font-weight:800;padding:3px 7px;border-radius:20px;margin-left:6px;vertical-align:2px;font-family:JBM}
-.kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:0 14px 12px}
-.kpi div{background:#1d1d1d;border:1px solid #2a2a2a;border-radius:9px;padding:8px 10px}
-.kpi span{display:block;font-size:10px;color:var(--g)}
-.kpi b{font-family:JBM;font-size:14px}
-.kpi .hi b{color:var(--y)}
-.feat{display:flex;flex-wrap:wrap;gap:6px;padding:0 14px 14px}
-.feat span{font-size:11px;font-weight:600;padding:5px 9px;border-radius:20px;background:#1d1d1d;border:1px solid #2a2a2a;color:#cfcfc8}
-.feat span.no{color:#666;text-decoration:line-through}
-.det{display:none;border-top:1px solid var(--k3);padding:12px 14px 4px}
-.b.open .det{display:block}
-.rt{margin-bottom:12px}
-.rt .r{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:6px}
-.rt .r span:last-child{font-family:JBM;color:var(--y)}
-.track{height:7px;background:var(--k3);border-radius:4px;overflow:hidden}
-.track i{display:block;height:100%;background:var(--y)}
-.tog{all:unset;cursor:pointer;display:flex;justify-content:space-between;align-items:center;width:100%;box-sizing:border-box;border-top:1px solid var(--k3);padding:11px 14px;font-size:12px;color:#bdbdb5;font-weight:600}
-.tog em{font-style:normal;color:var(--y);font-family:JBM;font-size:11px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 16px}
+.chips button{all:unset;cursor:pointer;padding:10px 14px;border-radius:30px;border:1px solid #333;font-size:12.5px;font-weight:600;color:#cfcfc8}
+.chips button[aria-pressed=true]{background:var(--y);color:var(--k);border-color:var(--y)}
 
-.sh{font-family:Anton;text-transform:uppercase;font-size:26px;margin:28px 0 12px}
+.list{display:grid;gap:12px}
+.bk{display:grid;grid-template-columns:64px minmax(0,1fr);background:var(--k2);border:1px solid var(--k3);border-radius:14px;overflow:hidden}
+.bk.top{border-color:var(--y);box-shadow:0 0 0 1px var(--y)}
+.lg{background:#1d1d1d;border-right:1px solid var(--k3);display:grid;place-items:center;font-family:Anton;font-size:26px;color:var(--w);position:relative}
+.bk.top .lg{background:var(--y);color:var(--k);border-color:var(--y)}
+.lg small{position:absolute;top:8px;left:0;right:0;text-align:center;font-family:JBM;font-size:10px;color:var(--g)}
+.bk.top .lg small{color:rgba(0,0,0,.55)}
+.bd{padding:14px 14px 12px;display:grid;gap:8px}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.nm b{display:block;font-size:15.5px}
+.nm span{font-size:11px;color:var(--g)}
+.amt{font-family:Anton;font-size:30px;line-height:1;white-space:nowrap;color:var(--y)}
+.amt small{font-family:Inter;font-size:11px;font-weight:600;color:var(--g);margin-right:4px}
+.ds{font-size:13.5px;line-height:1.45;color:#c4c4bc}
+.ft{display:flex;justify-content:space-between;align-items:center;gap:10px;padding-top:8px;border-top:1px solid #222}
+.tp{white-space:nowrap;font-family:JBM;font-size:9.5px;font-weight:700;padding:5px 9px;border-radius:20px;border:1px solid #3a3a3a;color:#cfcfc8}
+.bk.top .tp{border-color:var(--y);color:var(--y)}
+.go{white-space:nowrap;display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--k);background:var(--y);padding:9px 12px;border-radius:8px}
+.empty{text-align:center;color:var(--g);padding:20px;font-size:14px}
+
+.sh{font-family:Anton;text-transform:uppercase;font-size:26px;margin:30px 0 12px}
 .sh span{color:var(--y)}
-.mx{background:var(--k2);border:1px solid var(--k3);border-radius:14px;overflow:hidden}
-.mx .row{display:grid;grid-template-columns:1.6fr repeat(5,1fr);align-items:center;border-bottom:1px solid #1f1f1f;font-size:12px}
-.mx .row:last-child{border-bottom:none}
-.mx .row>div{padding:10px 4px;text-align:center}
-.mx .row>div:first-child{text-align:left;padding-left:12px;font-weight:600;color:#cfcfc8}
-.mx .h{background:#1b1b1b;font-family:JBM;font-size:10px;color:var(--g)}
-.mx .h>div:not(:first-child){font-family:Anton;font-size:15px;color:var(--w)}
-.ok{color:var(--y);font-weight:900}
-.ko{color:#555}
-.mx .num{font-family:JBM;font-size:11px}
-.mx .best{background:rgba(242,238,0,.1);color:var(--y);font-weight:700}
+.how{display:grid;gap:10px}
+.how div{display:flex;gap:14px;align-items:flex-start;background:var(--k2);border:1px solid var(--k3);border-radius:12px;padding:14px}
+.how .n{font-family:Anton;font-size:30px;color:transparent;-webkit-text-stroke:1.2px var(--y);line-height:1;flex:none;width:36px}
+.how b{display:block;font-family:Anton;font-weight:400;text-transform:uppercase;font-size:18px;margin-bottom:3px}
+.how p{font-size:13px;color:var(--g);line-height:1.45}
 
-.tgbar{margin-top:22px;background:linear-gradient(160deg,#2AABEE,#1A86BA);color:#fff;border-radius:14px;padding:16px;display:flex;align-items:center;gap:12px}
+.tgbar{margin-top:24px;background:linear-gradient(160deg,#2AABEE,#1A86BA);color:#fff;border-radius:14px;padding:16px;display:flex;align-items:center;gap:12px}
 .tgbar .ic{width:44px;height:44px;border-radius:50%;background:#fff;display:grid;place-items:center;flex:none}
 .tgbar .ic svg{width:22px;height:22px;fill:#229ED9;margin-left:-2px}
 .tgbar b{font-family:Anton;font-weight:400;font-size:19px;text-transform:uppercase;display:block;line-height:1.05}
 .tgbar small{font-size:12px;font-weight:600;opacity:.9}
-.tgbar .go{margin-left:auto;background:#fff;color:#1A86BA;font-weight:800;font-size:12px;padding:10px 12px;border-radius:8px;flex:none}
+.tgbar .go2{margin-left:auto;background:#fff;color:#1A86BA;font-weight:800;font-size:12px;padding:10px 12px;border-radius:8px;flex:none}
 </style></head>
 <body><div class="app">
 
 <div class="bar">
   <a class="back" href="/demo/ingegnere-king/"><span>←</span>Tutti i canali</a>
-  <img src="/demo/ingegnere-king/assets/logo.webp" alt="">
+  <img src="/demo/ingegnere-king/assets/logo.webp" alt="Ingegnere King">
 </div>
 
 <div class="head">
   <div class="k mono">● AGGIORNATO A NOVEMBRE 2026</div>
   <h1 class="disp">Comparazione<br><span>bookmakers</span></h1>
-  <p>I bookmaker con licenza ADM messi a confronto con i numeri: payout, app, live e tempi di prelievo. Nessuna opinione, solo dati.</p>
+  <p>I bonus dei bookmaker con licenza ADM, uno sotto l'altro. Cifra, condizioni in una riga, link alle condizioni ufficiali. Niente fronzoli.</p>
 </div>
 
-<div class="tabs" id="tabs">
-  <button class="on" data-k="score">Classifica</button>
-  <button data-k="payout">Payout</button>
-  <button data-k="prelievo">Prelievo</button>
+<div class="chips" role="group" aria-label="Filtra per tipo di bonus">
+  <button type="button" data-f="all" aria-pressed="true">Tutti</button>
+  <button type="button" data-f="Benvenuto" aria-pressed="false">Benvenuto</button>
+  <button type="button" data-f="Senza deposito" aria-pressed="false">Senza deposito</button>
+  <button type="button" data-f="Ricarica" aria-pressed="false">Ricarica</button>
 </div>
 
-<div id="list"></div>
+<div class="list" id="list"></div>
 
-<div class="sh">Tutto a <span>confronto</span></div>
-<div class="mx">
-  <div class="row h"><div>CARATTERISTICA</div><div>A</div><div>B</div><div>C</div><div>D</div><div>E</div></div>
-  <div class="row"><div>Payout calcio</div><div class="num best">95,2%</div><div class="num">94,6%</div><div class="num">94,1%</div><div class="num">93,8%</div><div class="num">93,0%</div></div>
-  <div class="row"><div>Prelievo</div><div class="num">24h</div><div class="num best">Istant.</div><div class="num">48h</div><div class="num">24h</div><div class="num">72h</div></div>
-  <div class="row"><div>Live streaming</div><div class="ok">✓</div><div class="ok">✓</div><div class="ko">—</div><div class="ok">✓</div><div class="ko">—</div></div>
-  <div class="row"><div>Cash out</div><div class="ok">✓</div><div class="ok">✓</div><div class="ok">✓</div><div class="ko">—</div><div class="ok">✓</div></div>
-  <div class="row"><div>Bet builder</div><div class="ok">✓</div><div class="ko">—</div><div class="ok">✓</div><div class="ok">✓</div><div class="ko">—</div></div>
-  <div class="row"><div>Statistiche live</div><div class="ok">✓</div><div class="ok">✓</div><div class="ok">✓</div><div class="ko">—</div><div class="ko">—</div></div>
-  <div class="row"><div>Voto app</div><div class="num">4,7</div><div class="num best">4,8</div><div class="num">4,4</div><div class="num">4,5</div><div class="num">4,1</div></div>
+<div class="sh">Prima di attivare <span>un bonus</span></div>
+<div class="how">
+  <div><span class="n">01</span><span><b>Rollover</b><p>Quante volte va rigiocato il bonus prima di poter prelevare.</p></span></div>
+  <div><span class="n">02</span><span><b>Quota minima</b><p>Le giocate valgono solo sopra una certa quota.</p></span></div>
+  <div><span class="n">03</span><span><b>Scadenza</b><p>Se non lo converti in tempo, il bonus sparisce.</p></span></div>
 </div>
 
 <a class="tgbar" href="#" target="_blank" rel="noopener">
   <div class="ic"><svg viewBox="0 0 24 24"><path d="M21.9 4.3 18.6 19.8c-.2 1.1-.9 1.4-1.8.9l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.2-8.3c.4-.4-.1-.6-.6-.2L6 13.4 1.1 11.9c-1.1-.3-1.1-1.1.2-1.6L20.5 2.9c.9-.3 1.7.2 1.4 1.4z"/></svg></div>
-  <div><b>Le analisi delle partite?</b><small>Sono sul gruppo Telegram</small></div>
-  <span class="go">ENTRA →</span>
+  <div><b>Le analisi delle partite?</b><small>Sono tutte sul gruppo Telegram</small></div>
+  <span class="go2">ENTRA →</span>
 </a>
 
-<div class="legal"><b>18+</b><br>Comparazione a scopo informativo, dati indicativi e soggetti a variazione. Il gioco è vietato ai minori e può causare dipendenza patologica. Gioca responsabilmente.</div>
+<div class="legal"><b>18+</b><br>Comparazione a scopo informativo, dati indicativi e soggetti a variazione: fanno fede i termini e le condizioni pubblicati da ciascun operatore. Il gioco è vietato ai minori e può causare dipendenza patologica. Gioca responsabilmente — Telefono Verde Nazionale: 800 558822.</div>
 </div>
 
 <script>
+{
 const B=[
- {id:"A",nm:"Book A",sub:"Licenza ADM",score:9.4,payout:95.2,prel:24,prelT:"24h",app:4.7,f:{"Live streaming":1,"Cash out":1,"Bet builder":1,"Statistiche live":1},r:{Quote:94,App:92,Live:96,Assistenza:88}},
- {id:"B",nm:"Book B",sub:"Licenza ADM",score:9.1,payout:94.6,prel:0,prelT:"Istantaneo",app:4.8,f:{"Live streaming":1,"Cash out":1,"Bet builder":0,"Statistiche live":1},r:{Quote:89,App:96,Live:90,Assistenza:91}},
- {id:"C",nm:"Book C",sub:"Licenza ADM",score:8.7,payout:94.1,prel:48,prelT:"48h",app:4.4,f:{"Live streaming":0,"Cash out":1,"Bet builder":1,"Statistiche live":1},r:{Quote:87,App:84,Live:80,Assistenza:86}},
- {id:"D",nm:"Book D",sub:"Licenza ADM",score:8.4,payout:93.8,prel:24,prelT:"24h",app:4.5,f:{"Live streaming":1,"Cash out":0,"Bet builder":1,"Statistiche live":0},r:{Quote:84,App:88,Live:85,Assistenza:79}},
- {id:"E",nm:"Book E",sub:"Licenza ADM",score:7.9,payout:93.0,prel:72,prelT:"72h",app:4.1,f:{"Live streaming":0,"Cash out":1,"Bet builder":0,"Statistiche live":0},r:{Quote:80,App:78,Live:72,Assistenza:82}}
+ {n:'Book A',t:'Benvenuto',a:'500€',d:'100% sul primo deposito fino a 500€, rollover 5x a quota minima 1,50.'},
+ {n:'Book B',t:'Senza deposito',a:'10€',d:'10€ alla registrazione con verifica SPID, nessun deposito richiesto.'},
+ {n:'Book C',t:'Benvenuto',a:'300€',d:'50% sul primo deposito fino a 300€, più 5€ di freebet.'},
+ {n:'Book D',t:'Ricarica',a:'250€',d:'25% sulla prima ricarica fino a 250€, poi 10€ a settimana per 10 settimane.'},
+ {n:'Book E',t:'Benvenuto',a:'1.000€',d:'100% fino a 1.000€ accreditato in 4 tranche settimanali.'},
+ {n:'Book F',t:'Senza deposito',a:'5€',d:'5€ di freebet alla registrazione, validi 7 giorni.'}
 ];
-const sorters={score:(a,b)=>b.score-a.score,payout:(a,b)=>b.payout-a.payout,prelievo:(a,b)=>a.prel-b.prel};
-function render(k){
-  const list=[...B].sort(sorters[k]);
-  document.getElementById('list').innerHTML=list.map((b,i)=>`
-  <div class="b${i===0?' first open':''}">
-    <div class="bh"><span class="rank">${String(i+1).padStart(2,'0')}</span><span class="logo">${b.id}</span>
-      <div class="nm"><b>${b.nm}${i===0?'<span class="top-tag">TOP</span>':''}</b><small>${b.sub}</small></div>
-      <div class="score"><b>${b.score.toFixed(1)}</b><small>/10</small></div></div>
-    <div class="kpi"><div class="${k==='payout'?'hi':''}"><span>Payout</span><b>${b.payout.toFixed(1).replace('.',',')}%</b></div><div class="${k==='prelievo'?'hi':''}"><span>Prelievo</span><b>${b.prelT}</b></div><div><span>App</span><b>★ ${b.app.toString().replace('.',',')}</b></div></div>
-    <div class="feat">${Object.entries(b.f).map(([n,v])=>`<span class="${v?'':'no'}">${v?'✓ ':''}${n}</span>`).join('')}</div>
-    <div class="det">${Object.entries(b.r).map(([n,v])=>`<div class="rt"><div class="r"><span>${n}</span><span>${(v/10).toFixed(1)}</span></div><div class="track"><i style="width:${v}%"></i></div></div>`).join('')}</div>
-    <button class="tog" onclick="this.parentNode.classList.toggle('open');this.querySelector('em').textContent=this.parentNode.classList.contains('open')?'CHIUDI ↑':'APRI ↓'"><span>Dettaglio punteggi</span><em>${i===0?'CHIUDI ↑':'APRI ↓'}</em></button>
-  </div>`).join('');
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const L=document.getElementById('list');
+const draw=f=>{
+  const r=B.map((b,i)=>({...b,i})).filter(b=>f==='all'||b.t===f);
+  L.innerHTML=r.length?r.map(b=>`<article class="bk${b.i===0?' top':''}">
+   <div class="lg"><small>${String(b.i+1).padStart(2,'0')}</small>${esc(b.n.slice(-1))}</div>
+   <div class="bd"><div class="row"><span class="nm"><b>${esc(b.n)}</b><span>Licenza ADM</span></span><span class="amt"><small>fino a</small>${esc(b.a)}</span></div>
+   <p class="ds">${esc(b.d)} Si applicano T&amp;C.</p>
+   <div class="ft"><span class="tp">${esc(b.t).toUpperCase()}</span><a class="go" href="#" rel="nofollow noopener">Condizioni ufficiali ↗</a></div></div></article>`).join(''):'<p class="empty">Nessun bonus di questo tipo al momento.</p>';
+};
+document.querySelectorAll('.chips button').forEach(btn=>btn.addEventListener('click',()=>{
+  document.querySelectorAll('.chips button').forEach(x=>x.setAttribute('aria-pressed',x===btn));
+  draw(btn.dataset.f);
+}));
+draw('all');
 }
-document.querySelectorAll('#tabs button').forEach(t=>t.onclick=()=>{document.querySelectorAll('#tabs button').forEach(x=>x.classList.remove('on'));t.classList.add('on');render(t.dataset.k)});
-render('score');
 </script>
 </body></html>
